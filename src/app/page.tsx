@@ -1,52 +1,70 @@
 'use client';
 
-import Image from 'next/image';
-import {useEffect} from 'react';
-import {logIcon} from '@/lib/tool';
-import styles from './page.module.css';
+import {useEffect, useState, useMemo} from 'react';
+import {Checkbox, Select, Tabs, TabsProps} from 'antd';
+import cls from 'classnames';
+import styles from './page.module.scss';
+import Boss from '@/components/boss';
+import {logIcon} from "@/lib/log";
 
 export default function Home() {
-  useEffect(() => {
-    console.debug('useEffect !!!');
-    fetch('/api')
-      .then(response => response.json())
-      .then(data => {
-        logIcon('搜索列表', data);
-      });
-  }, []);
+  const [filterOpts, setFilterOpts] = useState<Record<string, any>>({});
+  const [filterValue, setFilterValue] = useState<Record<string, any>>({});
+
+  const onUpdateFilterOpt = (type: string, val: any) => {
+    setFilterOpts(prev => ({...prev, [type]: val}));
+  };
+
+  const onSelectChange = (type: string, e: any) => {
+    logIcon('onSelectChange', {type, e});
+  };
+
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: 'czl',
+      children: (
+        <Boss
+          pageType={'user'}
+          filterValue={filterValue}
+          onUpdateFilterOption={onUpdateFilterOpt}
+        />
+      ),
+    },
+    {
+      key: '2',
+      label: '未登录',
+      children: (
+        <Boss
+          pageType={'normal'}
+          filterValue={filterValue}
+          onUpdateFilterOption={onUpdateFilterOpt}
+        />
+      ),
+    },
+  ];
 
   return (
-    <main className={styles.main}>
-      <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
-        By <Image src="/next.svg" alt="Vercel Logo" className={styles.vercelLogo} width={100} height={24} priority />
-      </a>
-    </main>
+    <div className={styles.wrap}>
+      <label className={styles.label}>keyword1:
+        <input
+          className={styles.input}
+          value={filterValue.keyword1}
+          onInput={(e: any) => setFilterValue(pre => ({...pre, 'keyword1': e.target.value}))}
+        />
+      </label>
+      <label className={styles.label}>keyword2:
+        <input
+          className={styles.input}
+          value={filterValue.keyword2}
+          onInput={(e: any) => setFilterValue(pre => ({...pre, 'keyword2': e.target.value}))}
+        />
+      </label>
+      <Select
+        style={{width: '100px'}}
+        options={(filterOpts['招聘状态'] || []).map((s: string) => ({value: s, label: s}))}
+      />
+      <Tabs defaultActiveKey="2" items={items}/>
+    </div>
   );
 }
-
-/**
- 
-// Example POST method implementation:
-async function postData(url = "", data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-}
-
-postData("https://example.com/answer", { answer: 42 }).then((data) => {
-  console.log(data); // JSON data parsed by `data.json()` call
-});
-
- * **/

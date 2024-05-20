@@ -5,6 +5,7 @@
 
 import {join} from 'path';
 import puppeteer from 'puppeteer';
+import {load} from 'cheerio';
 import {logIcon} from '@/lib/tool';
 
 const LaunchParam = {
@@ -46,8 +47,10 @@ const BossListApi = `https://www.zhipin.com/wapi/zpgeek/search/joblist.json
 
 const JobInfo = 'https://www.zhipin.com/wapi/zpgeek/job/card.json';
 
-export async function launch() {
-  logIcon('===================================================');
+const PageLimit = 100000000;
+const WaitLogin = false;
+export async function launch(query) {
+  logIcon(`================= ${query.type} ==================================`);
   const browser = await puppeteer.launch(LaunchParam);
   try {
     const page = await (async () => {
@@ -61,19 +64,24 @@ export async function launch() {
     const domLoadedCb = async () => {
       const curPage = await (async () => {
         const curPageDom = await page.waitForSelector('.options-pages a.selected');
-        return await curPageDom?.evaluate(el => parseInt(el.textContent));
+        return curPageDom?.evaluate(el => parseInt(el.textContent));
       })();
       // 下一页
-      const nextPageSelector = '.options-pages a:last-child';
-      const nextPageIcon = await page.waitForSelector(nextPageSelector);
-      const nextPageDisable = await nextPageIcon?.evaluate(el => el.classList.contains('disabled'));
-      // 最后一页
-      if (nextPageDisable) {
-        logIcon(`已经是最后一页, ${curPage}`);
-        return curPage;
+      try {
+        const nextPageSelector = '.options-pages a:last-child';
+        const nextPageIcon = await page.waitForSelector(nextPageSelector);
+        const nextPageDisable = await nextPageIcon?.evaluate(el => el.classList.contains('disabled'));
+        // 最后一页
+        if (nextPageDisable) {
+          logIcon(`已经是最后一页, ${curPage}`);
+          return curPage;
+        }
+        logIcon(`点击下一页`);
+        setTimeout(() => page.click(nextPageSelector), 100);
+        return 0;
+      } catch (e) {
+        logIcon('domLoadedCb 错误', e, 'error');
       }
-      await page.click(nextPageSelector);
-      return 0;
     };
 
     let totalJobs = [];
@@ -97,48 +105,52 @@ export async function launch() {
       });
       ***/
 
-      page.on('response', async response => {
-        if (!response.url().includes('joblist.json')) {
+      const onResponse = async response => {
+        console.log('onResponse');
+        const _m = response.request().method();
+        if (!response.url().includes('joblist.json') || _m !== 'GET') {
           return;
         }
-        const filterData = {
-          url: response.url(),
-          ok: response.ok(),
-          method: response.request().method(),
-          status: response.status(),
-          statusText: response.statusText(),
-        };
-        if (filterData.method === 'GET') {
-          const resJson = await response.json();
-          const jobs = (resJson.zpData?.jobList ?? []).map((item) => ({
-            ...item,
-            detailUrl: `https://www.zhipin.com/job_detail/${item.encryptJobId}.html?lid=${item.lid}&securityId=${item.securityId}&sessionId=`,
-          }));
-          ++pageCount;
-          totalJobs = totalJobs.concat(jobs);
-          logIcon(`第 ${pageCount} 页，jobs 数量: ${jobs.length}`);
-          if (resJson.zpData.hasMore && pageCount < 1) {
-            domLoadedCb();
-          } else {
-            // 列表搜集完成
-            const tmp = new Set();
-            totalJobs = totalJobs.filter(item => {
-              if (!tmp.has([item.brandName])) {
-                tmp.add(item.brandName);
-                return true;
-              }
-              return false;
-            });
-            const _jobs = await handleDetailPage(totalJobs.slice(0, 5), browser);
-
-            // await closeBrowser(browser);
-            resolve({...resJson.zpData, jobList: _jobs});
-          }
+        // const filterData = {
+        //   url: response.url(),
+        //   ok: response.ok(),
+        //   method: response.request().method(),
+        //   status: response.status(),
+        //   statusText: response.statusText(),
+        // };
+        const resJson = await response.json();
+        const jobs = (resJson.zpData?.jobList ?? []).map((item) => ({
+          ...item,
+          detailUrl: `https://www.zhipin.com/job_detail/${item.encryptJobId}.html?lid=${item.lid}&securityId=${item.securityId}&sessionId=`,
+        }));
+        ++pageCount;
+        totalJobs = totalJobs.concat(jobs);
+        logIcon(`第 ${pageCount} 页, jobs 数量: ${jobs.length} 总共:${resJson.zpData.totalCount}`);
+        if (resJson.zpData.hasMore && pageCount < PageLimit) {
+          domLoadedCb();
         } else {
-          logIcon(`请求 joblist.json 方法:${filterData.method}`);
+          const tmp = new Set();
+          totalJobs = totalJobs.filter(item => {
+            if (!tmp.has([item.brandName])) {
+              tmp.add(item.brandName);
+              return true;
+            }
+            return false;
+          });
+          logIcon(`========= 列表搜集完成! 总数:${totalJobs.length} ==========`, undefined, 'success');
+          try {
+            const _jobs = await handleDetailPage(totalJobs, browser, query.type);
+            await closeBrowser(browser);
+            resolve({...resJson.zpData, jobList: _jobs});
+          } catch (err) {
+            await closeBrowser(browser);
+            reject(err);
+          }
         }
-      });
-
+      };
+      if (!WaitLogin) {
+        page.on('response', onResponse);
+      }
       await page.goto(BossListPage);
       // await page.setViewport({width: 1080, height: 1024});
 
@@ -153,82 +165,151 @@ export async function launch() {
   } catch (e) {
     logIcon('未知错误', e);
     await closeBrowser(browser);
+    return e;
   }
 }
 
-async function handleDetailPage(jobList = [], browser) {
+const JobLimit = 999999999999999;
+async function handleDetailPage(jobList = [], browser, pageType) {
   if (jobList.length < 1) {
     return jobList;
   }
-  const queueNum = 2;
-  const jobNum = jobList.length;
+  const isUser = pageType === 'user';
+  const queueNum = isUser ? 2 : 8;
+  const jobNum = Math.min(jobList.length, JobLimit);
   let jobIdx = 0, jobCount = 0;
   const queue = Array.from({length: queueNum});
   return new Promise(async (resolve, reject) => {
-    await new Promise((resolve2, reject) => {
-      queue.forEach(async (_, i) => {
+    try {
+      await Promise.all(queue.map(async (_, j) => {
         const _page = await browser.newPage();
-        _page.once('console', msg => console.log('$PAGE LOG:', msg.text()));
-
-        _page.on('load', async () => {
-          const companyInfo = await parseDetailPage(_page);
-          logIcon(`详情页 ${companyInfo.name} jobIdx:${jobIdx} ${companyInfo.itemIdx}/${jobNum-1}`);
-          jobList[companyInfo.itemIdx].companyInfo = companyInfo;
+        const onResponse = async (response) => {
+          if (!/\/job_detail\/.*\.html/.test(response.url()) || response.status() !== 200) {
+            return;
+          }
+          let htmlStr = '';
+          try {
+            htmlStr = await response.text();
+          } catch (err) {
+            logIcon(`handleDetailPage response.text 错误`, err, 'error');
+            return;
+          }
+          const companyInfo = await parseDetailPage(_page, htmlStr);
           ++jobCount;
+          const _brandName = jobList[companyInfo.itemIdx]?.brandName;
+          const isProxyJob = jobList[companyInfo.itemIdx]?.proxyJob === 1;
+          if (companyInfo.name !== _brandName && !isProxyJob) {
+            const errMsg = {
+              infoName: companyInfo?.name,
+              itemName: _brandName,
+              itemIdx: companyInfo?.itemIdx,
+              url: jobList[companyInfo.itemIdx]?.detailUrl,
+            };
+            logIcon(
+              `详情页 ${companyInfo?.name} 名称不一致， ${companyInfo?.itemIdx}/${jobNum-1}`,
+              errMsg,
+              'error'
+            );
+            reject(errMsg);
+            return;
+          }
+          logIcon(`详情页 ${companyInfo?.itemIdx} - ${jobIdx}/ ${jobNum-1}  ${companyInfo?.name}`);
+          jobList[companyInfo.itemIdx].Info = companyInfo;
           if (jobIdx < jobNum) {
-            _page.goto(`${jobList[jobIdx].detailUrl}&itemIdx=${jobIdx}`);
-            jobIdx++;
+            const cb = () => {
+              _page.goto(`${jobList[jobIdx].detailUrl}&itemIdx=${jobIdx}`);
+              ++jobIdx;
+            }
+            isUser ? setTimeout(cb, 200) : cb();
           }
           // 详情页处理完成
-          if (jobCount) {
+          if (jobCount === jobNum) {
+            logIcon('======= 详情页处理完成 =======', undefined, 'success');
             resolve(jobList);
           }
-        });
+        };
+        _page.on('response', onResponse);
+        // _page.on('load', onLoad);
+        queue[j] = _page;
+        return _page;
+      }));
 
-        queue[i] = _page;
-        if (i === queueNum - 1) {
-          resolve2();
-        }
-      });
-    })
-
-    let queueIdx = 0;
-    for(; jobIdx < queueNum; jobIdx++) {
-      queue[queueIdx++].goto(`${jobList[jobIdx].detailUrl}&itemIdx=${jobIdx}`);
+      for(let queueIdx = 0; queueIdx < queueNum; queueIdx++) {
+        queue[queueIdx].goto(`${jobList[jobIdx].detailUrl}&itemIdx=${jobIdx}`);
+        ++jobIdx;
+      }
+    } catch (e) {
+      reject(e);
     }
   });
 }
 
-async function parseDetailPage(page) {
-  const query = getParams(page.url());
-  const mainDom = await page.waitForSelector('#main');
-  const _ = await page.waitForSelector('#main .location-address');
-  const companyInfo = await mainDom.evaluate(el => {
-    return {
-      name: el.querySelector('.job-sider .company-info > a:first-child').getAttribute('title'),
-      // 招聘状态
-      jobStatus: el.querySelector('.job-status').textContent.trim(),
-      // 活跃程度
-      activeTime: el.querySelector('.boss-active-time').textContent.trim(),
-      // 公司介绍
-      companyInfoHtml: el.querySelector('.company-info-box .job-sec-text').innerHTML,
-      // 成立日期
-      establishDate: el.querySelector('.res-time').lastChild.textContent,
-      // 详细地址
-      address: el.querySelector('.location-address').textContent.trim(),
-    }
-  });
-  companyInfo.itemIdx = parseInt(query.itemIdx);
+async function parseDetailPage(page, html) {
+  const url = decodeURIComponent(page.url());
+  let _itemIdx = url.split('&itemIdx=')[1];
+  _itemIdx = parseInt(_itemIdx);
+  if (Number.isNaN(_itemIdx)) {
+    logIcon(`query.itemIdx 无法被解析为 number`, url, 'error');
+    return {};
+  }
+
+  const $ = load(html);
+  const companyInfo = {
+    // 猎头没有name
+    name: $('.job-sider .company-info > a:first-child', '#main')?.attr('title'),
+    // 招聘状态
+    jobStatus: $('.job-status', '#main')?.text().trim(),
+    // 活跃程度
+    activeTime: $('.job-boss-info .name :last-child', '#main')?.text().trim() || '无',
+    // 岗位职责、任职要求
+    jobRequire: $('.job-detail-section .job-sec-text', '#main')?.html()?.trim(),
+    // 公司介绍
+    companyInfoHtml: $('.company-info-box .job-sec-text', '#main')?.html()?.trim(),
+    // 成立日期
+    establishDate: $('.res-time', '#main')?.text()?.trim().replace('成立日期', ''),
+    // 详细地址
+    address: $('.location-address', '#main')?.text().trim(),
+  };
+  companyInfo.itemIdx = _itemIdx;
   return companyInfo;
+}
+
+async function parseDetailPage2(page) {
+  try {
+    const mainDom = await page.waitForSelector('#main', {visible: true, timeout: 30000});
+    // const _ = await page.waitForSelector('#main .location-address');
+    const companyInfo = await mainDom.evaluate(el => {
+      return {
+        name: el.querySelector('.job-sider .company-info > a:first-child').getAttribute('title'),
+        // 招聘状态
+        jobStatus: el.querySelector('.job-status')?.textContent.trim(),
+        // 活跃程度
+        activeTime: el.querySelector('.job-boss-info .name :last-child')?.textContent.trim(),
+        // 公司介绍
+        companyInfoHtml: el.querySelector('.company-info-box .job-sec-text')?.innerHTML,
+        // 成立日期
+        establishDate: el.querySelector('.res-time')?.lastChild?.textContent,
+        // 详细地址
+        address: el.querySelector('.location-address')?.textContent.trim(),
+      }
+    });
+    const url = decodeURIComponent(page.url());
+    let _itemIdx = url.split('&itemIdx=')[1];
+    _itemIdx = parseInt(_itemIdx);
+    if (Number.isNaN(_itemIdx)) {
+      logIcon(`query.itemIdx 错误`, url, 'error');
+      return {};
+    }
+    companyInfo.itemIdx = _itemIdx;
+    return companyInfo;
+  } catch (e) {
+    const url = decodeURIComponent(page.url());
+    await page.screenshot({path: './error.png'});
+  }
 }
 
 async function closeBrowser(browser) {
   const pages = await browser.pages() || [];
   await Promise.all(pages.map(async item => await item.close()));
   await browser.close();
-}
-function getParams(url) {
-  const params = {};
-  url.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => (params[k] = v));
-  return params;
 }

@@ -1,0 +1,35 @@
+.wrap {
+  .tableWrap {
+    .ant-table {
+      font-size: 12px;
+    }
+    .row_cls {
+      cursor: pointer;
+      .ant-table-cell-row-hover {
+        background-color: cornflowerblue !important;
+      }
+    }
+  }
+}
+
+.larger {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.long_txt {
+  text-wrap: normal;
+  word-break: break-word;
+  white-space: break-spaces;
+  &.es {
+    max-width: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
+.ant-tooltip {
+  max-width: 600px;
+}
