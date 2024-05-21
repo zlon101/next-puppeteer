@@ -38,6 +38,7 @@ export interface IJob {
     jobStatus: string;
     // 活跃程度
     activeTime: string;
+    upDate: string;
     // 公司介绍
     companyInfoHtml: string;
     // 成立日期

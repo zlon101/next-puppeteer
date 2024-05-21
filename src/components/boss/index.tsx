@@ -17,60 +17,152 @@ function NoWrap(props: any) {
 
 const KeywordReg = /(反流|狭窄|主动脉瓣|二尖瓣|三尖瓣|房颤|心房纤颤|过速)/;
 
-interface IProps {
+interface Area {
+  text: string;
+  value: string;
+  children: {
+    text: string;
+    value: string;
+  }[];
+}
+export interface IProps {
   pageType: 'normal' | 'user';
-  filterValue: Record<string, any>;
+  filterValue: {
+    '招聘状态': string[];
+    '猎头': boolean;
+    keyword: string;
+    activeTime: string[];
+    address: string[];
+    money: string;
+    establishDate: string;
+  };
   onUpdateFilterOption: (type: string, value: any) => void;
+  onChangeFilter: (val: Record<string, any>) => void;
 }
 
 export default function Boss(props: IProps) {
-  const {pageType, filterValue, onUpdateFilterOption} = props;
+  const {pageType, filterValue, onUpdateFilterOption, onChangeFilter} = props;
   const [source, setSource] = useState<IJob[]>([]);
   const [jobStatusOpts, setJobStatusOpts] = useState<string[]>([]);
   const [activeTimeOpts, setActiveTimeOpts] = useState<string[]>([]);
+  const [areaOptions, setAreaOption] = useState<Area[]>([]);
 
   const filtedList = useMemo(() => {
-    let ls = source;
-    return ls;
+    const filterActiveTime = filterValue.activeTime || [];
+    return source.reduce((acc, _job) => {
+      let ok = !filterActiveTime.length || filterActiveTime.includes(_job.Info.activeTime);
+      ok = ok && (filterValue['猎头'] || !_job.proxyJob);
+      ok = ok && (!filterValue['招聘状态'] || filterValue['招聘状态'].includes(_job.Info.jobStatus));
+      ok = ok && (!filterValue.address || (!!_job.businessDistrict && filterValue.address.some(_addre => _addre.includes(_job.businessDistrict))));
+      const [min, max, bonus] = (() => {
+        const [limit, bonus = '0'] = _job.salaryDesc.split('.');
+        return [...limit.split('-').map(parseFloat), parseInt(bonus, 10)];
+      })();
+      const filterMoney = filterValue.money ? parseInt(filterValue.money) : 0;
+      ok = ok && (!filterMoney || max >= filterMoney);
+      // 成立日期
+      ok = ok && (!filterValue.establishDate || (!!_job.Info.establishDate && filterValue.establishDate >= _job.Info.establishDate));
+
+      ok && acc.push(_job);
+      return acc;
+    }, [] as any);
   }, [source, filterValue]);
 
   const columns = [
     {
       title: '公司',
       dataIndex: 'brandName',
+      ellipsis: true,
+      width: 100,
       render: (s: string, record: IJob, index: number) => (
         <>
           <span className={'larger'}>
             {index + 1}. {s}
           </span>
           <br />
-          {!record.proxyJob && '猎头'}
+          {record.proxyJob ? '猎头' : null}
         </>
       ),
     },
     {
       title: '岗位',
       dataIndex: 'jobName',
-      render: (s: string, record: IJob, index: number) => <NoWrap>{s}</NoWrap>,
+      ellipsis: true,
+      width: 100,
+      // render: (s: string, record: IJob, index: number) => <NoWrap>{s}</NoWrap>,
     },
     {
       title: '活跃程度',
       key: 'activeTime',
+      ellipsis: true,
+      width: 150,
       filters: activeTimeOpts.map(s => ({text: s, value: s})),
-      onFilter: (value: any, record: IJob) => {
-        return record.Info.activeTime === value;
-      },
-      // sorter: (a: IJob, b: IJob) => a.name.length - b.name.length,
-      // sortDirections: ['ascend', 'descend', 'ascend'],
+      defaultFilteredValue: filterValue.activeTime,
+      filteredValue: filterValue.activeTime,
+      // onFilter: (value: any, record: IJob) => {
+      //   return record.Info.activeTime === value;
+      // },
       render: (_: unknown, record: IJob, index: number) => (
         <div>
-          <NoWrap>{record.Info.activeTime}</NoWrap>
+          <NoWrap>{record.Info.activeTime}</NoWrap><br/>
+          {/*<NoWrap>{record.Info.upDate}</NoWrap>*/}
           {/*<NoWrap>{record.Info.jobStatus} - {record.jobValidStatus}</NoWrap>*/}
         </div>
       ),
     },
     {
+      title: '工资',
+      dataIndex: 'salaryDesc',
+      ellipsis: true,
+      width: 100,
+      render(v: string, record: IJob) {
+        return <NoWrap>{v}</NoWrap>;
+      },
+    },
+    {
+      title: '地点',
+      key: 'address',
+      ellipsis: true,
+      width: 120,
+      filters: areaOptions,
+      defaultFilteredValue: filterValue.address,
+      filteredValue: filterValue.address,
+      filterMode: 'tree' as any,
+      filterSearch: true,
+      render(v: unknown, record: IJob) {
+        return (
+          <Tooltip placement="top" title={record.Info.address}>
+            <NoWrap>
+              {record.businessDistrict}/{record.areaDistrict}
+            </NoWrap>
+          </Tooltip>
+        );
+      },
+    },
+    {
+      title: '成立日期',
+      key: 'establishDate',
+      ellipsis: true,
+      width: 100,
+      sorter: (a: IJob, b: IJob) => parseInt(a.Info.establishDate.replace(/\D/g, '')) - parseInt(b.Info.establishDate.replace(/\D/g, '')),
+      sortDirections: ['ascend', 'descend', 'ascend'] as any,
+      render(v: unknown, record: IJob) {
+        return (
+          <>
+            <NoWrap>{record.Info.establishDate}</NoWrap>
+            <br />
+            {/*
+            <NoWrap>{record.brandIndustry}</NoWrap><br/>
+            <NoWrap>{record.brandScaleName}</NoWrap><br/>
+            <NoWrap>{record.brandStageName}</NoWrap>
+            */}
+          </>
+        );
+      },
+    },
+    {
       title: '要求',
+      hidden: true,
       dataIndex: 'jobLabels',
       render: (v: string, record: IJob, index: number) => {
         const keyTexts = record.jobLabels || [];
@@ -90,20 +182,6 @@ export default function Boss(props: IProps) {
       },
     },
     {
-      title: '职责',
-      ellipsis: true,
-      dataIndex: 'jobRequire',
-      render: (v: unknown, record: IJob, index: number) => {
-        return (
-          <Tooltip
-            placement="top"
-            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire}}></p>}>
-            <p className={'long_txt es'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? '-'}}></p>
-          </Tooltip>
-        );
-      },
-    },
-    {
       title: '专业技能',
       dataIndex: 'skills',
       render: (v: string[], record: IJob, index: number) => {
@@ -118,44 +196,21 @@ export default function Boss(props: IProps) {
         );
       },
     },
-    // ============================================
     {
-      title: '工资',
-      dataIndex: 'salaryDesc',
-      render(v: string, record: IJob) {
-        return <NoWrap>{v}</NoWrap>;
-      },
-    },
-    {
-      title: '地点',
-      key: 'address',
-      render(v: unknown, record: IJob) {
+      title: '职责',
+      ellipsis: true,
+      dataIndex: 'jobRequire',
+      render: (v: unknown, record: IJob, index: number) => {
         return (
-          <Tooltip placement="top" title={record.Info.address}>
-            <NoWrap>
-              {record.businessDistrict}/{record.areaDistrict}
-            </NoWrap>
+          <Tooltip
+            placement="top"
+            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire}}></p>}>
+            <p className={'long_txt es'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? '-'}}></p>
           </Tooltip>
         );
       },
     },
-    {
-      title: '成立日期',
-      key: 'establishDate',
-      render(v: unknown, record: IJob) {
-        return (
-          <>
-            <NoWrap>{record.Info.establishDate}</NoWrap>
-            <br />
-            {/*
-            <NoWrap>{record.brandIndustry}</NoWrap><br/>
-            <NoWrap>{record.brandScaleName}</NoWrap><br/>
-            <NoWrap>{record.brandStageName}</NoWrap>
-            */}
-          </>
-        );
-      },
-    },
+    // ============================================
     {
       title: '福利',
       dataIndex: 'welfareList',
@@ -229,8 +284,9 @@ export default function Boss(props: IProps) {
       const jobs = data?.jobList ?? [];
       const _jobStatusOpts: string[] = [];
       const _activeTimeOpts: string[] = [];
+      const areaTree: Area[] = [];
       jobs.forEach(job => {
-        if (job.brandName !== job.Info.name) {
+        if (job.brandName !== job.Info.name && !job.proxyJob) {
           logIcon('job.brandName !== job.Info.name', undefined, 'error');
           console.debug(job);
           debugger;
@@ -241,14 +297,35 @@ export default function Boss(props: IProps) {
         if (job.Info.activeTime && !_activeTimeOpts.includes(job.Info.activeTime)) {
           _activeTimeOpts.push(job.Info.activeTime);
         }
+        // 地点
+        const areaIdx = areaTree.findIndex((a: Area) => a.value === job.areaDistrict);
+        if (job.businessDistrict) {
+          if (areaIdx !== -1) {
+            if (areaTree[areaIdx].children.findIndex(bb => bb.text === job.businessDistrict) === -1) {
+              areaTree[areaIdx].children.push({
+                value: `${job.areaDistrict}/${job.businessDistrict}`,
+                text: job.businessDistrict,
+              });
+            }
+          } else {
+            areaTree.push({
+              value: job.areaDistrict,
+              text: job.areaDistrict,
+              children: [],
+            })
+          }
+        }
       });
+      console.debug('areaTree', areaTree);
+      setAreaOption(areaTree);
       setJobStatusOpts(_jobStatusOpts);
       onUpdateFilterOption('招聘状态', _jobStatusOpts);
       setActiveTimeOpts(_activeTimeOpts);
       setSource(jobs);
     } catch (e) {
-      debugger;
       logIcon('error', e, 'error');
+      console.debug(e);
+      debugger;
     }
   };
 
@@ -256,6 +333,8 @@ export default function Boss(props: IProps) {
     const cache = JSON.parse(localStorage.getItem(pageType) ?? 'null');
     cache && fetchData(cache);
   }, []);
+
+  logIcon('filterValue', filterValue);
 
   return (
     <div className={'wrap'}>
@@ -274,6 +353,11 @@ export default function Boss(props: IProps) {
         columns={columns}
         pagination={false}
         scroll={{x: true}}
+        onChange={(pagination, filters, sorter, extra) => {
+          // 分页、排序、筛选变化时触发
+          // {activeTime: string[]}
+          onChangeFilter(filters);
+        }}
         onRow={(record: IJob) => {
           return {
             onClick: () => {

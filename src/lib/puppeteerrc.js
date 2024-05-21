@@ -48,7 +48,9 @@ const BossListApi = `https://www.zhipin.com/wapi/zpgeek/search/joblist.json
 const JobInfo = 'https://www.zhipin.com/wapi/zpgeek/job/card.json';
 
 const PageLimit = 100000000;
+const JobLimit = 999999999999999;
 const WaitLogin = false;
+
 export async function launch(query) {
   logIcon(`================= ${query.type} ==================================`);
   const browser = await puppeteer.launch(LaunchParam);
@@ -169,13 +171,12 @@ export async function launch(query) {
   }
 }
 
-const JobLimit = 999999999999999;
 async function handleDetailPage(jobList = [], browser, pageType) {
   if (jobList.length < 1) {
     return jobList;
   }
   const isUser = pageType === 'user';
-  const queueNum = isUser ? 2 : 8;
+  const queueNum = isUser ? 1 : 8;
   const jobNum = Math.min(jobList.length, JobLimit);
   let jobIdx = 0, jobCount = 0;
   const queue = Array.from({length: queueNum});
@@ -220,7 +221,7 @@ async function handleDetailPage(jobList = [], browser, pageType) {
               _page.goto(`${jobList[jobIdx].detailUrl}&itemIdx=${jobIdx}`);
               ++jobIdx;
             }
-            isUser ? setTimeout(cb, 200) : cb();
+            isUser ? setTimeout(cb, 2000) : cb();
           }
           // 详情页处理完成
           if (jobCount === jobNum) {
@@ -258,9 +259,10 @@ async function parseDetailPage(page, html) {
     // 猎头没有name
     name: $('.job-sider .company-info > a:first-child', '#main')?.attr('title'),
     // 招聘状态
-    jobStatus: $('.job-status', '#main')?.text().trim(),
+    jobStatus: $('.job-status', '#main')?.text().trim() ?? '无',
     // 活跃程度
     activeTime: $('.job-boss-info .name :last-child', '#main')?.text().trim() || '无',
+    upDate: (/"upDate":\s*"([\d\-T:]+)"/.exec(html)?.[1] ?? '').replace('T', ' '),
     // 岗位职责、任职要求
     jobRequire: $('.job-detail-section .job-sec-text', '#main')?.html()?.trim(),
     // 公司介绍
@@ -272,40 +274,6 @@ async function parseDetailPage(page, html) {
   };
   companyInfo.itemIdx = _itemIdx;
   return companyInfo;
-}
-
-async function parseDetailPage2(page) {
-  try {
-    const mainDom = await page.waitForSelector('#main', {visible: true, timeout: 30000});
-    // const _ = await page.waitForSelector('#main .location-address');
-    const companyInfo = await mainDom.evaluate(el => {
-      return {
-        name: el.querySelector('.job-sider .company-info > a:first-child').getAttribute('title'),
-        // 招聘状态
-        jobStatus: el.querySelector('.job-status')?.textContent.trim(),
-        // 活跃程度
-        activeTime: el.querySelector('.job-boss-info .name :last-child')?.textContent.trim(),
-        // 公司介绍
-        companyInfoHtml: el.querySelector('.company-info-box .job-sec-text')?.innerHTML,
-        // 成立日期
-        establishDate: el.querySelector('.res-time')?.lastChild?.textContent,
-        // 详细地址
-        address: el.querySelector('.location-address')?.textContent.trim(),
-      }
-    });
-    const url = decodeURIComponent(page.url());
-    let _itemIdx = url.split('&itemIdx=')[1];
-    _itemIdx = parseInt(_itemIdx);
-    if (Number.isNaN(_itemIdx)) {
-      logIcon(`query.itemIdx 错误`, url, 'error');
-      return {};
-    }
-    companyInfo.itemIdx = _itemIdx;
-    return companyInfo;
-  } catch (e) {
-    const url = decodeURIComponent(page.url());
-    await page.screenshot({path: './error.png'});
-  }
 }
 
 async function closeBrowser(browser) {
