@@ -46,3 +46,7 @@ export function getUrlQuery(url: string) {
   url.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => (params[k] = v));
   return params;
 }
+
+export function obj2str(query: Record<string, string>) {
+  return Object.keys(query).reduce((acc: string, k: string) => `${acc}&${k}=${query[k]}`, '').slice(1);
+}

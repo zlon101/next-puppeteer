@@ -31,6 +31,7 @@ export interface IJob {
   bossOnline: boolean;
 
   detailUrl: string;
+  encryptJobId: string;
 
   Info: {
     name: string;
@@ -54,12 +55,21 @@ export interface IJobsRes {
   resCount: number;
   hasMore: boolean;
   jobList: IJob[];
+  fetchTime: string;
   totalCount: number;
 }
 
+interface ReqParam {
+  waitLogin: string;
+  type: string;
+  pageLimit: number;
+  jobLimit: number;
+}
+
 export async function GET(req: Request) {
-  const query = getUrlQuery(req.url);
+  const query: ReqParam = getUrlQuery(req.url) as any;
   const filterData = await launch(query);
+  filterData.fetchTime = new Date().toLocaleString();
   // const filterData = Mock;
   return Response.json(filterData);
 }
