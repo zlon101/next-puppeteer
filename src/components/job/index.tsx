@@ -2,19 +2,11 @@
 
 import {useEffect, useState, useMemo} from 'react';
 import {Table, Tag, Button, Tooltip, message} from 'antd';
-import {logIcon, createRegExp, traverse, isHideElement} from '@/lib/tool';
-import {IJobsRes, IJob} from '@/app/api/boss/route';
-import {parseSalary} from "@/lib/puppeteerrc/share";
+import Link from 'next/link'
+import {logIcon, serveEvent} from '@/lib/tool';
+import {filterJobs, parseSalary} from "@/lib/puppeteerrc/share";
+import {IFilterValue, IPageType, RowKey, IJobsRes, IJob, PageType} from './const';
 import './index.scss';
-
-function NoWrap(props: any) {
-  const {children, ...resProps} = props;
-  return (
-    <span style={{whiteSpace: 'nowrap'}} {...resProps}>
-      {children || '-'}
-    </span>
-  );
-}
 
 interface Area {
   text: string;
@@ -25,33 +17,19 @@ interface Area {
     count: number;
   }[];
 }
+
 export interface IProps {
-  pageType: 'normal' | 'user' | 'recommLogined';
-  filterValue: {
-    '招聘状态': string[];
-    '猎头': boolean;
-    keyword: string;
-    activeTime: string[];
-    address: string[];
-    money: string;
-    establishDate: string;
-    waitLogin: boolean;
-  };
+  pageType: IPageType;
+  filterValue: IFilterValue;
   onUpdateFilterOption: (type: string, value: any) => void;
-  onChangeFilter: (val: Record<string, any>) => void;
+  onChangeFilter: (val: Partial<Record<keyof IFilterValue, any>>) => void;
 }
 
-const PairPage: Record<string, string> = {
-  user: 'recommLogined',
-  recommLogined: 'user',
-  // normal: 'xxx',
-};
-const RowKey = 'encryptJobId';
 export default function Boss(props: IProps) {
   const {pageType, filterValue, onUpdateFilterOption, onChangeFilter} = props;
   const [source, setSource] = useState<IJob[]>([]);
   const [fetchTime, setFetchTime] = useState<string>('');
-  const [jobStatusOpts, setJobStatusOpts] = useState<string[]>([]);
+  // const [_, setJobStatusOpts] = useState<string[]>([]);
   const [activeTimeOpts, setActiveTimeOpts] = useState<string[]>([]);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -117,7 +95,7 @@ export default function Boss(props: IProps) {
       dataIndex: 'brandName',
       ellipsis: true,
       render: (s: string, record: IJob, index: number) => (
-        <p style={{width: '100px'}}>
+        <p>
           <span className={'larger'}>
             {index + 1}. {s}
           </span>
@@ -182,6 +160,7 @@ export default function Boss(props: IProps) {
       },
     },
     {
+      hidden: pageType === PageType.zhilianLogin,
       title: '成立日期',
       key: 'establishDate',
       ellipsis: true,
@@ -247,7 +226,7 @@ export default function Boss(props: IProps) {
         return (
           <Tooltip
             placement="top"
-            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire}}></p>}>
+            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? ''}}></p>}>
             <p className={'long_txt es'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? '-'}}></p>
           </Tooltip>
         );
@@ -298,19 +277,8 @@ export default function Boss(props: IProps) {
       title: '其他',
       key: 'other',
       hidden: true,
-      render: (v: unknown, record: IJob, index: number) => {
-        const keys = ['jobType', 'proxyJob', 'proxyType'];
-        return (
-          <div>
-            {keys.map((k: any) => (
-              <p key={k}>
-                <NoWrap>
-                  {k}：{(record as any)[k]}
-                </NoWrap>
-              </p>
-            ))}
-          </div>
-        );
+      render: (v: string) => {
+        return (<div className={'long_txt'}>{v}</div>);
       },
     },
   ];
@@ -319,17 +287,13 @@ export default function Boss(props: IProps) {
     try {
       let data = cache;
       if (!cache) {
-        const res = await fetch(`/api/boss?type=${pageType}&waitLogin=${filterValue.waitLogin}`);
-        data = await res.json();
+        data = await serveEvent<IJobsRes>(`/api/boss?type=${pageType}&waitLogin=${filterValue.waitLogin}`);
       }
+
       const jobs = data?.jobList ?? [];
       const _jobStatusOpts: string[] = [];
       const _activeTimeOpts: string[] = [];
       jobs.forEach(job => {
-        if (job.brandName !== job.Info.name && !job.proxyJob) {
-          logIcon('job.brandName !== job.Info.name', undefined, 'error');
-          console.debug(job);
-        }
         if (job.Info.jobStatus && !_jobStatusOpts.includes(job.Info.jobStatus)) {
           _jobStatusOpts.push(job.Info.jobStatus);
         }
@@ -338,21 +302,21 @@ export default function Boss(props: IProps) {
         }
       });
 
-      setJobStatusOpts(_jobStatusOpts);
+      // setJobStatusOpts(_jobStatusOpts);
       onUpdateFilterOption('招聘状态', _jobStatusOpts);
       setActiveTimeOpts(_activeTimeOpts);
 
       setSource(jobs);
       setFetchTime(data?.fetchTime ?? '');
-      !cache && saveCache(jobs);
+      // !cache && saveCache(data);
     } catch (e) {
       logIcon('error', e, 'error');
       console.debug(e);
     }
   };
 
-  const saveCache = (val?: IJob[]) => {
-    localStorage.setItem(pageType, JSON.stringify({jobList: val || source, fetchTime}));
+  const saveCache = (val?: IJobsRes) => {
+    localStorage.setItem(pageType, JSON.stringify(val ? val : {jobList: source, fetchTime}));
     messageApi.open({
       type: 'success',
       content: '保存成功',
@@ -367,33 +331,15 @@ export default function Boss(props: IProps) {
     });
   };
 
-  const onMerge = () => {
-    const other = JSON.parse(localStorage.getItem(PairPage[pageType]) ?? 'null');
-    if (!other) {
-      messageApi.open({
-        type: 'warning',
-        content: `${PairPage[pageType]} 缓存数据为空`,
-      });
-      return;
-    }
-    const tmp = new Set();
-    const newJobs = source.concat(other).filter((item2: IJob) => {
-      if (tmp.has(item2[RowKey])) {
-        return false;
-      }
-      tmp.add(item2[RowKey]);
-      return true;
-    });
-    setSource(newJobs);
-    messageApi.open({
-      type: 'success',
-      content: '合并成功',
-    });
-  };
-
   useEffect(() => {
     const cache = JSON.parse(localStorage.getItem(pageType) ?? 'null');
     cache && fetchData(cache);
+    if (pageType === PageType.zhilianLogin) {
+      onChangeFilter({
+        activeTime: [],
+        establishDate: '',
+      });
+    }
   }, []);
 
   return (
@@ -411,9 +357,7 @@ export default function Boss(props: IProps) {
         <Button onClick={clearCache} style={{margin: '0 10px'}}>
           清除storage
         </Button>
-        <Button onClick={onMerge} style={{margin: '0 10px'}}>
-          merge
-        </Button>
+        <Link href="/map-chart">地图</Link>
       </div>
       <Table
         rootClassName={'tableWrap'}
@@ -438,5 +382,14 @@ export default function Boss(props: IProps) {
         }}
       />
     </div>
+  );
+}
+
+function NoWrap(props: any) {
+  const {children, ...resProps} = props;
+  return (
+    <span style={{whiteSpace: 'nowrap'}} {...resProps}>
+      {children || '-'}
+    </span>
   );
 }

@@ -34,17 +34,17 @@ type IType2 = keyof (typeof Color2);
 
 export const logIcon = (label: string, data?: any, type: IType2 = 'debug' ) => {
   if (data === undefined) {
-    console.debug(`\n${Color2[type]} ${label}`);
+    console.log(`\n${Color2[type]} ${label}`);
     return;
   }
   try {
     const msg = ['undefined', 'object'].includes(typeof data) ? JSON.stringify(data, null, 2) : data;
     if (typeof msg === 'string') {
-      console.debug(`\n${Color2[type]} ${label}:\n%s`, msg);
+      console.log(`\n${Color2[type]} ${label}:\n%s`, msg);
     } else {
-      console.debug(`\n${Color2[type]} ${label}:\n`, data);
+      console.log(`\n${Color2[type]} ${label}:\n`, data);
     }
   } catch (_) {
-    console.debug(`\n${Color2[type]} ${label}:\n`, data);
+    console.log(`\n${Color2[type]} ${label}:\n`, data);
   }
 };

@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
+    "@amap/amap-jsapi-types": "^0.0.15",
     "antd": "^5.17.0",
     "cheerio": "^1.0.0-rc.12",
     "classnames": "^2.5.1",

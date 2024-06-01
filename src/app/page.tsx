@@ -1,56 +1,33 @@
 'use client';
 
-import {useEffect, useState, useMemo} from 'react';
+import {useState} from 'react';
 import {Checkbox, Select, Tabs, TabsProps, Form, Input, Button} from 'antd';
-import cls from 'classnames';
 import styles from './page.module.scss';
-import Boss, {IProps} from '@/components/boss';
+import Boss from '../components/job';
+import {DefalutFilterVal, PageType, IFilterValue} from '@/components/job/const';
 import {logIcon} from "@/lib/log";
-
-const DefalutFilterVal = {
-  '猎头': false,
-  // 今日活跃, 3日内活跃, 本周活跃, 2周内活跃, 本月活跃, 2|3|4|5月内活跃, 近半年活跃, 半年前活跃
-  activeTime: ['刚刚活跃', '在线', '今日活跃', '3日内活跃', '本周活跃', '2周活跃'],
-  money: 15,
-  establishDate: '2020-12-12',
-};
 
 export default function Home() {
   const [filterOpts, setFilterOpts] = useState<Record<string, any>>({});
-  const [filterValue, setFilterValue] = useState<IProps['filterValue']>(DefalutFilterVal as any);
+  const [filterValue, setFilterValue] = useState<IFilterValue>(DefalutFilterVal as any);
   const [form] = Form.useForm();
 
   const onUpdateFilterOpt = (type: string, val: any) => {
     setFilterOpts(prev => ({...prev, [type]: val}));
   };
 
-  const onChangeFilter = (val: Record<string, any>) => {
+  const onChangeFilter = (val: Partial<Record<keyof IFilterValue, any>>) => {
     setFilterValue(prev => ({...prev, ...val}));
-  };
-
-  const onSelectChange = (type: string, e: any) => {
-    logIcon('onSelectChange', {type, e});
+    form.setFieldsValue({...filterValue, ...val});
   };
 
   const items: TabsProps['items'] = [
     {
       key: '0',
-      label: '自定义搜索(登录后)',
+      label: 'boss(登录后)',
       children: (
         <Boss
-          pageType={'user'}
-          filterValue={filterValue}
-          onUpdateFilterOption={onUpdateFilterOpt}
-          onChangeFilter={onChangeFilter}
-        />
-      ),
-    },
-    {
-      key: '1',
-      label: '平台推荐(登录后)',
-      children: (
-        <Boss
-          pageType={'recommLogined'}
+          pageType={PageType.bossLogin}
           filterValue={filterValue}
           onUpdateFilterOption={onUpdateFilterOpt}
           onChangeFilter={onChangeFilter}
@@ -59,10 +36,22 @@ export default function Home() {
     },
     {
       key: '2',
-      label: '未登录',
+      label: 'boss(未登录)',
       children: (
         <Boss
-          pageType={'normal'}
+          pageType={PageType.bossNotLogin}
+          filterValue={filterValue}
+          onUpdateFilterOption={onUpdateFilterOpt}
+          onChangeFilter={onChangeFilter}
+        />
+      ),
+    },
+    {
+      key: '3',
+      label: '智联(登录后)',
+      children: (
+        <Boss
+          pageType={PageType.zhilianLogin}
           filterValue={filterValue}
           onUpdateFilterOption={onUpdateFilterOpt}
           onChangeFilter={onChangeFilter}
@@ -77,6 +66,11 @@ export default function Home() {
         layout={'inline'}
         form={form}
         initialValues={filterValue}
+        onValuesChange={(changedValues) => {
+          if (['waitLogin', '猎头'].some(k => changedValues.hasOwnProperty(k))) {
+            setFilterValue(prev => ({...prev, ...changedValues}));
+          }
+        }}
         onFinish={(allVal) => {
           logIcon('onFinish', allVal);
           setFilterValue(prev => ({...prev, ...allVal}));

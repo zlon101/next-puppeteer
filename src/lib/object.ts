@@ -47,6 +47,23 @@ export function getUrlQuery(url: string) {
   return params;
 }
 
-export function obj2str(query: Record<string, string>) {
+export function obj2str(query: Record<string, string | number | boolean>): string {
   return Object.keys(query).reduce((acc: string, k: string) => `${acc}&${k}=${query[k]}`, '').slice(1);
+}
+
+// 数组去重
+export function uniqueArray<T>(arr: T[], idKey: (keyof T) | ((val: T) => string | number)): T[] {
+  if ((arr || []).length < 2) {
+    return arr;
+  }
+  const idSet = new Set();
+  const isFn = typeof idKey === 'function';
+  return arr.filter((item: T) => {
+    const idVal = isFn ? idKey(item) : item[idKey];
+    if (idSet.has(idVal)) {
+      return false;
+    }
+    idSet.add(idVal);
+    return true;
+  });
 }
