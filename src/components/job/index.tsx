@@ -308,7 +308,7 @@ export default function Boss(props: IProps) {
 
       setSource(jobs);
       setFetchTime(data?.fetchTime ?? '');
-      // !cache && saveCache(data);
+      !cache && saveCache(data);
     } catch (e) {
       logIcon('error', e, 'error');
       console.debug(e);

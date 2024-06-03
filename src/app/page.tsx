@@ -9,7 +9,7 @@ import {logIcon} from "@/lib/log";
 
 export default function Home() {
   const [filterOpts, setFilterOpts] = useState<Record<string, any>>({});
-  const [filterValue, setFilterValue] = useState<IFilterValue>(DefalutFilterVal as any);
+  const [filterValue, setFilterValue] = useState<IFilterValue>({} as any); // DefalutFilterVal
   const [form] = Form.useForm();
 
   const onUpdateFilterOpt = (type: string, val: any) => {

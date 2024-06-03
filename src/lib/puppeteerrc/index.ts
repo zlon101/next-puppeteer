@@ -11,6 +11,7 @@ import {ReqParam, PageType, IJob} from '@/components/job/const';
 import {closeBrowser, filterJobs} from './share';
 import {enterBoss} from './boss';
 import {enterZhiLian} from './zhilian';
+import {queryLocation} from "@/lib/puppeteerrc/gaode";
 
 const ShellCmd = join(process.cwd(), 'script', 'chrome.sh');
 const LaunchParam = {
@@ -51,6 +52,7 @@ export async function launch(query: ReqParam): Promise<IJob[]> {
     const browser = await puppeteer.connect({
       browserWSEndpoint: chromeJson.webSocketDebuggerUrl,
       defaultViewport: LaunchParam.defaultViewport,
+      protocolTimeout: 999999999,
     });
     // const browser = await puppeteer.launch(LaunchParam);
     // const pages = await browser.pages();
@@ -63,7 +65,16 @@ export async function launch(query: ReqParam): Promise<IJob[]> {
         jobs = await enterBoss(browser, nQuery);
       }
       jobs = filterJobs(jobs);
-      logIcon(`End 过滤后 ${jobs.length} 条`);
+      const addres = jobs.map((job: IJob) => job.Info?.address);
+      const locations = await queryLocation(browser, addres);
+      jobs.forEach((job, idx) => {
+        if (!locations[idx]) {
+          console.log(`没有location: ${idx+1}: ${job.brandName}`);
+        }
+        job.Info.location = locations[idx];
+      });
+      logIcon(`End! 共${jobs.length} 条`);
+      closeBrowser(browser);
       return jobs;
     } catch (e) {
       logIcon('未知错误', e);

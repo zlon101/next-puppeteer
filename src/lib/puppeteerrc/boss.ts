@@ -1,15 +1,9 @@
 import {load} from 'cheerio';
 import {PageType, ReqParam, IJob, RowKey} from '@/components/job/const';
 import {logIcon} from '../log';
-import {closeBrowser} from './share';
+import {closeBrowser, goto} from './share';
 import {uniqueArray} from "@/lib/object";
 
-const ListPages = [
-  // 自定义搜索模式
-  `https://www.zhipin.com/web/geek/job?city=101270100&experience=101,103,104,105&position=100901,100208&jobType=1901&salary=405`,
-  // 平台推荐
-  `https://www.zhipin.com/web/geek/job-recommend?city=101270100&salary=405&experience=101,103,104,105&jobType=1901`,
-];
 const JobDetailPage = `https://www.zhipin.com/job_detail/encryptJobId.html?
 lid=lid&
 securityId=securityId&
@@ -18,6 +12,14 @@ const BossListApi = `https://www.zhipin.com/wapi/zpgeek/search/joblist.json
 ?scene=1&query=&city=101270100&experience=101,103,104,105&payType=&partTime=&degree=
 &industry=&scale=&stage=&position=100901,100208&jobType=1901&salary=405&multiBusinessDistrict=&multiSubway=
 &page=1&pageSize=50`;
+const ListPages = [
+  // 自定义搜索模式
+  `https://www.zhipin.com/web/geek/job?city=101270100&experience=101,103,104,105&position=100901,100208&jobType=1901&salary=405`,
+  // 平台推荐
+  `https://www.zhipin.com/web/geek/job-recommend?city=101270100&salary=405&experience=101,103,104,105&jobType=1901`,
+];
+const MaxDetailNum = 4;
+const DetailTimeSpace = 1000;
 
 export async function enterBoss(browser: any, param: ReqParam) {
   try {
@@ -28,7 +30,6 @@ export async function enterBoss(browser: any, param: ReqParam) {
     const listPageRes =  uniqueArray<IJob>(dataArr, 'uid');
 
     const jobs: IJob[] = await handleDetailPage(listPageRes, browser, param);
-    await closeBrowser(browser);
     return jobs;
   } catch(e) {
     logIcon('enter catch');
@@ -136,7 +137,7 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
     if (param.waitLogin !== 'true') {
       page.on('response', onResponse);
     }
-    await page.goto(pageUrl);
+    await goto(page, pageUrl);
     // await page.setViewport({width: 1080, height: 1024});
 
     // #region Type into search box
@@ -155,8 +156,8 @@ async function handleDetailPage(jobList: IJob[], browser: any, param: ReqParam):
   if (jobList.length < 1) {
     return jobList;
   }
-  const hasLogin = pageType !== PageType.bossNotLogin;
-  const queueNum = hasLogin ? 1 : 8;
+  const hasLogin = pageType === PageType.bossLogin;
+  const queueNum = hasLogin ? 1 : MaxDetailNum;
   const jobNum = Math.min(jobList.length, parseInt(param.jobLimit));
   let jobIdx = 0,
     jobCount = 0;
@@ -181,6 +182,7 @@ async function handleDetailPage(jobList: IJob[], browser: any, param: ReqParam):
               return;
             }
             let htmlStr = '';
+            await _page.waitForNavigation({waitUntil: 'domcontentloaded'});
             try {
               htmlStr = await response.text();
             } catch (err) {
@@ -194,11 +196,12 @@ async function handleDetailPage(jobList: IJob[], browser: any, param: ReqParam):
             logIcon(`详情页 ${jobIdx}/ ${jobNum - 1}  ${job?.brandName}`);
             jobList[jobIdToIndex[companyInfo.uid]].Info = companyInfo;
             if (jobIdx < jobNum) {
+              const _detailUrl = jobList[jobIdx].detailUrl;
               const cb = () => {
-                _page.goto(`${jobList[jobIdx].detailUrl}`);
+                goto(_page, _detailUrl);
                 ++jobIdx;
               };
-              hasLogin ? setTimeout(cb, 2000) : cb();
+              hasLogin ? setTimeout(cb, DetailTimeSpace) : cb();
             }
             // 详情页处理完成
             if (jobCount === jobNum) {
@@ -215,7 +218,7 @@ async function handleDetailPage(jobList: IJob[], browser: any, param: ReqParam):
       );
 
       for (let queueIdx = 0; queueIdx < queueNum; queueIdx++) {
-        queue[queueIdx].goto(`${jobList[jobIdx].detailUrl}`);
+        goto(queue[queueIdx], jobList[jobIdx].detailUrl);
         ++jobIdx;
       }
     } catch (e) {
@@ -245,6 +248,7 @@ async function parseDetailPage(page: any, html: string): Promise<IJob['Info']> {
     address: $('.location-address', '#main')?.text().trim(),
   };
 }
+
 
 export const Mock = {
   resCount: 450,

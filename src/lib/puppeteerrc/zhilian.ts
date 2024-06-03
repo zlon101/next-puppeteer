@@ -1,9 +1,8 @@
 import {load} from 'cheerio';
 import {logIcon} from '../log';
-import {closeBrowser} from './share';
+import {closeBrowser, goto} from './share';
 import {ReqParam, IJob} from '@/components/job/const';
 import {uniqueArray} from '@/lib/object';
-import {newGaodePage} from "@/lib/puppeteerrc/gaode";
 
 export interface IZhiLianJob {
   uid: string;
@@ -46,19 +45,21 @@ interface IListRes {
   };
 }
 
+const ListApi = `https://fe-api.zhaopin.com/c/i/search/positions`;
 const ListPages = [
   `https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1`,
-  // 'https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1',
+  'https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1',
 ];
-const ListApi = `https://fe-api.zhaopin.com/c/i/search/positions`;
+const Tabs = ['.listsort__uls .listsort__item:first-child a', '.listsort__uls .listsort__item:last-child a'];
+const MaxDetailPageNum = 2;
+const DetailTimeSpace = 500;
 
 export async function enterZhiLian(browser: any, param: ReqParam) {
   try {
     let dataArr: IZhiLianJob[] = [];
-    // const tabs = ['.listsort__uls .listsort__item:first-child a', '.listsort__uls .listsort__item:last-child a'];
-    const tabs = ['.listsort__uls .listsort__item:first-child a'];
+
     for (const pageUrl of ListPages) {
-      for (const tabSelect of tabs) {
+      for (const tabSelect of Tabs) {
         const cb = async (page2: any) => {
           const tabDom = await page2.waitForSelector(tabSelect);
           // page.click(tabDom);
@@ -71,7 +72,6 @@ export async function enterZhiLian(browser: any, param: ReqParam) {
     const listPageRes = uniqueArray<IZhiLianJob>(dataArr, 'uid');
     const jobs: IZhiLianJob[] = await handleDetailPage(listPageRes, browser, param);
     logIcon(`======= 详情页处理完成，去重后共 ${jobs.length} 条 =======`, undefined, 'success');
-    await closeBrowser(browser);
     return transform(jobs);
   } catch (e) {
     logIcon('enterZhiLian catch');
@@ -87,7 +87,7 @@ export async function handleListPage(
   pageUrl: string,
   onPageLoaded: any,
 ): Promise<IZhiLianJob[]> {
-  logIcon(`================= 搜索列表 ==================================`, pageUrl);
+  logIcon(`========= 搜索列表 ==========`, pageUrl);
 
   const page = await (async () => {
     // const pages = await browser.pages();
@@ -170,7 +170,7 @@ export async function handleListPage(
     }
 
     try {
-      await page.goto(pageUrl);
+      await goto(page, pageUrl);
       await onPageLoaded(page);
     } catch (e) {
       logIcon('导航到列表页错误', undefined, 'error');
@@ -186,7 +186,7 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
   }
   const _jobLimit = parseInt(param.jobLimit);
   const jobNum = Math.min(jobList.length, _jobLimit);
-  const queueNum = Math.min(5, jobNum);
+  const queueNum = Math.min(MaxDetailPageNum, jobNum);
   let jobIdx = 0,
     jobCount = 0;
   const queue: any[] = Array.from({length: queueNum});
@@ -203,14 +203,16 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
     try {
       await Promise.all(
         queue.map(async (_, j) => {
-          const {parse: getLocation} = await newGaodePage(browser);
+          // const {parse: getLocation} = await newGaodePage(browser);
           const _page = await browser.newPage();
 
           const onResponse = async (response: any) => {
             if (!/\/\/jobs\.zhaopin\.com\/.*\.htm/.test(response.url()) || response.status() !== 200) {
               return;
             }
+
             let htmlStr = '';
+            await _page.waitForNavigation({waitUntil: 'domcontentloaded'});
             try {
               htmlStr = await response.text();
             } catch (err) {
@@ -222,19 +224,16 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
             ++jobCount;
             // logIcon(`详情页 ${jobIdx}/ ${jobNum - 1}  ${jobList[jobIdToIndex[companyInfo.uid]].name}`);
             // 获取经纬度
-            if (companyInfo.address) {
-              const addre = companyInfo.address.includes('成都市') ? companyInfo.address : `成都市${companyInfo.address}`;
-              (companyInfo as any).location = await getLocation(addre);
-            }
             jobList[jobIdToIndex[companyInfo.uid]].Info = companyInfo;
 
             if (jobIdx < jobNum) {
+              const _detailUrl = jobList[jobIdx].detailUrl;
               const cb = () => {
-                _page.goto(`${jobList[jobIdx].detailUrl}`);
+                goto(_page, _detailUrl);
                 ++jobIdx;
               };
               // hasLogin ? setTimeout(cb, 1000) : cb();
-              cb();
+              setTimeout(cb, DetailTimeSpace);
             }
             // 详情页处理完成
             if (jobCount === jobNum) {
@@ -249,7 +248,7 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
       );
 
       for (let queueIdx = 0; queueIdx < queueNum; queueIdx++) {
-        queue[queueIdx].goto(`${jobList[jobIdx].detailUrl}`);
+        goto(queue[queueIdx], jobList[jobIdx].detailUrl);
         ++jobIdx;
       }
     } catch (e) {
