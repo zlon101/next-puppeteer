@@ -37,15 +37,15 @@ export default function Boss(props: IProps) {
     const filterActiveTime = filterValue.activeTime || [];
     const areaCountMap: Record<string, number> = {};
     const list = source.reduce((acc, _job) => {
-      let ok = !filterActiveTime.length || filterActiveTime.includes(_job.Info.activeTime);
+      let ok = !filterActiveTime.length || filterActiveTime.includes(_job.aainfo.activeTime);
       ok = ok && (filterValue['猎头'] || !_job.proxyJob);
-      ok = ok && (!filterValue['招聘状态'] || filterValue['招聘状态'].includes(_job.Info.jobStatus));
+      ok = ok && (!filterValue['招聘状态'] || filterValue['招聘状态'].includes(_job.aainfo.jobStatus));
       ok = ok && (!filterValue.address || (!!_job.businessDistrict && filterValue.address.some(_addre => _addre.includes(_job.businessDistrict))));
       const [min, max, bonus] = parseSalary(_job.salaryDesc);
       const filterMoney = filterValue.money ? parseInt(filterValue.money) : 0;
       ok = ok && (!filterMoney || max >= filterMoney);
       // 成立日期
-      ok = ok && (!filterValue.establishDate || (!!_job.Info.establishDate && filterValue.establishDate >= _job.Info.establishDate));
+      ok = ok && (!filterValue.establishDate || (!!_job.aainfo.establishDate && filterValue.establishDate >= _job.aainfo.establishDate));
       if (ok) {
         if (_job.businessDistrict) {
           areaCountMap[_job.businessDistrict] ? areaCountMap[_job.businessDistrict]++ : (areaCountMap[_job.businessDistrict] = 1);
@@ -120,13 +120,13 @@ export default function Boss(props: IProps) {
       defaultFilteredValue: filterValue.activeTime,
       filteredValue: filterValue.activeTime,
       // onFilter: (value: any, record: IJob) => {
-      //   return record.Info.activeTime === value;
+      //   return record.aainfo.activeTime === value;
       // },
       render: (_: unknown, record: IJob, index: number) => (
         <div style={{width: '100px'}}>
-          <NoWrap>{record.Info.activeTime}</NoWrap><br/>
-          {/*<NoWrap>{record.Info.upDate}</NoWrap>*/}
-          {/*<NoWrap>{record.Info.jobStatus} - {record.jobValidStatus}</NoWrap>*/}
+          <NoWrap>{record.aainfo.activeTime}</NoWrap><br/>
+          {/*<NoWrap>{record.aainfo.upDate}</NoWrap>*/}
+          {/*<NoWrap>{record.aainfo.jobStatus} - {record.jobValidStatus}</NoWrap>*/}
         </div>
       ),
     },
@@ -151,7 +151,7 @@ export default function Boss(props: IProps) {
       filterSearch: false,
       render(v: unknown, record: IJob) {
         return (
-          <Tooltip placement="top" title={record.Info.address}>
+          <Tooltip placement="top" title={record.aainfo.address}>
             <NoWrap>
               {record.businessDistrict}/{record.areaDistrict}
             </NoWrap>
@@ -165,12 +165,12 @@ export default function Boss(props: IProps) {
       key: 'establishDate',
       ellipsis: true,
       width: 100,
-      sorter: (a: IJob, b: IJob) => parseInt(a.Info.establishDate.replace(/\D/g, '')) - parseInt(b.Info.establishDate.replace(/\D/g, '')),
+      sorter: (a: IJob, b: IJob) => parseInt(a.aainfo.establishDate.replace(/\D/g, '')) - parseInt(b.aainfo.establishDate.replace(/\D/g, '')),
       sortDirections: ['ascend', 'descend', 'ascend'] as any,
       render(v: unknown, record: IJob) {
         return (
           <>
-            <NoWrap>{record.Info.establishDate}</NoWrap>
+            <NoWrap>{record.aainfo.establishDate}</NoWrap>
             <br />
             {/*
             <NoWrap>{record.brandIndustry}</NoWrap><br/>
@@ -226,8 +226,8 @@ export default function Boss(props: IProps) {
         return (
           <Tooltip
             placement="top"
-            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? ''}}></p>}>
-            <p className={'long_txt es'} dangerouslySetInnerHTML={{__html: record.Info.jobRequire ?? '-'}}></p>
+            title={<p className={'long_txt'} dangerouslySetInnerHTML={{__html: record.aainfo.jobRequire ?? ''}}></p>}>
+            <p className={'long_txt es'} dangerouslySetInnerHTML={{__html: record.aainfo.jobRequire ?? '-'}}></p>
           </Tooltip>
         );
       },
@@ -255,7 +255,7 @@ export default function Boss(props: IProps) {
       key: 'companyInfoHtml',
       ellipsis: true,
       render(_: unknown, record: IJob) {
-        const {companyInfoHtml} = record.Info;
+        const {companyInfoHtml} = record.aainfo;
         if (!companyInfoHtml) {
           return '-';
         }
@@ -294,11 +294,11 @@ export default function Boss(props: IProps) {
       const _jobStatusOpts: string[] = [];
       const _activeTimeOpts: string[] = [];
       jobs.forEach(job => {
-        if (job.Info.jobStatus && !_jobStatusOpts.includes(job.Info.jobStatus)) {
-          _jobStatusOpts.push(job.Info.jobStatus);
+        if (job.aainfo.jobStatus && !_jobStatusOpts.includes(job.aainfo.jobStatus)) {
+          _jobStatusOpts.push(job.aainfo.jobStatus);
         }
-        if (job.Info.activeTime && !_activeTimeOpts.includes(job.Info.activeTime)) {
-          _activeTimeOpts.push(job.Info.activeTime);
+        if (job.aainfo.activeTime && !_activeTimeOpts.includes(job.aainfo.activeTime)) {
+          _activeTimeOpts.push(job.aainfo.activeTime);
         }
       });
 

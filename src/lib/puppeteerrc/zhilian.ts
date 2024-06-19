@@ -1,6 +1,6 @@
 import {load} from 'cheerio';
 import {logIcon} from '../log';
-import {closeBrowser, goto} from './share';
+import {closeBrowser, filterJobs, goto, waitForContentLoaded} from './share';
 import {ReqParam, IJob} from '@/components/job/const';
 import {uniqueArray} from '@/lib/object';
 
@@ -35,7 +35,14 @@ export interface IZhiLianJob {
   jobKnowledgeWelfareFeatures: string;
   cityDistrict: string;
   streetName: string;
-  Info: any;
+  featureServer: {
+    // 上次回复时间
+    lastReplyTime: number;
+    // 今日回复
+    reply24h: number;
+  };
+  aainfo: any;
+  // hrStateInfo
 }
 
 interface IListRes {
@@ -49,15 +56,14 @@ const ListApi = `https://fe-api.zhaopin.com/c/i/search/positions`;
 const ListPages = [
   `https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1`,
   'https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1',
-];
-const Tabs = ['.listsort__uls .listsort__item:first-child a', '.listsort__uls .listsort__item:last-child a'];
-const MaxDetailPageNum = 2;
+].slice();
+const Tabs = ['.listsort__uls .listsort__item:first-child a', '.listsort__uls .listsort__item:last-child a'].slice();
+const MaxDetailPageNum = 1;
 const DetailTimeSpace = 500;
 
 export async function enterZhiLian(browser: any, param: ReqParam) {
   try {
     let dataArr: IZhiLianJob[] = [];
-
     for (const pageUrl of ListPages) {
       for (const tabSelect of Tabs) {
         const cb = async (page2: any) => {
@@ -69,14 +75,16 @@ export async function enterZhiLian(browser: any, param: ReqParam) {
         dataArr = dataArr.concat(jobs);
       }
     }
+
     const listPageRes = uniqueArray<IZhiLianJob>(dataArr, 'uid');
     const jobs: IZhiLianJob[] = await handleDetailPage(listPageRes, browser, param);
-    logIcon(`======= 详情页处理完成，去重后共 ${jobs.length} 条 =======`, undefined, 'success');
-    return transform(jobs);
+    let jobs2: IJob[] = transformDetail(jobs);
+    jobs2 = filterJobs(jobs2);
+    logIcon(`======= 详情页处理完成，去重后共 ${jobs2.length} 条 =======`, undefined, 'success');
+    return jobs2;
   } catch (e) {
     logIcon('enterZhiLian catch');
     console.log(e);
-    await closeBrowser(browser);
     return [];
   }
 }
@@ -106,7 +114,7 @@ export async function handleListPage(
       const nextPageDisable = await nextPageIcon?.evaluate((el: any) => !!el.disabled);
       // 最后一页
       if (!nextPageDisable) {
-        logIcon(`下一页`);
+        console.log(`下一页`);
         page.click(nextPageSelector);
       }
     } catch (e) {
@@ -150,10 +158,9 @@ export async function handleListPage(
         uid: item.number,
         detailUrl: item.positionUrl,
       }));
-      // jobs = jobs.filter(_job => /(web|前端|react|vue|js|javascript)/i.test(_job.jobName));
       ++pageCount;
       totalJobs = totalJobs.concat(jobs);
-      logIcon(`第 ${pageCount} 页, jobs 数量: ${totalJobs.length} 总共:${resJson.count}`);
+      console.log(`第 ${pageCount} 页, jobs 数量: ${totalJobs.length} 总共:${resJson.count}`);
 
       if (totalJobs.length < resJson.count && pageCount < pageLimit) {
         setTimeout(goNextPage, 400);
@@ -212,19 +219,18 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
             }
 
             let htmlStr = '';
-            await _page.waitForNavigation({waitUntil: 'domcontentloaded'});
             try {
               htmlStr = await response.text();
             } catch (err) {
               logIcon(`handleDetailPage response.text 错误`, err, 'error');
+              console.log(err);
               return;
             }
-
             const companyInfo = await parseDetailPage(_page, htmlStr);
             ++jobCount;
             // logIcon(`详情页 ${jobIdx}/ ${jobNum - 1}  ${jobList[jobIdToIndex[companyInfo.uid]].name}`);
             // 获取经纬度
-            jobList[jobIdToIndex[companyInfo.uid]].Info = companyInfo;
+            jobList[jobIdToIndex[companyInfo.uid]].aainfo = companyInfo;
 
             if (jobIdx < jobNum) {
               const _detailUrl = jobList[jobIdx].detailUrl;
@@ -232,8 +238,7 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
                 goto(_page, _detailUrl);
                 ++jobIdx;
               };
-              // hasLogin ? setTimeout(cb, 1000) : cb();
-              setTimeout(cb, DetailTimeSpace);
+              DetailTimeSpace ? setTimeout(cb, DetailTimeSpace) : cb();
             }
             // 详情页处理完成
             if (jobCount === jobNum) {
@@ -258,6 +263,7 @@ async function handleDetailPage(jobList: IZhiLianJob[], browser: any, param: Req
 }
 
 async function parseDetailPage(page: any, html: string) {
+  await waitForContentLoaded(page);
   const url = decodeURIComponent(page.url());
   const $ = load(html);
   return {
@@ -274,7 +280,7 @@ async function parseDetailPage(page: any, html: string) {
 }
 
 type IJobKeys = keyof IJob;
-function transform(srcArr: IZhiLianJob[]): IJob[] {
+function transformDetail(srcArr: IZhiLianJob[]): IJob[] {
   const KeyMap: Partial<Record<IJobKeys, keyof IZhiLianJob | ((va: IZhiLianJob) => any)>> = {
     jobName: 'name',
     jobDegree: 'education',
@@ -282,6 +288,9 @@ function transform(srcArr: IZhiLianJob[]): IJob[] {
     jobLabels: (_job: IZhiLianJob) => [],
     skills: (_job: IZhiLianJob) => (_job.skillLabel || []).map((item: any) => item.value),
     salaryDesc: (_job: IZhiLianJob) => {
+      if (!_job.salary60.includes('-')) {
+        return _job.salary60;
+      }
       // 9千-2.2万.14薪
       const [min, max] = _job.salary60.split('-').map(v => {
         const num = parseFloat(v);
@@ -293,7 +302,12 @@ function transform(srcArr: IZhiLianJob[]): IJob[] {
     areaDistrict: 'cityDistrict',
     businessDistrict: 'streetName',
     brandName: 'companyName',
-    Info: (_job: IZhiLianJob) => JSON.parse(_job.cardCustomJson).salary60,
+    aainfo: (_job: IZhiLianJob) => {
+      return {
+        ...JSON.parse(_job.cardCustomJson).salary60,
+        activeTime: (_job.featureServer.lastReplyTime ? new Date(+_job.featureServer.lastReplyTime).toLocaleString() : '无') + _job.featureServer.lastReplyTime ?? '无',
+      }
+    },
   } as const;
 
   return srcArr.map((job: IZhiLianJob) => {
@@ -302,8 +316,8 @@ function transform(srcArr: IZhiLianJob[]): IJob[] {
       acc[k] = typeof v2 === 'function' ? v2(job) : job[v2!];
       return acc;
     }, {} as IJob);
-    obj.Info = {
-      ...job.Info,
+    obj.aainfo = {
+      ...job.aainfo,
       activeTime: '',
     };
     return Object.assign({} as any, job, obj);

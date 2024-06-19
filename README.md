@@ -1,6 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[puppeteer](https://pptr.dev/api/puppeteer.page.waitfornavigation)
+
+[高德地图API](https://lbs.amap.com/api/javascript-api-v2/tutorails/add-marker) 
+
+
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 

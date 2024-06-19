@@ -2,38 +2,41 @@
 
 import {useEffect, useState, useRef} from 'react';
 import { Checkbox } from 'antd';
-import type { CheckboxProps, GetProp } from 'antd';
+import type {GetProp } from 'antd';
 import '@amap/amap-jsapi-types';
 import AMapLoader from '@amap/amap-jsapi-loader';
-import {logIcon, obj2str} from '@/lib/tool';
 import {IJob, IJobsRes, PageType} from '@/components/job/const';
 import './index.scss';
 
-type CheckboxValueType = GetProp<typeof Checkbox.Group, 'value'>[number];
+// type CheckboxValueType = GetProp<typeof Checkbox.Group, 'value'>[number];
 type IPos = [number, number];
 const CheckboxGroup = Checkbox.Group;
 
 export default function MapContainer() {
-  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>([]);
+  const [checkedList, setCheckedList] = useState<string[]>([]);
   const [source, setSource] = useState<Record<string, IJob[]>>({});
   const [plainOptions, setPlainOptions] = useState<string[]>([]);
   const mapRef = useRef<any>(null);
   const updateMapRef = useRef<any>(null);
   const [posCount, setPosCount] = useState<number>(0);
 
-  const checkAll = plainOptions.length === checkedList.length;
-  const indeterminate = checkedList.length > 0 && checkedList.length < plainOptions.length;
-  const onChange = (list: CheckboxValueType[]) => {
+  const onChange = (list: string[]) => {
+    const jobs = list.reduce((acc, k) => [...acc, ...source[k]], [] as any);
     setCheckedList(list);
-  };
-  const onCheckAllChange: CheckboxProps['onChange'] = (e) => {
-    setCheckedList(e.target.checked ? plainOptions : []);
+    setPosCount(updateMapRef.current(jobs));
   };
 
   useEffect(() => {
     const _source: Record<string, IJob[]> = Object.values(PageType).reduce((acc, k) => {
       const v: IJobsRes = JSON.parse(localStorage.getItem(k) ?? 'null');
-      v && (acc[k] = v.jobList);
+      // v && (acc[k] = v.jobList);
+      if (v) {
+        acc[k] = [
+          v.jobList[0],
+          {...v.jobList[0], brandName: 'aaaaa'},
+          {...v.jobList[0], brandName: 'vbbbb'},
+        ]
+      }
       return acc;
     }, {} as any);
     const keys = Object.keys(_source) ?? [];
@@ -56,9 +59,6 @@ export default function MapContainer() {
   return (
     <div className="wrap">
       <div>
-        <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-          全选
-        </Checkbox>
         <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
         <span className="pos_count">坐标数: {posCount}</span>
       </div>
@@ -99,7 +99,7 @@ async function initMap() {
   const layer = new AMap.LabelsLayer({
     zooms: [3, 20],
     zIndex: 1000,
-    collision: false, //该层内标注是否避让
+    collision: true, //该层内标注是否避让
     allowCollision: true, //不同标注层之间是否避让
   });
   map.on('complete', () => {
@@ -115,13 +115,13 @@ async function initMap() {
     const markers2: any = [];
     let count = 0;
     jobs.forEach((job, jobIdx) => {
-      if ((job.Info.location ?? []).length !== 2) {
+      if ((job.aainfo.location ?? []).length !== 2) {
         // console.log(`没有location: ${jobIdx}. ${job.brandName}`);
         return;
       }
       ++count;
       const labelMarker = new AMap.LabelMarker({
-        position: job.Info.location,
+        position: job.aainfo.location,
         icon,
       });
       markers2.push(labelMarker);

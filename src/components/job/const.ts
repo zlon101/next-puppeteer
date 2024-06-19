@@ -70,7 +70,7 @@ export interface IJob {
   securityId: string;
   lid: string;
 
-  Info: {
+  aainfo: {
     uid: string;
     // 招聘状态
     jobStatus: string;

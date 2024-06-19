@@ -2,6 +2,7 @@ import {goto} from '@/lib/puppeteerrc/share';
 
 type IPosition = [number, number];
 
+const Frequency = 800;
 export async function queryLocation(browser: any, addres: string[]): Promise<IPosition[]> {
   // console.log('查询经纬度2', addres);
   const page = await browser.newPage();
@@ -24,7 +25,7 @@ export async function queryLocation(browser: any, addres: string[]): Promise<IPo
         count === Num ? resolve(positions) : next();
         return;
       }
-      _addre = _addre.includes('成都市') ? _addre : `成都市${_addre}`;
+      _addre = _addre.includes('成都') ? _addre : `成都市${_addre}`;
 
       await input.evaluate((el: any, addre2: string) => {
         el.value = addre2;
@@ -52,20 +53,19 @@ export async function queryLocation(browser: any, addres: string[]): Promise<IPo
       try {
         const text = await response.text();
         // "location": "104.06,30.54",
-        const location = /"location":\s*"([\d.,]+)"/.exec(text)![1];
-        positions[count] = location.split(',').map(v => parseFloat(v)) as IPosition;
+        const location = /"location":\s*"([\d.,]+)"/.exec(text)?.[1];
+        positions[count] =  location ? location.split(',').map(v => parseFloat(v)) as IPosition : (null as any);
         ++count;
         if (count === Num) {
           resolve(positions);
         } else {
-          next();
+          setTimeout(next, Frequency);
         }
       } catch(e) {
-        console.log('response.text 错误:\n', e);
-        reject('response.text 错误');
+        console.log('queryLocation response.text 错误:\n', e);
+        reject('queryLocation response.text 错误');
       }
     });
     next();
   });
 }
-
