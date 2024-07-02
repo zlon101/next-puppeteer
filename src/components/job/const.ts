@@ -2,11 +2,27 @@ import {ValueOf} from '@/lib/types';
 
 export const PageType = {
   bossLogin: 'bossLogin',
+  bossWx: 'bossWx',
   bossNotLogin: 'bossNotLogin',
   zhilianLogin: 'zhilianLogin',
+  zhiliangWx: 'zhiliangWx',
 } as const;
 
 export type IPageType = ValueOf<typeof PageType>;
+
+export const ignoreNamesCtx = {
+  key: 'IgnoreNameSym',
+  get(): string[] {
+    return JSON.parse(localStorage.getItem(this.key) ?? '[]');
+  },
+  set(v: any) {
+    localStorage.setItem(this.key, JSON.stringify(v));
+  },
+  add(name: string) {
+    const newNames = [...new Set([...this.get(), name])];
+    this.set(newNames);
+  }
+}
 
 export interface IFilterValue {
   '招聘状态': string[];
@@ -34,6 +50,7 @@ export interface ReqParam {
   type: IPageType;
   pageLimit: string;
   jobLimit: string;
+  location: string;
 }
 
 export interface IJob {
@@ -54,6 +71,8 @@ export interface IJob {
   // brandStageName: string; // 融资状态
   areaDistrict: string; // 双流
   businessDistrict: string; // 华阳
+  businessName?: string;
+  districtName?: string;
 
   other?: string;
 

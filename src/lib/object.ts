@@ -1,3 +1,5 @@
+import {func} from "prop-types";
+
 export function getType(val: any, expectType?: string): string | boolean {
   const reaType = Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
   if (expectType) {
@@ -43,7 +45,7 @@ export function createRegExp(searchText: string | RegExp, conf: IParam = Default
 
 export function getUrlQuery(url: string) {
   const params: Record<string, string> = {};
-  url.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => (params[k] = v));
+  url.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => (params[k] = decodeURIComponent(v)));
   return params;
 }
 
@@ -66,4 +68,9 @@ export function uniqueArray<T>(arr: T[], idKey: (keyof T) | ((val: T) => string 
     idSet.add(idVal);
     return true;
   });
+}
+
+export function parseDate(date: Date) {
+  const [m, d, h, mm] = [date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes()];
+  return `${m}/${d} ${h}:${mm}`;
 }

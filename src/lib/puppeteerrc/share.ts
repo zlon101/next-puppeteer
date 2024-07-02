@@ -20,11 +20,12 @@ export function parseSalary(salaryDesc: string): [number, number, number] {
 }
 
 export function filterJobs(jobs: IJob[]) {
+  const Blacklist = ['外企德科', '兴业数金', '软通动力', '中软国际', '博才世杰', '赛意信息'];
   return jobs.filter((job: IJob) => {
     let black = false;
     const _activeTime = job.aainfo?.activeTime ?? '';
     black = !!_activeTime && (_activeTime.includes('年') || /[345]月内/.test(_activeTime));
-    black = black || job.brandName?.includes('外企德科');
+    black = black || Blacklist.some(item => job.brandName?.includes(item));
     black = black || !/(web|前端|react|vue|js|javascript|html|node)/i.test(job.jobName);
     return !black;
   });

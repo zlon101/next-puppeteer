@@ -1,8 +1,10 @@
 import {load} from 'cheerio';
-import {logIcon} from '../log';
-import {closeBrowser, filterJobs, goto, waitForContentLoaded} from './share';
-import {ReqParam, IJob} from '@/components/job/const';
+import {logIcon} from '@/lib/log';
+import {parseDate} from '@/lib/tool';
+import {filterJobs, goto, waitForContentLoaded} from '../share';
+import {ReqParam, IJob, PageType} from '@/components/job/const';
 import {uniqueArray} from '@/lib/object';
+import {getWxJobsFromFile} from './zhilian-wx';
 
 export interface IZhiLianJob {
   uid: string;
@@ -64,18 +66,24 @@ const DetailTimeSpace = 500;
 export async function enterZhiLian(browser: any, param: ReqParam) {
   try {
     let dataArr: IZhiLianJob[] = [];
-    for (const pageUrl of ListPages) {
-      for (const tabSelect of Tabs) {
-        const cb = async (page2: any) => {
-          const tabDom = await page2.waitForSelector(tabSelect);
-          // page.click(tabDom);
-          await tabDom.click();
-        };
-        const jobs: IZhiLianJob[] = await handleListPage(browser, param, pageUrl, cb);
-        dataArr = dataArr.concat(jobs);
+
+    if (param.type === PageType.zhiliangWx) {
+      dataArr = await getWxJobsFromFile() as any;
+    } else {
+      for (const pageUrl of ListPages) {
+        for (const tabSelect of Tabs) {
+          const cb = async (page2: any) => {
+            const tabDom = await page2.waitForSelector(tabSelect);
+            // page.click(tabDom);
+            await tabDom.click();
+          };
+          const jobs: IZhiLianJob[] = await handleListPage(browser, param, pageUrl, cb);
+          dataArr = dataArr.concat(jobs);
+        }
       }
     }
 
+    dataArr = addAttr(dataArr);
     const listPageRes = uniqueArray<IZhiLianJob>(dataArr, 'uid');
     const jobs: IZhiLianJob[] = await handleDetailPage(listPageRes, browser, param);
     let jobs2: IJob[] = transformDetail(jobs);
@@ -153,11 +161,7 @@ export async function handleListPage(
 
       const resVa: IListRes = await response.json();
       const resJson = resVa.data;
-      let jobs = (resJson.list ?? []).map(item => ({
-        ...item,
-        uid: item.number,
-        detailUrl: item.positionUrl,
-      }));
+      let jobs = (resJson.list ?? []);
       ++pageCount;
       totalJobs = totalJobs.concat(jobs);
       console.log(`第 ${pageCount} 页, jobs 数量: ${totalJobs.length} 总共:${resJson.count}`);
@@ -304,8 +308,9 @@ function transformDetail(srcArr: IZhiLianJob[]): IJob[] {
     brandName: 'companyName',
     aainfo: (_job: IZhiLianJob) => {
       return {
-        ...JSON.parse(_job.cardCustomJson).salary60,
-        activeTime: (_job.featureServer.lastReplyTime ? new Date(+_job.featureServer.lastReplyTime).toLocaleString() : '无') + _job.featureServer.lastReplyTime ?? '无',
+        ..._job.aainfo,
+        // ...JSON.parse(_job.cardCustomJson).salary60,
+        activeTime: (_job.featureServer.lastReplyTime ? parseDate(new Date(+_job.featureServer.lastReplyTime)) : '无/') + `  ${_job.featureServer.reply24h ?? '无'}`,
       }
     },
   } as const;
@@ -316,10 +321,14 @@ function transformDetail(srcArr: IZhiLianJob[]): IJob[] {
       acc[k] = typeof v2 === 'function' ? v2(job) : job[v2!];
       return acc;
     }, {} as IJob);
-    obj.aainfo = {
-      ...job.aainfo,
-      activeTime: '',
-    };
     return Object.assign({} as any, job, obj);
   });
+}
+
+function addAttr(jobs: IZhiLianJob[]) {
+  jobs.forEach((item: IZhiLianJob) => {
+    item.uid = item.number;
+    item.detailUrl = item.positionUrl;
+  });
+  return jobs;
 }

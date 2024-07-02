@@ -1,5 +1,5 @@
 import {launch} from '@/lib/puppeteerrc';
-import {getUrlQuery} from '@/lib/tool';
+import {getUrlQuery, parseDate} from '@/lib/tool';
 import {ReqParam, IJob, IJobsRes} from '@/components/job/const';
 
 // export const dynamic = 'force-dynamic'; // defaults to auto
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
   launch(query).then((jobList: IJob[]) => {
     clearInterval(timeId);
-    const data: IJobsRes = {jobList: jobList, fetchTime: new Date().toLocaleString()};
+    const data: IJobsRes = {jobList: jobList, fetchTime: parseDate(new Date())};
     writer.write(formatEvent({event: 'done', data: JSON.stringify(data)}));
     writer.close();
   });

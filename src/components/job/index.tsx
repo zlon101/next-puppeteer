@@ -5,7 +5,7 @@ import {Table, Tag, Button, Tooltip, message} from 'antd';
 import Link from 'next/link'
 import {logIcon, serveEvent} from '@/lib/tool';
 import {filterJobs, parseSalary} from "@/lib/puppeteerrc/share";
-import {IFilterValue, IPageType, RowKey, IJobsRes, IJob, PageType} from './const';
+import {IFilterValue, IPageType, RowKey, IJobsRes, IJob, PageType, ignoreNamesCtx} from './const';
 import './index.scss';
 
 interface Area {
@@ -25,12 +25,13 @@ export interface IProps {
   onChangeFilter: (val: Partial<Record<keyof IFilterValue, any>>) => void;
 }
 
-export default function Boss(props: IProps) {
+export default function JobTable(props: IProps) {
   const {pageType, filterValue, onUpdateFilterOption, onChangeFilter} = props;
   const [source, setSource] = useState<IJob[]>([]);
   const [fetchTime, setFetchTime] = useState<string>('');
   // const [_, setJobStatusOpts] = useState<string[]>([]);
   const [activeTimeOpts, setActiveTimeOpts] = useState<string[]>([]);
+  const [ignoreNames, setIgnoreNames] = useState<string[]>(ignoreNamesCtx.get());
   const [messageApi, contextHolder] = message.useMessage();
 
   const [filtedList, areaOptions] = useMemo(() => {
@@ -41,11 +42,13 @@ export default function Boss(props: IProps) {
       ok = ok && (filterValue['猎头'] || !_job.proxyJob);
       ok = ok && (!filterValue['招聘状态'] || filterValue['招聘状态'].includes(_job.aainfo.jobStatus));
       ok = ok && (!filterValue.address || (!!_job.businessDistrict && filterValue.address.some(_addre => _addre.includes(_job.businessDistrict))));
+      // 薪资
       const [min, max, bonus] = parseSalary(_job.salaryDesc);
       const filterMoney = filterValue.money ? parseInt(filterValue.money) : 0;
       ok = ok && (!filterMoney || max >= filterMoney);
       // 成立日期
       ok = ok && (!filterValue.establishDate || (!!_job.aainfo.establishDate && filterValue.establishDate >= _job.aainfo.establishDate));
+      ok = ok && !ignoreNames.includes(_job.brandName);
       if (ok) {
         if (_job.businessDistrict) {
           areaCountMap[_job.businessDistrict] ? areaCountMap[_job.businessDistrict]++ : (areaCountMap[_job.businessDistrict] = 1);
@@ -83,11 +86,81 @@ export default function Boss(props: IProps) {
       }
     });
     areaTree.forEach(areaNode => {
-      areaNode.text = `${areaNode.text} - ${areaNode.children.length}`;
+      areaNode.text = `${areaNode.text} - ${areaNode.children.reduce((sum, child) => sum + child.count, 0)}`;
       areaNode.children.forEach(childNode => (childNode.text = `${childNode.text} - ${childNode.count}`));
     })
     return [list, areaTree];
-  }, [source, filterValue]);
+  }, [source, filterValue, ignoreNames]);
+
+  const fetchData = async (cache?: IJobsRes) => {
+    try {
+      let data = cache;
+      if (!data) {
+        data = await serveEvent<IJobsRes>(`/api/boss?type=${pageType}&waitLogin=${filterValue.waitLogin}`);
+      }
+      // 从小程序中删除 web 中已有的数据
+      if ([PageType.bossWx, PageType.zhiliangWx].includes(pageType as any)) {
+        const webKey = pageType === PageType.bossWx ? PageType.bossLogin : PageType.zhilianLogin;
+        const jobsFromWeb = JSON.parse(localStorage.getItem(webKey) ?? 'null');
+        if (jobsFromWeb) {
+          data!.jobList = data!.jobList.filter(jobItem => !jobsFromWeb.jobList.some((job2: IJob) => job2.uid === jobItem.uid));
+          logIcon(`过滤web中已有的数据后剩余 ${data.jobList.length} 条`);
+        }
+      }
+
+      const jobs = filterJobs(data?.jobList ?? []);
+      const _jobStatusOpts: string[] = [];
+      const _activeTimeOpts: string[] = [];
+      jobs.forEach(job => {
+        if (job.aainfo.jobStatus && !_jobStatusOpts.includes(job.aainfo.jobStatus)) {
+          _jobStatusOpts.push(job.aainfo.jobStatus);
+        }
+        if (job.aainfo.activeTime && !_activeTimeOpts.includes(job.aainfo.activeTime)) {
+          _activeTimeOpts.push(job.aainfo.activeTime);
+        }
+      });
+
+      // setJobStatusOpts(_jobStatusOpts);
+      onUpdateFilterOption('招聘状态', _jobStatusOpts);
+      setActiveTimeOpts(_activeTimeOpts);
+
+      setSource(jobs);
+      data?.fetchTime && setFetchTime(data?.fetchTime);
+      !cache && saveCache(data);
+    } catch (e) {
+      logIcon('error', e, 'error');
+      console.debug(e);
+    }
+  };
+
+  const saveCache = (val?: IJobsRes) => {
+    localStorage.setItem(pageType, JSON.stringify(val ? val : {jobList: source, fetchTime}));
+    messageApi.open({
+      type: 'success',
+      content: '保存成功',
+      duration: 0.5,
+    });
+  };
+
+  const clearCache = () => {
+    localStorage.removeItem(pageType);
+    messageApi.open({
+      type: 'success',
+      content: '清除成功',
+      duration: 0.5,
+    });
+  };
+
+  const onDel = (job: IJob, e: any) => {
+    e.stopPropagation();
+    ignoreNamesCtx.add(job.brandName);
+    setIgnoreNames(pre => [job.brandName, ...pre]);
+    messageApi.open({
+      type: 'success',
+      content: '删除成功',
+      duration: 0.5,
+    });
+  };
 
   const columns = [
     {
@@ -281,55 +354,20 @@ export default function Boss(props: IProps) {
         return (<div className={'long_txt'}>{v}</div>);
       },
     },
+    {
+      title: '操作',
+      key: 'action',
+      render: (_: unknown, record: IJob) => {
+        return (
+          <Button
+            size="small"
+            style={{fontSize: 12}}
+            onClick={(e) => onDel(record, e)}
+          >删除</Button>
+        );
+      },
+    },
   ];
-
-  const fetchData = async (cache?: IJobsRes) => {
-    try {
-      let data = cache;
-      if (!cache) {
-        data = await serveEvent<IJobsRes>(`/api/boss?type=${pageType}&waitLogin=${filterValue.waitLogin}`);
-      }
-
-      const jobs = data?.jobList ?? [];
-      const _jobStatusOpts: string[] = [];
-      const _activeTimeOpts: string[] = [];
-      jobs.forEach(job => {
-        if (job.aainfo.jobStatus && !_jobStatusOpts.includes(job.aainfo.jobStatus)) {
-          _jobStatusOpts.push(job.aainfo.jobStatus);
-        }
-        if (job.aainfo.activeTime && !_activeTimeOpts.includes(job.aainfo.activeTime)) {
-          _activeTimeOpts.push(job.aainfo.activeTime);
-        }
-      });
-
-      // setJobStatusOpts(_jobStatusOpts);
-      onUpdateFilterOption('招聘状态', _jobStatusOpts);
-      setActiveTimeOpts(_activeTimeOpts);
-
-      setSource(jobs);
-      setFetchTime(data?.fetchTime ?? '');
-      !cache && saveCache(data);
-    } catch (e) {
-      logIcon('error', e, 'error');
-      console.debug(e);
-    }
-  };
-
-  const saveCache = (val?: IJobsRes) => {
-    localStorage.setItem(pageType, JSON.stringify(val ? val : {jobList: source, fetchTime}));
-    messageApi.open({
-      type: 'success',
-      content: '保存成功',
-    });
-  };
-
-  const clearCache = () => {
-    localStorage.removeItem(pageType);
-    messageApi.open({
-      type: 'success',
-      content: '清除成功',
-    });
-  };
 
   useEffect(() => {
     const cache = JSON.parse(localStorage.getItem(pageType) ?? 'null');

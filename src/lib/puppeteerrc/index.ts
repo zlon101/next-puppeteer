@@ -9,7 +9,7 @@ import fs from 'node:fs';
 import puppeteer from 'puppeteer';
 import {logIcon} from '@/lib/tool';
 import {ReqParam, PageType, IJob} from '@/components/job/const';
-import {closeBrowser, filterJobs} from './share';
+import {closeBrowser} from './share';
 import {enterBoss} from './boss';
 import {enterZhiLian} from './zhilian';
 import {queryLocation} from "@/lib/puppeteerrc/gaode";
@@ -43,6 +43,7 @@ const LaunchParam = {
 const DefaultQuery = {
   pageLimit: 999,
   jobLimit: 999,
+  // location: 'true',
 }
 
 export async function launch(query: ReqParam): Promise<IJob[]> {
@@ -65,7 +66,7 @@ export async function launch(query: ReqParam): Promise<IJob[]> {
       if (cacheObject && query.waitLogin !== 'true') {
         jobs = cacheObject;
       } else {
-        if (nQuery.type === PageType.zhilianLogin) {
+        if ([PageType.zhilianLogin, PageType.zhiliangWx].includes(nQuery.type as any)) {
           jobs = await enterZhiLian(browser, nQuery);
         } else {
           jobs = await enterBoss(browser, nQuery);
@@ -76,14 +77,17 @@ export async function launch(query: ReqParam): Promise<IJob[]> {
         logIcon(`写入缓存成功`);
       }
       // 查询坐标
-      const addres = jobs.map((job: IJob) => job.aainfo?.address);
-      const locations = await queryLocation(browser, addres);
-      jobs.forEach((job, idx) => {
-        if (!locations[idx]) {
-          console.log(`没有location: ${idx+1}: ${job.brandName}`);
-        }
-        job.aainfo.location = locations[idx];
-      });
+      if (nQuery.location === 'true') {
+        const addres = jobs.map((job: IJob) => job.aainfo?.address);
+        const locations = await queryLocation(browser, addres);
+        jobs.forEach((job, idx) => {
+          if (!locations[idx]) {
+            console.log(`没有location: ${idx+1}: ${job.brandName}`);
+          }
+          job.aainfo.location = locations[idx];
+        });
+      }
+
       logIcon(`End! 共${jobs.length} 条`);
       fs.writeFileSync(CachePath, '');
       closeBrowser(browser);

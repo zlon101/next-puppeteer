@@ -3,7 +3,7 @@
 import {useState} from 'react';
 import {Checkbox, Select, Tabs, TabsProps, Form, Input, Button} from 'antd';
 import styles from './page.module.scss';
-import Boss from '../components/job';
+import JobTable from '../components/job';
 import {DefalutFilterVal, PageType, IFilterValue} from '@/components/job/const';
 import {logIcon} from "@/lib/log";
 
@@ -24,9 +24,9 @@ export default function Home() {
   const items: TabsProps['items'] = [
     {
       key: '0',
-      label: 'boss(登录后)',
+      label: 'boss网页',
       children: (
-        <Boss
+        <JobTable
           pageType={PageType.bossLogin}
           filterValue={filterValue}
           onUpdateFilterOption={onUpdateFilterOpt}
@@ -36,10 +36,10 @@ export default function Home() {
     },
     {
       key: '2',
-      label: 'boss(未登录)',
+      label: 'boss小程序',
       children: (
-        <Boss
-          pageType={PageType.bossNotLogin}
+        <JobTable
+          pageType={PageType.bossWx}
           filterValue={filterValue}
           onUpdateFilterOption={onUpdateFilterOpt}
           onChangeFilter={onChangeFilter}
@@ -48,10 +48,22 @@ export default function Home() {
     },
     {
       key: '3',
-      label: '智联(登录后)',
+      label: '智联网页',
       children: (
-        <Boss
+        <JobTable
           pageType={PageType.zhilianLogin}
+          filterValue={filterValue}
+          onUpdateFilterOption={onUpdateFilterOpt}
+          onChangeFilter={onChangeFilter}
+        />
+      ),
+    },
+    {
+      key: '4',
+      label: '智联小程序',
+      children: (
+        <JobTable
+          pageType={PageType.zhiliangWx}
           filterValue={filterValue}
           onUpdateFilterOption={onUpdateFilterOpt}
           onChangeFilter={onChangeFilter}

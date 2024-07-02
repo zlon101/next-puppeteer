@@ -1,8 +1,9 @@
 import {load} from 'cheerio';
 import {PageType, ReqParam, IJob, RowKey} from '@/components/job/const';
-import {logIcon} from '../log';
-import {closeBrowser, filterJobs, goto, waitForContentLoaded} from './share';
+import {logIcon} from '@/lib/log';
+import {filterJobs, goto, waitForContentLoaded} from '../share';
 import {uniqueArray} from "@/lib/object";
+import {getBossWxJobsFromFile} from './boss-wx';
 
 const JobDetailPage = `https://www.zhipin.com/job_detail/encryptJobId.html?
 lid=lid&
@@ -21,20 +22,28 @@ const ListPages = [
   `https://www.zhipin.com/web/geek/job-recommend?city=101270100&salary=405&experience=101,103,104,105&jobType=1901`,
 ];
 const MaxDetailNum = 1;
-const DetailTimeSpace = 800;
+const DetailTimeSpace = 2000;
 
 export async function enterBoss(browser: any, param: ReqParam) {
+  const isWx = param.type === PageType.bossWx;
   try {
     let dataArr: IJob[] = [];
-    for (const pageUrl of ListPages) {
-      dataArr = dataArr.concat(await handleListPage(browser, param, pageUrl));
+    if (isWx) {
+      dataArr = await getBossWxJobsFromFile() as any;
+    } else {
+      for (const pageUrl of ListPages) {
+        dataArr = dataArr.concat(await handleListPage(browser, param, pageUrl));
+      }
     }
-    dataArr = filterJobs(dataArr);
-    const listPageRes =  uniqueArray<IJob>(dataArr, 'uid');
 
+    dataArr = addAttr(dataArr);
+    dataArr = filterJobs(dataArr);
+    dataArr =  uniqueArray<IJob>(dataArr, 'uid');
+    logIcon(`========= 列表搜集完成! 总数:${dataArr.length} ==========`, undefined, 'success');
     // 处理详情页
-    let jobs: IJob[] = await handleDetailPage(listPageRes, browser, param);
+    let jobs: IJob[] = await handleDetailPage(dataArr, browser, param);
     jobs = filterJobs(jobs);
+
     logIcon(`======= 详情页处理完成，去重后共 ${jobs.length} 条 =======`, undefined, 'success');
     return jobs;
   } catch(e) {
@@ -116,11 +125,7 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
         _url.includes(RecommListApi)
       ) {
         const resJson = await response.json();
-        let jobs = (resJson.zpData?.jobList ?? []).map((item: IJob) => ({
-          ...item,
-          uid: item.encryptJobId,
-          detailUrl: `https://www.zhipin.com/job_detail/${item.encryptJobId}.html?lid=${item.lid}&securityId=${item.securityId}&sessionId=`,
-        }));
+        const jobs = resJson.zpData?.jobList ?? [];
 
         ++pageCount;
         totalJobs = totalJobs.concat(jobs);
@@ -129,7 +134,6 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
         if (resJson.zpData.hasMore && pageCount < pageLimit) {
           setTimeout(goNextPage, 300);
         } else {
-          logIcon(`========= 列表搜集完成! 总数:${totalJobs.length} ==========`, undefined, 'success');
           resolve(totalJobs);
         }
       }
@@ -192,7 +196,7 @@ async function handleDetailPage(jobList: IJob[], browser: any, param: ReqParam):
 
             const companyInfo = await parseDetailPage(_page, htmlStr);
             ++jobCount;
-            const job = jobList[jobIdToIndex[companyInfo.uid]];
+            // const job = jobList[jobIdToIndex[companyInfo.uid]];
             // logIcon(`详情页 ${jobIdx}/ ${jobNum - 1}  ${job?.brandName}`);
             jobList[jobIdToIndex[companyInfo.uid]].aainfo = companyInfo;
             if (jobIdx < jobNum) {
@@ -247,4 +251,15 @@ async function parseDetailPage(page: any, html: string): Promise<IJob['aainfo']>
     // 详细地址
     address: $('.location-address', '#main')?.text().trim(),
   };
+}
+
+function addAttr(jobs: IJob[]) {
+  jobs.forEach(item => {
+    item.aainfo = item.aainfo ?? {};
+    item.uid = item.encryptJobId;
+    item.areaDistrict = item.areaDistrict || item.districtName || '';
+    item.businessDistrict = item.businessDistrict || item.businessName || '';
+    item.detailUrl = `https://www.zhipin.com/job_detail/${item.encryptJobId}.html?lid=${item.lid}&securityId=${item.securityId}&sessionId=`;
+  });
+  return jobs;
 }
