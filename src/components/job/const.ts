@@ -13,7 +13,16 @@ export type IPageType = ValueOf<typeof PageType>;
 export const ignoreNamesCtx = {
   key: 'IgnoreNameSym',
   get(): string[] {
-    return JSON.parse(localStorage.getItem(this.key) ?? '[]');
+    if (typeof window !== 'undefined') {
+      return JSON.parse(localStorage.getItem(this.key) ?? '[]');
+    }
+    return [];
+  },
+  getStr(): string {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(this.key) ?? '[]';
+    }
+    return '[]';
   },
   set(v: any) {
     localStorage.setItem(this.key, JSON.stringify(v));
@@ -51,6 +60,7 @@ export interface ReqParam {
   pageLimit: string;
   jobLimit: string;
   location: string;
+  ignores: string;
 }
 
 export interface IJob {
@@ -111,4 +121,48 @@ export interface IJob {
 export interface IJobsRes {
   jobList: IJob[];
   fetchTime: string;
+}
+
+export interface Area {
+  label: string;
+  text: string;
+  value: string;
+  count?: number;
+  children: {
+    label: string;
+    text: string;
+    value: string;
+    count?: number;
+  }[];
+}
+export function getAreaTreeFromJobs(jobs: IJob[]): Area[] {
+  const areaTree: Area[] = [];
+  jobs.forEach((job: IJob) => {
+    if (!job.businessDistrict) {
+      return;
+    }
+    const areaId = `${job.areaDistrict}/${job.businessDistrict}`;
+    const areaIdx = areaTree.findIndex((a: Area) => a.value === job.areaDistrict);
+    if (areaIdx !== -1) {
+      if (areaTree[areaIdx].children.findIndex(bb => bb.label === job.businessDistrict) === -1) {
+        areaTree[areaIdx].children.push({
+          value: areaId,
+          text: job.businessDistrict,
+          label: job.businessDistrict,
+        });
+      }
+    } else {
+      areaTree.push({
+        value: job.areaDistrict,
+        text: job.areaDistrict,
+        label: job.areaDistrict,
+        children: [{
+          value: areaId,
+          text: job.businessDistrict,
+          label: job.businessDistrict,
+        }],
+      })
+    }
+  });
+  return areaTree;
 }

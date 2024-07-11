@@ -1,5 +1,3 @@
-import {func} from "prop-types";
-
 export function getType(val: any, expectType?: string): string | boolean {
   const reaType = Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
   if (expectType) {
@@ -49,8 +47,8 @@ export function getUrlQuery(url: string) {
   return params;
 }
 
-export function obj2str(query: Record<string, string | number | boolean>): string {
-  return Object.keys(query).reduce((acc: string, k: string) => `${acc}&${k}=${query[k]}`, '').slice(1);
+export function obj2query(query: Record<string, string | number | boolean>): string {
+  return Object.keys(query).reduce((acc: string, k: string) => `${acc}&${k}=${encodeURIComponent(query[k])}`, '').slice(1);
 }
 
 // 数组去重

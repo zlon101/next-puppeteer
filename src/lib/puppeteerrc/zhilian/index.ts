@@ -57,8 +57,8 @@ interface IListRes {
 const ListApi = `https://fe-api.zhaopin.com/c/i/search/positions`;
 const ListPages = [
   `https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1`,
-  'https://sou.zhaopin.com/?jl=801&kw=%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1',
-].slice();
+  `https://sou.zhaopin.com/?jl=801&kw=web%E5%89%8D%E7%AB%AF&sl=15001%2C25000&et=2&p=1`
+];
 const Tabs = ['.listsort__uls .listsort__item:first-child a', '.listsort__uls .listsort__item:last-child a'].slice();
 const MaxDetailPageNum = 1;
 const DetailTimeSpace = 500;
@@ -82,7 +82,9 @@ export async function enterZhiLian(browser: any, param: ReqParam) {
         }
       }
     }
-
+    // 过滤已删除的公司名
+    const ignoreJobs = JSON.parse(param.ignores);
+    dataArr = dataArr.filter(item => !ignoreJobs.includes(item.companyName));
     dataArr = addAttr(dataArr);
     const listPageRes = uniqueArray<IZhiLianJob>(dataArr, 'uid');
     const jobs: IZhiLianJob[] = await handleDetailPage(listPageRes, browser, param);
@@ -182,7 +184,8 @@ export async function handleListPage(
 
     try {
       await goto(page, pageUrl);
-      await onPageLoaded(page);
+      setTimeout(() => onPageLoaded(page), 3000);
+      // await onPageLoaded(page);
     } catch (e) {
       logIcon('导航到列表页错误', undefined, 'error');
       console.log(e);
@@ -308,7 +311,7 @@ function transformDetail(srcArr: IZhiLianJob[]): IJob[] {
     brandName: 'companyName',
     aainfo: (_job: IZhiLianJob) => {
       return {
-        ..._job.aainfo,
+        ...(_job.aainfo ?? {}),
         // ...JSON.parse(_job.cardCustomJson).salary60,
         activeTime: (_job.featureServer.lastReplyTime ? parseDate(new Date(+_job.featureServer.lastReplyTime)) : '无/') + `  ${_job.featureServer.reply24h ?? '无'}`,
       }

@@ -15,6 +15,7 @@ const BossListApi = `https://www.zhipin.com/wapi/zpgeek/search/joblist.json
 &page=1&pageSize=50`;
 const CustomSearchListApi = 'search/joblist.json';
 const RecommListApi = 'recommend/job/list.json';
+const HasConnectApi = '/wapi/zprelation/friend/geekFilterByLabel';
 const ListPages = [
   // 自定义搜索模式
   `https://www.zhipin.com/web/geek/job?city=101270100&experience=101,103,104,105&position=100901,100208&jobType=1901&salary=405`,
@@ -26,16 +27,20 @@ const DetailTimeSpace = 2000;
 
 export async function enterBoss(browser: any, param: ReqParam) {
   const isWx = param.type === PageType.bossWx;
+  const contactedBrands: string[] = [];
   try {
     let dataArr: IJob[] = [];
     if (isWx) {
       dataArr = await getBossWxJobsFromFile() as any;
     } else {
       for (const pageUrl of ListPages) {
-        dataArr = dataArr.concat(await handleListPage(browser, param, pageUrl));
+        dataArr = dataArr.concat(await handleListPage(browser, param, pageUrl, contactedBrands));
       }
     }
-
+    // 过滤已删除和已经联系过的公司名
+    console.log(`\n已经联系过 ${contactedBrands.length}\n`);
+    const ignoreBrands = contactedBrands.concat(JSON.parse(param.ignores));
+    dataArr = dataArr.filter(item => !ignoreBrands.includes(item.brandName));
     dataArr = addAttr(dataArr);
     dataArr = filterJobs(dataArr);
     dataArr =  uniqueArray<IJob>(dataArr, 'uid');
@@ -54,7 +59,7 @@ export async function enterBoss(browser: any, param: ReqParam) {
 }
 
 
-export async function handleListPage(browser: any, param: ReqParam, pageUrl: string): Promise<IJob[]> {
+export async function handleListPage(browser: any, param: ReqParam, pageUrl: string, contactedBrands: string[]): Promise<IJob[]> {
   logIcon(`================= 搜索列表 ==================================\n%s`, pageUrl);
 
   const isRecommonPage = pageUrl.includes('job-recommend');
@@ -117,6 +122,14 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
       //   status: response.status(),
       //   statusText: response.statusText(),
       // };
+
+      // 已经联系过的公司
+      if (_m === 'GET' && _url.includes(HasConnectApi)) {
+        const resJson = await response.json();
+        const hasContactBrandNames: string[] = (resJson.zpData?.friendList ?? []).map((item: any) => item.brandName);
+        contactedBrands.push(...hasContactBrandNames);
+        return;
+      }
       if (_m !== 'GET') return;
       if (
         // 自定义搜索的列表接口
@@ -126,7 +139,6 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
       ) {
         const resJson = await response.json();
         const jobs = resJson.zpData?.jobList ?? [];
-
         ++pageCount;
         totalJobs = totalJobs.concat(jobs);
         console.log(`第 ${pageCount} 页, jobs 数量: ${totalJobs.length} 总共:${resJson.zpData.totalCount} hasMore:${resJson.zpData.hasMore}`);

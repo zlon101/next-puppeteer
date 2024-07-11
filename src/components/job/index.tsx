@@ -1,22 +1,13 @@
-'use client';
+'use client'
 
 import {useEffect, useState, useMemo} from 'react';
 import {Table, Tag, Button, Tooltip, message} from 'antd';
+import {useImmer} from 'use-immer';
 import Link from 'next/link'
-import {logIcon, serveEvent} from '@/lib/tool';
+import {logIcon, obj2query, serveEvent} from '@/lib/tool';
 import {filterJobs, parseSalary} from "@/lib/puppeteerrc/share";
-import {IFilterValue, IPageType, RowKey, IJobsRes, IJob, PageType, ignoreNamesCtx} from './const';
+import {IFilterValue, IPageType, RowKey, IJobsRes, IJob, PageType, ignoreNamesCtx, getAreaTreeFromJobs, Area} from './const';
 import './index.scss';
-
-interface Area {
-  text: string;
-  value: string;
-  children: {
-    text: string;
-    value: string;
-    count: number;
-  }[];
-}
 
 export interface IProps {
   pageType: IPageType;
@@ -29,14 +20,15 @@ export default function JobTable(props: IProps) {
   const {pageType, filterValue, onUpdateFilterOption, onChangeFilter} = props;
   const [source, setSource] = useState<IJob[]>([]);
   const [fetchTime, setFetchTime] = useState<string>('');
-  // const [_, setJobStatusOpts] = useState<string[]>([]);
   const [activeTimeOpts, setActiveTimeOpts] = useState<string[]>([]);
+  const [areaTree, setAreaTree] = useState<Area[]>([]);
   const [ignoreNames, setIgnoreNames] = useState<string[]>(ignoreNamesCtx.get());
   const [messageApi, contextHolder] = message.useMessage();
 
-  const [filtedList, areaOptions] = useMemo(() => {
+  const [filtedList, areaCountMap, activeTimeCountMap] = useMemo(() => {
     const filterActiveTime = filterValue.activeTime || [];
     const areaCountMap: Record<string, number> = {};
+    const activeTimeCountMap: Record<string, number> = {};
     const list = source.reduce((acc, _job) => {
       let ok = !filterActiveTime.length || filterActiveTime.includes(_job.aainfo.activeTime);
       ok = ok && (filterValue['猎头'] || !_job.proxyJob);
@@ -50,53 +42,43 @@ export default function JobTable(props: IProps) {
       ok = ok && (!filterValue.establishDate || (!!_job.aainfo.establishDate && filterValue.establishDate >= _job.aainfo.establishDate));
       ok = ok && !ignoreNames.includes(_job.brandName);
       if (ok) {
-        if (_job.businessDistrict) {
-          areaCountMap[_job.businessDistrict] ? areaCountMap[_job.businessDistrict]++ : (areaCountMap[_job.businessDistrict] = 1);
-        }
         acc.push(_job);
+        const activeTimeFlag = _job.aainfo.activeTime;
+        if (activeTimeFlag) {
+          activeTimeCountMap[activeTimeFlag] ? activeTimeCountMap[activeTimeFlag]++ : (activeTimeCountMap[activeTimeFlag] = 1);
+        }
+        const areaId = `${_job.areaDistrict}/${_job.businessDistrict}`;
+        if (_job.businessDistrict) {
+          areaCountMap[areaId] ? areaCountMap[areaId]++ : (areaCountMap[areaId] = 1);
+        }
       }
       return acc;
     }, [] as any);
 
-    // 地点
-    const areaTree: Area[] = [];
-    list.forEach((job: IJob) => {
-      if (!job.businessDistrict) {
-        return;
-      }
-      const areaIdx = areaTree.findIndex((a: Area) => a.value === job.areaDistrict);
-      if (areaIdx !== -1) {
-        if (areaTree[areaIdx].children.findIndex(bb => bb.text === job.businessDistrict) === -1) {
-          areaTree[areaIdx].children.push({
-            value: `${job.areaDistrict}/${job.businessDistrict}`,
-            text: job.businessDistrict,
-            count: areaCountMap[job.businessDistrict],
-          });
-        }
-      } else {
-        areaTree.push({
-          value: job.areaDistrict,
-          text: job.areaDistrict,
-          children: [{
-            value: `${job.areaDistrict}/${job.businessDistrict}`,
-            text: job.businessDistrict,
-            count: areaCountMap[job.businessDistrict],
-          }],
-        })
-      }
-    });
-    areaTree.forEach(areaNode => {
-      areaNode.text = `${areaNode.text} - ${areaNode.children.reduce((sum, child) => sum + child.count, 0)}`;
-      areaNode.children.forEach(childNode => (childNode.text = `${childNode.text} - ${childNode.count}`));
-    })
-    return [list, areaTree];
+    return [list, areaCountMap, activeTimeCountMap];
   }, [source, filterValue, ignoreNames]);
+
+  const areaFilterOpts = useMemo(() => {
+    areaTree.forEach(areaNode => {
+      areaNode.children.forEach(childNode => {
+        childNode.count = areaCountMap[childNode.value] ?? 0;
+        childNode.text = `${childNode.label}/ ${childNode.count}`;
+      });
+      areaNode.text = `${areaNode.label}/ ${areaNode.children.reduce((sum, child) => sum + child.count!, 0)}`;
+    });
+    return areaTree;
+  }, [areaTree, areaCountMap]);
 
   const fetchData = async (cache?: IJobsRes) => {
     try {
       let data = cache;
       if (!data) {
-        data = await serveEvent<IJobsRes>(`/api/boss?type=${pageType}&waitLogin=${filterValue.waitLogin}`);
+        const query = obj2query({
+          type: pageType,
+          waitLogin: filterValue.waitLogin,
+          ignores: ignoreNamesCtx.getStr(),
+        });
+        data = await serveEvent<IJobsRes>(`/api/job?${query}`);
       }
       // 从小程序中删除 web 中已有的数据
       if ([PageType.bossWx, PageType.zhiliangWx].includes(pageType as any)) {
@@ -123,6 +105,7 @@ export default function JobTable(props: IProps) {
       // setJobStatusOpts(_jobStatusOpts);
       onUpdateFilterOption('招聘状态', _jobStatusOpts);
       setActiveTimeOpts(_activeTimeOpts);
+      setAreaTree(getAreaTreeFromJobs(jobs));
 
       setSource(jobs);
       data?.fetchTime && setFetchTime(data?.fetchTime);
@@ -189,12 +172,9 @@ export default function JobTable(props: IProps) {
       key: 'activeTime',
       ellipsis: true,
       width: 150,
-      filters: activeTimeOpts.map(s => ({text: s, value: s})),
+      filters: activeTimeOpts.map(s => ({text: `${s}/ ${activeTimeCountMap[s] ?? 0}`, value: s})),
       defaultFilteredValue: filterValue.activeTime,
       filteredValue: filterValue.activeTime,
-      // onFilter: (value: any, record: IJob) => {
-      //   return record.aainfo.activeTime === value;
-      // },
       render: (_: unknown, record: IJob, index: number) => (
         <div style={{width: '100px'}}>
           <NoWrap>{record.aainfo.activeTime}</NoWrap><br/>
@@ -217,7 +197,7 @@ export default function JobTable(props: IProps) {
       key: 'address',
       ellipsis: true,
       width: 120,
-      filters: areaOptions,
+      filters: areaFilterOpts,
       defaultFilteredValue: filterValue.address,
       filteredValue: filterValue.address,
       filterMode: 'tree' as any,

@@ -35,13 +35,9 @@ export async function GET(req: Request) {
       'Cache-Control': 'no-cache, no-transform',
     },
   });
-  // return Response.json({
-  //   jobList,
-  //   fetchTime: new Date().toLocaleString(),
-  // });
 }
 
-
+/*******
 export async function POST() {
   const res = await fetch('https://data.mongodb-api.com/...', {
     method: 'POST',
@@ -55,3 +51,4 @@ export async function POST() {
   const data = await res.json();
   return Response.json(data);
 }
+ ****/
