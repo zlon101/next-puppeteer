@@ -26,6 +26,7 @@ export default function JobTable(props: IProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [filtedList, areaCountMap, activeTimeCountMap] = useMemo(() => {
+    // console.debug('\nfilterValue', JSON.stringify(filterValue, null, 2));
     const filterActiveTime = filterValue.activeTime || [];
     const areaCountMap: Record<string, number> = {};
     const activeTimeCountMap: Record<string, number> = {};
