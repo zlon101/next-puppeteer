@@ -1,0 +1,3767 @@
+{
+  "respCode": 0,
+  "respData": {
+    "infoData": [
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "309136279814096512",
+          "userName": "爱**码",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/448a77a1-0e7a-48db-963a-810389e5a8ca.png",
+          "userStatus": 0,
+          "infoId": "1814571822957564416",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "b1325dbd-ed4f-4083-b33e-8bf98174eede.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "metric": "U0DalHrWNT8t9TAhTs2kfw172115s2",
+          "infoPrice": 376800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 415800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减140"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减140", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.6折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "爱**码" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 1,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721462610365",
+          "infoType": 0,
+          "updateTimestamp": "1721468633199",
+          "businessLineId": 903061,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1549029792030917652",
+          "userName": "转**转",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/5eeebe37-0d0f-4c88-ad0b-0f5ba19d89f2.png",
+          "userStatus": 0,
+          "infoId": "1771181479641027584",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "19072f7a-3ecc-4cd8-9d69-2851824f6215.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "19072f7a-3ecc-4cd8-9d69-2851824f6215.jpg" },
+            { "picUrl": "f5816119-9119-4763-b884-523d76292463.jpg" },
+            { "picUrl": "83406683-c392-4346-8c51-9d5ff9919aa2.jpg" },
+            { "picUrl": "70293b24-4e7b-413b-8e28-be77cffd8f64.jpg" },
+            { "picUrl": "dea23a83-f308-44d4-85dc-b987c54d263c.jpg" },
+            { "picUrl": "1e23bca1-4423-4f71-9ff1-3b5f461cd765.jpg" },
+            { "picUrl": "44f44ab5-8b79-42dc-8a2c-bb7c7fa73535.jpg" },
+            { "picUrl": "93d63bb5-3521-443b-86f4-bc320964ca9b.jpg" },
+            { "picUrl": "2a17742f-d0dc-48bd-9c26-0ff98f9d8996.jpg" },
+            { "picUrl": "3133629e-43f9-4087-866e-c18b14c44d12.jpg" },
+            { "picUrl": "16b336f5-c574-45cf-bd80-92e62a534845.jpg" },
+            { "picUrl": "174c6cd5-9fc5-48df-ac17-5e3d635342ff.png" }
+          ],
+          "metric": "745eEhuURmFdHzV06era0g172115s2",
+          "infoPrice": 418800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 528800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.9折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "转**转" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 2,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1711117546364",
+          "infoType": 0,
+          "updateTimestamp": "1711117739526",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1714901170419145216",
+          "userName": "用**L",
+          "userPhoto": "https://pic5.zhuanstatic.com/zhuanzh/b10bb2e0-7edf-4d0b-b7f9-c2b21637eece.png",
+          "userStatus": 0,
+          "infoId": "1813944023921366018",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "914d246b-d777-4044-a27d-125cd12f6f11.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "914d246b-d777-4044-a27d-125cd12f6f11.jpg" },
+            { "picUrl": "5920c07d-a93f-4273-a4c7-0a4f1da78565.jpg" },
+            { "picUrl": "b3eab4ff-8456-4240-9292-96d7beef7317.jpg" },
+            { "picUrl": "b0c011aa-0569-47af-9de4-72d67767bd3c.jpg" },
+            { "picUrl": "0316cf81-910d-4270-b2fb-0f64bfc6b967.jpg" },
+            { "picUrl": "569cbcd4-18fc-4954-844c-efa0e9fade93.jpg" },
+            { "picUrl": "a6d82813-b030-4231-8072-8c0599603ee7.jpg" },
+            { "picUrl": "dc3cc60c-d9d4-4ad6-beaf-97944842c137.jpg" },
+            { "picUrl": "92b80823-48b0-4e0c-9ba0-c5533d2030f5.jpg" },
+            { "picUrl": "b19f53f6-5290-4219-8398-945bfa82354a.jpg" },
+            { "picUrl": "f515a304-cc61-4c58-9b52-63b83028c86e.jpg" },
+            { "picUrl": "eabfdb51-a0fe-4813-ba64-83d5838deafc.png" }
+          ],
+          "metric": "SgzMR2IYhDMeuwRhDEn4wA172115s2",
+          "infoPrice": 443800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 478800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.3GHz Intel Core i7",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "用**L" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 8,
+            "oldPrice": "券前价¥4738",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 3,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.3GHz Intel Core i7 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721312931411",
+          "infoType": 0,
+          "updateTimestamp": "1721326045636",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1661219341352565632",
+          "userName": "优**店",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/41fe4572-9f08-4666-91ea-d03a95141bfe.png",
+          "userStatus": 0,
+          "infoId": "1813085823155753984",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 银色",
+          "infoCover": {
+            "picUrl": "904c26e4-84d4-4d83-bf2c-2c4983bafc8a.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "904c26e4-84d4-4d83-bf2c-2c4983bafc8a.jpg" },
+            { "picUrl": "20e1c848-5400-4ec5-9aa5-7f41eb5409a1.jpg" },
+            { "picUrl": "11c9b02c-9402-4853-8315-14a3fd13e08d.jpg" },
+            { "picUrl": "25e1239c-b98a-4b2d-a997-2558e7244863.jpg" },
+            { "picUrl": "e88325af-0688-468a-8a94-9b93859938ed.jpg" },
+            { "picUrl": "ad5ac341-1608-4905-8802-e75f215626c8.jpg" },
+            { "picUrl": "2cdaa479-555e-4c97-a279-2d061f0bd103.jpg" },
+            { "picUrl": "575035df-8150-4440-a559-1e27d72d967b.jpg" },
+            { "picUrl": "36bbc2db-5561-47bf-acd6-2d87a2bb4bc9.jpg" },
+            { "picUrl": "6e6634b7-3ec7-4a55-864b-363d3abcf393.jpg" },
+            { "picUrl": "c28c1888-1238-4a43-8e32-cfff763d2d87.jpg" },
+            { "picUrl": "f2d3e166-cee5-4e73-9643-b8c077718d7e.png" }
+          ],
+          "metric": "ZWQKBVrPDG1fagHUpzUTlw172115s2",
+          "infoPrice": 459800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 496800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "3.2折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "BS机",
+                "labelUrl": "https://pic3.zhuanstatic.com/zhuanzh/a7baa556-ed35-4583-9a9e-30038390aa52.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "机身无痕",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "优**店" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 4,
+          "goodsPage": 1,
+          "title": "99新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 银色 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721108320402",
+          "infoType": 0,
+          "updateTimestamp": "1721456350361",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "BS机",
+              "labelUrl": "https://pic3.zhuanstatic.com/zhuanzh/a7baa556-ed35-4583-9a9e-30038390aa52.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            },
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1745292394716534016",
+          "userName": "一**悦",
+          "userPhoto": "https://pic2.zhuanstatic.com/zhuanzh/01459183-bd4d-4290-82c0-c8e288334772.jpg",
+          "userStatus": 0,
+          "infoId": "1813167453057142784",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "d0d7164a-5b6e-4f36-9ecd-485d7c865b52.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "d0d7164a-5b6e-4f36-9ecd-485d7c865b52.jpg" },
+            { "picUrl": "1cb27a3a-fe8b-4786-8f73-c845ea2c43df.jpg" },
+            { "picUrl": "b6c77072-f405-4160-882f-84f8bbe782b1.jpg" },
+            { "picUrl": "a37cfb02-c75c-4fe7-8fc7-ebb6e5e2ed71.jpg" },
+            { "picUrl": "f711fc5d-9281-4e71-b0c0-7bed67f9fe1b.jpg" },
+            { "picUrl": "cd1bd716-f965-44bc-87fb-862c96c98fa5.jpg" },
+            { "picUrl": "c1809beb-0f8e-4c8b-861d-62e0ac5a4ef2.jpg" },
+            { "picUrl": "882d3ca0-d664-4bc9-b9d8-465fcba41b7c.jpg" },
+            { "picUrl": "ae976b98-8cbe-406a-8186-6d149c8f2c38.jpg" },
+            { "picUrl": "dfdc6859-ca92-434d-979e-c82aaa14bd45.jpg" },
+            { "picUrl": "0e5680ba-6b5a-4e3b-8b68-1952cbecea6e.jpg" },
+            { "picUrl": "d00c1d65-dbca-4fdf-9f5b-27b41aad5036.png" }
+          ],
+          "metric": "THbKOCY2jQLmqgy4NpecPQ172115s2",
+          "infoPrice": 328800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 359800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减160"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减160", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.3折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "一**悦" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 5,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721127782488",
+          "infoType": 0,
+          "updateTimestamp": "1721533036535",
+          "businessLineId": 903061,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "找靓机用户寄卖",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/72285366-cc57-4fb3-b108-927042770c4e.jpeg",
+          "userStatus": 0,
+          "infoId": "1808110918329241601",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 银色",
+          "infoCover": {
+            "picUrl": "1d7fbc67-b362-4009-b203-9650f7b1f930.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "1d7fbc67-b362-4009-b203-9650f7b1f930.jpg" },
+            { "picUrl": "d1eddb0b-d3a5-4f6b-aae5-480144fda8c3.jpg" },
+            { "picUrl": "1bc5d71e-1f9f-43e3-af60-706913c47ff7.jpg" },
+            { "picUrl": "4d81fe83-518f-4288-bddd-07bce4993313.jpg" },
+            { "picUrl": "0c6ea324-bd25-47b8-b41c-bd94f72aaacd.jpg" },
+            { "picUrl": "cf7d3a86-d696-456c-9fa7-17955a9f79d9.jpg" },
+            { "picUrl": "e916eebf-7218-4143-8a40-bc480d3be2a2.jpg" },
+            { "picUrl": "b7cdc3a7-546e-48ea-b9f4-7d232dc5fa5d.jpg" },
+            { "picUrl": "4f338b24-872d-4328-a5b7-cdf6c38e67bc.jpg" },
+            { "picUrl": "8e5c97f2-9284-48a6-98bc-e17781ce29d7.jpg" },
+            { "picUrl": "4f07cb8d-70c1-4632-aacd-69872c34b55a.jpg" },
+            { "picUrl": "8809b443-361e-457f-b3c7-b23b33f25b38.png" }
+          ],
+          "metric": "OVsWcfetu9FhUCDu1gXADQ172115s2",
+          "infoPrice": 395800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 421800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减260"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减260", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.7折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "userHeadLabelsInfo": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic4.zhuanstatic.com/zhuanzh/f7f4d56c-ee4e-4f0a-95b5-80b919c21038.png",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "找靓机用户寄卖" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 6,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 银色 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1719922210662",
+          "infoType": 0,
+          "updateTimestamp": "1721392802297",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "userPhotoLabel": "https://pic4.zhuanstatic.com/zhuanzh/f7f4d56c-ee4e-4f0a-95b5-80b919c21038.png",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "43840342137359",
+          "userName": "塔**酱",
+          "userPhoto": "https://pic2.zhuanstatic.com/zhuanzh/n_v2d93515723fa2495bb42964d04c8cea84.png",
+          "userStatus": 0,
+          "infoId": "1812002870523236352",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "83e2a1e2-1cf8-4f78-a449-5e70928698cd.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "83e2a1e2-1cf8-4f78-a449-5e70928698cd.jpg" },
+            { "picUrl": "a2b8e2aa-c0aa-4af2-85d4-289aa1180fa2.jpg" },
+            { "picUrl": "17571acc-c2cc-4ad9-8e94-7fdbcea4db3e.jpg" },
+            { "picUrl": "d799bd0c-3ef3-4f1e-b651-d73b525f087c.jpg" },
+            { "picUrl": "d7cf5eb2-bd9d-4621-9c92-ace2b021656b.jpg" },
+            { "picUrl": "66aeed2d-d30d-415e-948c-47dcc746841a.jpg" },
+            { "picUrl": "0d1b636d-038b-4c94-9b99-52a7c64e5597.jpg" },
+            { "picUrl": "0cdd31a6-b7a0-46ab-8b2d-a993cb20fd4c.jpg" },
+            { "picUrl": "c4f0e4ec-46b7-4040-b27f-51eb7d4327e9.jpg" },
+            { "picUrl": "29b311a9-4213-43b6-aff5-a7633e91aabc.jpg" },
+            { "picUrl": "08de7cb8-3d1e-4550-aa82-888b7a826c84.jpg" },
+            { "picUrl": "13084c20-7491-4d20-a22f-0e8772c28e86.png" }
+          ],
+          "metric": "y3ttdsZmgcU4TFAEJ4PhAw172115s2",
+          "infoPrice": 384800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 435800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.7折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "塔**酱" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 7,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1720850124376",
+          "infoType": 0,
+          "updateTimestamp": "1721529264920",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1772897013262561664",
+          "userName": "用**f",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/8e2c82e5-4b3b-469e-9cc2-4b37a5813772.jpg",
+          "userStatus": 0,
+          "infoId": "1814652974558630400",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰色",
+          "infoCover": {
+            "picUrl": "27e33b40-75f2-4a46-afa4-506a2c5d5455.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "27e33b40-75f2-4a46-afa4-506a2c5d5455.jpg" },
+            { "picUrl": "e868b624-6592-475a-b209-1d4aea6adca8.jpg" },
+            { "picUrl": "ea097322-9846-462c-857b-bd64ca905667.jpg" },
+            { "picUrl": "3c19a716-4d18-4308-af25-47702e22cbc3.jpg" },
+            { "picUrl": "21a1a8a1-9dfc-4068-b1a8-afd36ac7e4f2.jpg" },
+            { "picUrl": "7488f2a9-979f-48a3-bc70-99110b9c4337.jpg" },
+            { "picUrl": "f20c98a7-4a80-4873-b246-74251945b287.jpg" },
+            { "picUrl": "bec80032-8dcb-4a73-aa5e-b36e875a72ea.jpg" },
+            { "picUrl": "24eba7fe-c200-4539-b5c6-93ff4a5a7d79.jpg" },
+            { "picUrl": "14b5bd99-ddf7-4dd1-a7f2-e4161ab2baae.jpg" },
+            { "picUrl": "c5cf2875-367f-4537-91d0-f8d8232b2f08.jpg" },
+            { "picUrl": "e93219f2-2bc7-4695-a2d4-9a369646243a.png" }
+          ],
+          "metric": "KAkj9v9huS04dg5GNGj1sA172115s2",
+          "infoPrice": 340800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 498800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减140"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减140", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.4折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "用**f" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 8,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰色 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721481958413",
+          "infoType": 0,
+          "updateTimestamp": "1721483640189",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "309136279814096512",
+          "userName": "爱**码",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/448a77a1-0e7a-48db-963a-810389e5a8ca.png",
+          "userStatus": 0,
+          "infoId": "1814220604657734144",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "337cb46c-de50-40b8-89bc-df7d0a5c9779.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "337cb46c-de50-40b8-89bc-df7d0a5c9779.jpg" },
+            { "picUrl": "ad0b8329-9765-4d42-8fa8-e6519baf7533.jpg" },
+            { "picUrl": "8543ad21-7d7e-4584-af57-376d4c7b32f3.jpg" },
+            { "picUrl": "f8eaaed1-97f2-448c-8ab1-bb6b5c89dfd4.jpg" },
+            { "picUrl": "d5fa0301-b881-4c24-9f55-0fc47ec0dfd2.jpg" },
+            { "picUrl": "54b7f563-19a3-4c7c-a862-09773fe2286c.jpg" },
+            { "picUrl": "1285354c-7723-4970-a08a-31d7a1ae2fea.jpg" },
+            { "picUrl": "91c8139e-3b29-42cf-b330-7e41b9cf5bbe.jpg" },
+            { "picUrl": "01899749-0627-49f1-a955-8778865bf9d6.jpg" },
+            { "picUrl": "4f9d6188-5d80-4e39-824e-a51efa4dac3e.jpg" },
+            { "picUrl": "d95160a1-ef51-4661-9ff0-0b85e3a8e8f0.jpg" },
+            { "picUrl": "3cb8ca5e-6c8e-4f7a-84fe-a5dfb86239ed.png" }
+          ],
+          "metric": "ibHlTdaKGMwmDIzIMRi0tg172115s2",
+          "infoPrice": 456800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 581800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减210"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减210", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "3.2折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "机身无痕",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "爱**码" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 9,
+          "goodsPage": 1,
+          "title": "99新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721378873397",
+          "infoType": 0,
+          "updateTimestamp": "1721529090356",
+          "businessLineId": 903061,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/fc2ab798-de29-439b-83a2-9737e779b921.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "500145235830434944",
+          "userName": "凉**p",
+          "userPhoto": "https://pic4.zhuanstatic.com/zhuanzh/n_v26a0f8137a15e4c5088168d22416d6162.jpg",
+          "userStatus": 0,
+          "infoId": "1814596871503156224",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰色",
+          "infoCover": {
+            "picUrl": "f40552e0-df77-4e73-8e5f-e17ee26b275c.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "f40552e0-df77-4e73-8e5f-e17ee26b275c.jpg" },
+            { "picUrl": "a977ac5b-d711-43bb-aa73-c70e6eab60d1.jpg" },
+            { "picUrl": "055070c9-8622-4f1a-8885-776509b4cb8f.jpg" },
+            { "picUrl": "133be824-6544-493e-a053-389637a41ff2.jpg" },
+            { "picUrl": "bcb05188-a582-449e-a3f5-6a38694e8f14.jpg" },
+            { "picUrl": "ea0146f6-4351-4ab0-809b-6d2bb6d69389.jpg" },
+            { "picUrl": "768fb25c-e372-44ab-a65d-fef53d6aac70.jpg" },
+            { "picUrl": "c690cb75-072c-4354-8474-8e2750dde96a.jpg" },
+            { "picUrl": "c62e6491-ca86-4a6e-ac43-67a93538ab93.jpg" },
+            { "picUrl": "121a5221-1d3a-45db-860a-3a4cef0f3e11.jpg" },
+            { "picUrl": "b5e2d055-d5db-48ab-b99b-259d52ec11fb.jpg" },
+            { "picUrl": "efed4878-e698-43e2-98d6-921fd08efd7c.png" }
+          ],
+          "metric": "TysQHoFFDwFUql70cxvfTg172115s2",
+          "infoPrice": 383800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 526800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.6折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "凉**p" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 10,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰色 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721468582402",
+          "infoType": 0,
+          "updateTimestamp": "1721535575451",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1793152449563493632",
+          "userName": "用**C",
+          "userPhoto": "https://pic5.zhuanstatic.com/zhuanzh/b10bb2e0-7edf-4d0b-b7f9-c2b21637eece.png",
+          "userStatus": 0,
+          "infoId": "1809890617453531648",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "bad24396-6a27-44be-bdde-fab68f31629e.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "bad24396-6a27-44be-bdde-fab68f31629e.jpg" },
+            { "picUrl": "7ae7d8aa-41a6-49e8-ba52-d3e30f9375d7.jpg" },
+            { "picUrl": "cee17abe-0ec0-4aab-b3e9-7e2cc678cc59.jpg" },
+            { "picUrl": "f4fb679a-2a24-40fa-9839-66a0329ad819.jpg" },
+            { "picUrl": "10fa4957-a64b-481b-8a7a-711291968073.jpg" },
+            { "picUrl": "216a4958-c6c9-47f4-9e6d-ef11de7d53c0.jpg" },
+            { "picUrl": "25b2b76c-6b69-4cff-8c21-5750dcbebb66.jpg" },
+            { "picUrl": "1499d546-f721-410a-9d71-5215589ade38.jpg" },
+            { "picUrl": "1f09d135-fbfe-4a58-ad7e-3843df0ce3ff.jpg" },
+            { "picUrl": "6cb2937e-6fbb-4b78-9e67-8bafed8e6d74.jpg" },
+            { "picUrl": "94853cbc-ce93-461d-9cb8-01c81483bf89.jpg" },
+            { "picUrl": "6903a315-fa79-4517-bca8-4f0ed6843925.png" }
+          ],
+          "metric": "QQiyLWwrKBw4fsq3k58KlA172115s2",
+          "infoPrice": 367800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 536800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减160"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减160", "type": 1 }],
+          "labelPosition": {
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.3GHz Intel Core i7",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "用**C" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 8,
+            "oldPrice": "券前价¥3888",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 11,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.3GHz Intel Core i7 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1720346523999",
+          "infoType": 0,
+          "updateTimestamp": "1721276348425",
+          "businessLineId": 903061,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "第**候",
+          "userPhoto": "https://pic3.zhuanstatic.com/zhuanzh/05284a6b-d591-4c61-a386-b899a2d8574d.jpg",
+          "userStatus": 0,
+          "infoId": "1796013676139189248",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "6f014591-3878-4e68-a913-c069ab0f56b5.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "6f014591-3878-4e68-a913-c069ab0f56b5.jpg" },
+            { "picUrl": "05e0a85f-8134-4498-af14-28dce76a9fe5.jpg" },
+            { "picUrl": "63f6373d-edb2-4d5f-ad41-7f83bc3c74fa.jpg" },
+            { "picUrl": "2032fec7-8551-4890-a2b4-9ecd6d175c18.jpg" },
+            { "picUrl": "8fb50b5e-ccd2-404d-8c78-835acaca5dfd.jpg" },
+            { "picUrl": "d39a5b7d-00d7-45b3-82d5-5ededa007dac.jpg" },
+            { "picUrl": "160b0935-779b-4e51-b272-6e81295943a2.jpg" },
+            { "picUrl": "09343409-7db5-4c54-8cb8-d483546cc3d8.jpg" },
+            { "picUrl": "733b3191-dcae-4b09-b8e4-1c7904e656a0.jpg" },
+            { "picUrl": "096d441a-84f7-4c96-96dc-b7c5b92eb9ff.jpg" },
+            { "picUrl": "7a120826-651e-4761-b444-7e8b40bf034f.jpg" },
+            { "picUrl": "81d06c5d-927e-4099-9a86-b0b094e3e38e.png" }
+          ],
+          "metric": "9fgPsqVtlKd18d4mL1hX2Q172115s2",
+          "infoPrice": 360800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 414800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减210"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减210", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.5折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "第**候" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 12,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1717038003369",
+          "infoType": 0,
+          "updateTimestamp": "1721288264552",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "伴**海",
+          "userPhoto": "https://pic3.zhuanstatic.com/zhuanzh/24ff7a8b-f6f0-422b-82ab-1acdb5ffbb31.jpg",
+          "userStatus": 0,
+          "infoId": "1799010937706188800",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "9416ddbf-e611-4b00-9b20-b0d2497fc658.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "9416ddbf-e611-4b00-9b20-b0d2497fc658.jpg" },
+            { "picUrl": "ea1c18e3-8354-46b2-a2f0-ab37e2916ba1.jpg" },
+            { "picUrl": "a05e7fbd-2540-493a-9fec-c8be3706411e.jpg" },
+            { "picUrl": "c46ea999-c8b0-4483-8328-13b180da26d4.jpg" },
+            { "picUrl": "4301a01e-2f22-4f45-b933-7bb3468df90e.jpg" },
+            { "picUrl": "512bf725-579d-45f8-be52-5752a4e88a22.jpg" },
+            { "picUrl": "4b3f0708-f53e-4bfb-aa9d-2d003ed2fdd6.jpg" },
+            { "picUrl": "c492d052-7bbf-4b30-872b-7015a2d0708c.jpg" },
+            { "picUrl": "ad61da7b-77b2-4835-b080-20f61c785f37.jpg" },
+            { "picUrl": "560ee014-611f-4d45-ba05-db3a17b2e90a.jpg" },
+            { "picUrl": "4b7a80a2-37f1-4a04-9aec-db7ca0b31736.jpg" },
+            { "picUrl": "87104e5d-cd30-45fb-8dad-dad4c8ad8e21.png" }
+          ],
+          "metric": "cePb7Lsy4SLJasBHgMJzFw172115s2",
+          "infoPrice": 360800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 414800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满2999减210"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满2999减210", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.5折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "伴**海" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 13,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1717752606214",
+          "infoType": 0,
+          "updateTimestamp": "1721288272294",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1714901170419145216",
+          "userName": "用**L",
+          "userPhoto": "https://pic5.zhuanstatic.com/zhuanzh/b10bb2e0-7edf-4d0b-b7f9-c2b21637eece.png",
+          "userStatus": 0,
+          "infoId": "1814142590543892480",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "ac9c1e26-3ac1-4e53-b002-43bf860a70b6.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "ac9c1e26-3ac1-4e53-b002-43bf860a70b6.jpg" },
+            { "picUrl": "501f1288-28bf-4718-83cc-6ac521e3b7f4.jpg" },
+            { "picUrl": "d0ca3cca-1e2f-47fe-9a56-eaa6e32e398a.jpg" },
+            { "picUrl": "9908f3aa-febb-4227-af5b-f8cbf651f2ae.jpg" },
+            { "picUrl": "6c253906-a93d-471d-a65c-c2100135faf6.jpg" },
+            { "picUrl": "9f01cb1f-9f01-4f66-929c-bf7c046f5177.jpg" },
+            { "picUrl": "b12a252a-c2c4-49c5-9d21-d51fce23ca77.jpg" },
+            { "picUrl": "e9295523-44d1-4235-8f20-014a07697e9b.jpg" },
+            { "picUrl": "1678c7d8-9302-48cb-a69f-dd7e5e1791e7.jpg" },
+            { "picUrl": "818c5e7a-d61e-49d6-8916-fb179860b112.jpg" },
+            { "picUrl": "5ac7f118-288c-4f3b-85c9-f00bcd9ed1d0.jpg" },
+            { "picUrl": "beffb84f-505b-4520-b778-2e1019d1e3d8.png" }
+          ],
+          "metric": "4JqL7HZDR3G01bSFNrMxow172115s2",
+          "infoPrice": 448800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 478800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.3GHz Intel Core i7",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "用**L" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 8,
+            "oldPrice": "券前价¥4788",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 14,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.3GHz Intel Core i7 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721360273382",
+          "infoType": 0,
+          "updateTimestamp": "1721360273472",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "43840342137359",
+          "userName": "塔**酱",
+          "userPhoto": "https://pic2.zhuanstatic.com/zhuanzh/n_v2d93515723fa2495bb42964d04c8cea84.png",
+          "userStatus": 0,
+          "infoId": "1814227864804299778",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "f4f594d4-7bf7-4298-be97-14540b97d25c.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "f4f594d4-7bf7-4298-be97-14540b97d25c.jpg" },
+            { "picUrl": "a48d81be-ea86-40bd-b7c9-28c2af9e95dc.jpg" },
+            { "picUrl": "bae5d850-0cb1-487a-aa3f-e099e590550d.jpg" },
+            { "picUrl": "e3a0afbc-cc9b-417f-8bcc-866aa5c95988.jpg" },
+            { "picUrl": "97ace0bb-1250-465e-879c-8cdd800f6c42.jpg" },
+            { "picUrl": "bca2856e-44e9-4cb7-9163-8624a313078a.jpg" },
+            { "picUrl": "61d8f1d3-7a8e-4b7d-8a76-85b50207ca58.jpg" },
+            { "picUrl": "57142284-fc4e-48a6-9a79-560ab6c87fca.jpg" },
+            { "picUrl": "e0086ce2-b214-4251-be93-a5a9ad434817.jpg" },
+            { "picUrl": "5050d999-39f9-48c1-a56c-d908c1335c26.jpg" },
+            { "picUrl": "008244af-60dd-4641-a919-b9ad74767c96.jpg" },
+            { "picUrl": "540e38ce-47b3-447e-b14d-2eab5195f794.png" }
+          ],
+          "metric": "l4uxhPYCKpwPn93K0X7Bfg172115s2",
+          "infoPrice": 383800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 435800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减210"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减210", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.6折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": " 电池健康度90%-95%",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "塔**酱" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 15,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721380604351",
+          "infoType": 0,
+          "updateTimestamp": "1721529178309",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "折**杏",
+          "userPhoto": "https://pic3.zhuanstatic.com/zhuanzh/b1379d3f-cec8-4964-90ab-1a9856a7966e.jpg",
+          "userStatus": 0,
+          "infoId": "1812376500411110400",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "9612e612-92e1-4cb0-b913-0c2ca9b3dee2.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "9612e612-92e1-4cb0-b913-0c2ca9b3dee2.jpg" },
+            { "picUrl": "a50da92e-f2e2-4d61-9924-85fc1547120b.jpg" },
+            { "picUrl": "883c6360-ead2-438e-80ec-6743858bd208.jpg" },
+            { "picUrl": "0bbeb2f7-9f21-4564-b753-d5bb3023c055.jpg" },
+            { "picUrl": "bd9fca61-b10b-48b4-97d8-5169e0d8e007.jpg" },
+            { "picUrl": "ecf75082-f030-44cd-9330-3b23e7ac809b.jpg" },
+            { "picUrl": "c6126dce-b758-43b7-b761-fdda9a0c99b9.jpg" },
+            { "picUrl": "fdfed425-1e72-4485-9234-43a15055c787.jpg" },
+            { "picUrl": "ee3c76fd-3f18-48c5-913f-44c3fc124877.jpg" },
+            { "picUrl": "80c4d748-baf2-4948-bfbf-6968744fb3a2.jpg" },
+            { "picUrl": "153a1baf-3ed6-432b-aeab-d929b3a3e990.jpg" },
+            { "picUrl": "9431b5bf-5ae2-4bd2-a827-a8fbc1517ded.png" }
+          ],
+          "metric": "hNItgHlnK3ImkyFsdTXGAA172115s2",
+          "infoPrice": 390800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 424800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减260"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减260", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.7折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "BS机",
+                "labelUrl": "https://pic3.zhuanstatic.com/zhuanzh/a7baa556-ed35-4583-9a9e-30038390aa52.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "折**杏" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 16,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1720939204681",
+          "infoType": 0,
+          "updateTimestamp": "1721288380723",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "BS机",
+              "labelUrl": "https://pic3.zhuanstatic.com/zhuanzh/a7baa556-ed35-4583-9a9e-30038390aa52.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            },
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "286380820661483520",
+          "userName": "f**5",
+          "userPhoto": "https://pic1.zhuanstatic.com/zhuanzh/bdffbe5e-205f-40c0-8c4c-07762b9f6d80.png",
+          "userStatus": 0,
+          "infoId": "1810909386056274432",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "d4260508-87c2-4945-bdc5-9fa977ca1b92.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "d4260508-87c2-4945-bdc5-9fa977ca1b92.jpg" },
+            { "picUrl": "5c85de84-9d4c-4b25-a282-064ac67b9761.jpg" },
+            { "picUrl": "e938dee7-9f5a-4054-995a-e3dc2f20764e.jpg" },
+            { "picUrl": "18b2c62b-15f9-4fc0-a8be-b3ed4f5f87b3.jpg" },
+            { "picUrl": "f6b55741-bbec-4561-b75f-37e97b21be83.jpg" },
+            { "picUrl": "02dc0964-19dc-433e-b038-63f25c74c46e.jpg" },
+            { "picUrl": "9a862e64-673a-48cb-920c-490b2d220921.jpg" },
+            { "picUrl": "3966522a-3ec2-4d17-914a-8e1f01fa58e4.jpg" },
+            { "picUrl": "7a4a8eec-b77f-4809-a9af-b6016c024bdd.jpg" },
+            { "picUrl": "0c7e6ed7-921a-4e12-868b-2e944f74a5af.jpg" },
+            { "picUrl": "eece65b3-dd1f-42b9-8f5c-99093a9ee7ab.jpg" },
+            { "picUrl": "9b7b5892-74c7-4e79-a58e-8e37468da86a.png" }
+          ],
+          "metric": "PjBTzjqOJK5ewPotMB82fQ172115s2",
+          "infoPrice": 408800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 488800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.8折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "descLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "屏幕完美",
+                "textColor": "#111111",
+                "borderColor": "#FFFFFF",
+                "bgColor": "#F2F2F2",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "f**5" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 17,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1720589417362",
+          "infoType": 0,
+          "updateTimestamp": "1721431076311",
+          "businessLineId": 903077,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1557700020060522496",
+          "userName": "极**选",
+          "userPhoto": "https://pic4.zhuanstatic.com/zhuanzh/2a3d6aac-c08e-417c-ae4c-7d1615229c57.jpg",
+          "userStatus": 0,
+          "infoId": "1813193209839490048",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "da957519-0aaa-44d1-86fa-f8c244648b67.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "da957519-0aaa-44d1-86fa-f8c244648b67.jpg" },
+            { "picUrl": "22506c29-e6d3-474a-b625-8675b0172404.jpg" },
+            { "picUrl": "2ddc0bd9-958e-4c3a-8c9f-495b083e4c86.jpg" },
+            { "picUrl": "085624cf-37ee-4963-a27b-8596357c13f5.jpg" },
+            { "picUrl": "23ac54fd-ce54-4f5a-be15-e446be6b208c.jpg" },
+            { "picUrl": "f13722e6-a060-4af8-812f-7dc8fcfc143f.jpg" },
+            { "picUrl": "f4fa786d-9cf6-4b2f-919c-6a4bf3d02f11.jpg" },
+            { "picUrl": "43258704-6481-41fd-be11-dfc45213e461.jpg" },
+            { "picUrl": "192b035d-89f3-45db-9bf2-a3c740a7412b.jpg" },
+            { "picUrl": "4007483d-cfde-4a39-8c85-1892858eb030.jpg" },
+            { "picUrl": "7a18916e-a6b9-4677-b524-03f17ac14492.jpg" },
+            { "picUrl": "a74bd76a-d686-48ff-a101-f3dacbd6952b.png" }
+          ],
+          "metric": "9C37mJSiNuhxbrDwbIgxww172115s2",
+          "infoPrice": 389800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 558800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减250"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减250", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.7折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "极**选" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 18,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721133923383",
+          "infoType": 0,
+          "updateTimestamp": "1721224292085",
+          "businessLineId": 903061,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "清**人",
+          "userPhoto": "https://pic3.zhuanstatic.com/zhuanzh/cc17a0d4-f527-40a0-bf9b-11fa8fd1924f.jpg",
+          "userStatus": 0,
+          "infoId": "1814593611233563136",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰色",
+          "infoCover": {
+            "picUrl": "5fb491ca-335f-45d7-8c66-bf5436fa9f60.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "5fb491ca-335f-45d7-8c66-bf5436fa9f60.jpg" },
+            { "picUrl": "64f7e984-3137-4f05-91ff-8655cf12c602.jpg" },
+            { "picUrl": "7fdd0890-9ade-42a9-bd86-c665b9689ad7.jpg" },
+            { "picUrl": "a83a918a-ba6e-4de9-9a90-cfa5d3eae5b4.jpg" },
+            { "picUrl": "8c7ef2ec-7dc2-48d2-a7b3-ca66925246c2.jpg" },
+            { "picUrl": "87435ab0-d958-48f6-9f50-bb27c90b2107.jpg" },
+            { "picUrl": "541c3ccf-c05c-4a93-aade-d133cb525cd3.jpg" },
+            { "picUrl": "59831b88-6211-4809-b007-858bf73c58cc.jpg" },
+            { "picUrl": "5e926c93-2a25-4820-85f6-fcd5fb1da765.jpg" },
+            { "picUrl": "32f4dcb5-f598-4c6e-81d8-c9ba59cdf457.jpg" },
+            { "picUrl": "40569f86-9bbd-4b3c-a68d-bc9c7203f157.jpg" },
+            { "picUrl": "fe43bec2-886d-47ab-bbec-71fee9138467.png" }
+          ],
+          "metric": "7vCK6GvCd5aJW6yPgzOxaQ172115s2",
+          "infoPrice": 380800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 406800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减260"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减260", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.6折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "清**人" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 19,
+          "goodsPage": 1,
+          "title": "9成新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 其他版本 深空灰色 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721467805094",
+          "infoType": 0,
+          "updateTimestamp": "1721467805477",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic1.zhuanstatic.com/zhuanzh/6bfc2269-ba38-4ed8-b967-2658c7011daf.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      },
+      {
+        "type": 0,
+        "commonGoods": {
+          "uid": "1526102172100465664",
+          "userName": "雾**",
+          "userPhoto": "https://pic3.zhuanstatic.com/zhuanzh/2e4ac2db-1b3c-4424-8120-21c588d46501.jpg",
+          "userStatus": 0,
+          "infoId": "1813868851390386176",
+          "infoDesc": "苹果 20年 13寸 MacBook Pro 16GB 512G SSD 深空灰",
+          "infoCover": {
+            "picUrl": "9b492cbc-aecd-4dbb-8a40-ec2ee4922f94.jpg",
+            "width": "600",
+            "height": "600"
+          },
+          "infoCoverList": [
+            { "picUrl": "9b492cbc-aecd-4dbb-8a40-ec2ee4922f94.jpg" },
+            { "picUrl": "e12eb995-ea93-4eb3-9a24-a91045f4564f.jpg" },
+            { "picUrl": "36de1964-319e-4af2-86c2-98f73ffcbaa0.jpg" },
+            { "picUrl": "97634634-78a2-4637-bedb-a4ad139ae9ce.jpg" },
+            { "picUrl": "4e111ff3-0488-4b21-8361-05e844442f7f.jpg" },
+            { "picUrl": "17b477b7-9730-43a4-98a6-2a51b16c28dc.jpg" },
+            { "picUrl": "d8fef854-6be8-40e7-82fc-73cf08f9b6c8.jpg" },
+            { "picUrl": "e6ab5a61-91a0-4982-9bf5-fe7ffbdf9a4a.jpg" },
+            { "picUrl": "060ee291-c432-4bd2-b191-9b30b413b1ab.jpg" },
+            { "picUrl": "99916c2a-7154-407e-980f-cae7b8df5c78.jpg" },
+            { "picUrl": "533bf23b-502f-48e8-85b1-098e51c08696.jpg" },
+            { "picUrl": "5f343eeb-59ca-462f-a6d7-e26565b15205.png" }
+          ],
+          "metric": "MJZ9cpoP1ixbpEfI5akghA172115s2",
+          "infoPrice": 395800,
+          "freight": 0,
+          "postageExplain": 2,
+          "oriPrice": 421800,
+          "status": 1,
+          "discountInfos": {
+            "discountList": [
+              { "textList": ["满3999减260"], "uiType": "1", "type": "0" }
+            ]
+          },
+          "discountList": [{ "prefix": "", "text": "满3999减260", "type": 1 }],
+          "labelPosition": {
+            "discountLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000004",
+                "labelText": "2.7折",
+                "textColor": "#FF483C",
+                "borderColor": "#FFCFC1",
+                "bgColor": "#FFFFFF",
+                "type": 3,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "paramLabelsInfo": [
+              {
+                "leftText": { "labelText": "CPU", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "2.0GHz Intel Core i5",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              },
+              {
+                "leftText": { "labelText": "显卡", "textColor": "#111111" },
+                "labelId": "20220921000004",
+                "labelText": "核芯/集成显卡",
+                "textColor": "#111111",
+                "borderColor": "#DFDFDF",
+                "bgColor": "#FFFFFF",
+                "type": 5,
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "serviceLabelsInfo": [
+              {
+                "leftText": {},
+                "labelId": "20220921000005",
+                "labelText": "3000元内商务本热销榜·第1名",
+                "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+                "width": "30",
+                "height": "30",
+                "textColor": "#111111",
+                "borderColor": "#D8D8D8",
+                "bgColor": "#FFFFFF",
+                "type": 4,
+                "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+                "priority": -4,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ],
+            "titleLabelsInfoV2": [
+              {
+                "leftText": {},
+                "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+                "width": "224",
+                "height": "52",
+                "priority": 9999,
+                "configEnable": true,
+                "needLogin": false
+              }
+            ]
+          },
+          "specialUserDesc": { "type": 1, "desc": "雾**" },
+          "isShowUserDesc": 1,
+          "extraPriceInfo": {
+            "type": 10,
+            "oldPrice": "发售价¥14499",
+            "needLineation": "0"
+          },
+          "cateId": 2103002,
+          "cateChildId": 0,
+          "goodsIndex": 20,
+          "goodsPage": 1,
+          "title": "95新 苹果 20年 13寸 MacBook Pro 13.3英寸 2.0GHz Intel Core i5 16GB 512G SSD Intel Iris Plus Graphics 国行 深空灰 苹果 电脑",
+          "grandCateId": 1100000016,
+          "modelId": 40496,
+          "brandIdNew": 10530,
+          "creatTime": "1721295008883",
+          "infoType": 0,
+          "updateTimestamp": "1721444406616",
+          "businessLineId": 903080,
+          "pictureScale": "1",
+          "liveShots": "0",
+          "titleLablesInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "titleLabelsInfo": [
+            {
+              "leftText": {},
+              "labelUrl": "https://pic5.zhuanstatic.com/zhuanzh/060c9318-8b78-4f90-b010-2cf86f5beacc.png",
+              "width": "224",
+              "height": "52",
+              "priority": 9999,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "serviceLabelsInfo": [
+            {
+              "leftText": {},
+              "labelId": "20220921000005",
+              "labelText": "3000元内商务本热销榜·第1名",
+              "labelUrl": "https://pic6.zhuanstatic.com/zhuanzh/51601262-e90e-43b9-88ee-92c3507d69a1.png",
+              "width": "30",
+              "height": "30",
+              "textColor": "#111111",
+              "borderColor": "#D8D8D8",
+              "bgColor": "#FFFFFF",
+              "type": 4,
+              "jumpUrl": "https://m.zhuanzhuan.com/u/b2c_channel_page/optimizedSubRankList?needHideHead=3&needNewWebview=1&rankId=275&secondFrom=1100000016_275&firstFrom=recommendRank&relationId=25&platform=zz&changeRankParam=&refContent=103&anchor=苹果 20年 13寸 MacBook Pro",
+              "priority": -4,
+              "configEnable": true,
+              "needLogin": false
+            }
+          ],
+          "userIdentityLabelsInfo": [],
+          "userInfoLabelText": "寄卖"
+        }
+      }
+    ]
+  }
+}

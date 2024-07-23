@@ -1,0 +1,21 @@
+.wrap {
+  outline: 1px solid red;
+  height: 95vh;
+  width: 96vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  #map-container {
+    flex: 1;
+  }
+  .pos_count {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+}
+
+.amap-info-window {
+  white-space: nowrap;
+  font-size: 12px;
+}

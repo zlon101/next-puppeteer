@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Checkbox, Select, Tabs, TabsProps, Form, Input, Button} from 'antd';
 import styles from './page.module.scss';
 import JobTable from '../components/job';
