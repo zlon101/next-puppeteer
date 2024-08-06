@@ -23,7 +23,7 @@ const ListPages = [
   `https://www.zhipin.com/web/geek/job-recommend?city=101270100&salary=405&experience=101,103,104,105&jobType=1901`,
 ];
 const MaxDetailNum = 1;
-const DetailTimeSpace = 2000;
+const DetailTimeSpace = 2500;
 
 export async function enterBoss(browser: any, param: ReqParam) {
   const isWx = param.type === PageType.bossWx;
