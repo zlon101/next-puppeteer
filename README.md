@@ -2,6 +2,12 @@
 
 [高德地图API](https://lbs.amap.com/api/javascript-api-v2/tutorails/add-marker) 
 
+## puppeteer
+
+1. 通过命令行运行 Chrome
+2. 通过 puppeteer.connect 连接浏览器，实现对浏览器的控制
+
+> 下载歌曲，执行自动化任务前先打开浏览器配置文件下载路径
 
 
 ## Getting Started

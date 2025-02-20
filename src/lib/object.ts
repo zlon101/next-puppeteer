@@ -72,3 +72,29 @@ export function parseDate(date: Date) {
   const [m, d, h, mm] = [date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes()];
   return `${m}/${d} ${h}:${mm}`;
 }
+
+/**
+ * 获取url参数
+ */
+export function getParams(url: string): Record<string, string> {
+  const params = {} as Record<string, string>;
+  url.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => (params[k] = v));
+  return params;
+}
+
+/**
+ * 设置url参数
+ */
+export function setUrlQuery(url: string, args: Record<string, string>): string {
+  const newQuery = getParams(url);
+  const newKList = Object.keys(args);
+  newKList.forEach(k => {
+    newQuery[k] = args[k];
+  });
+  let newPath = url.split('?')[0].replace(/\/$/, '') + '?';
+  const list = Object.keys(newQuery)
+    .filter(k => newQuery[k])
+    .map(k => `${k}=${newQuery[k]}`);
+  newPath += list.join('&');
+  return newPath;
+}

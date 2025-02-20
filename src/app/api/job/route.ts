@@ -1,4 +1,4 @@
-import {launch} from '@/lib/puppeteerrc';
+import {launch} from '@/lib/puppeteerrc/job';
 import {getUrlQuery, parseDate} from '@/lib/tool';
 import {ReqParam, IJob, IJobsRes} from '@/components/job/const';
 

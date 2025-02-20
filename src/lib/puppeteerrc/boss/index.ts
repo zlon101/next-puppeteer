@@ -72,6 +72,7 @@ export async function handleListPage(browser: any, param: ReqParam, pageUrl: str
     // (pages || []).forEach((page2: any) => page2.close());
     return await browser.newPage();
   })();
+
   // 下一页
   const goNextPage = async () => {
     try {
