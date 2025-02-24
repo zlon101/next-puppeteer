@@ -3,31 +3,42 @@
 import {useEffect, useState} from 'react';
 import {Input, Button, Checkbox} from 'antd';
 import styles from '../page.module.scss';
-import {serveEvent, getParams, logIcon, setUrlQuery} from '@/lib/tool';
-import {IJobsRes} from '@/components/job/const';
+import {serveEvent, logIcon} from '@/lib/tool';
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 
 export default function DownMusic() {
   const [form, setForm] = useState({
-    musicStr: '稻香',
+    musicStr: '稻香\n夜空中最亮的星',
     pending: false,
     downloadPath: '/Users/admins/Downloads/down-music/aa',
   });
+  const [logArr, setLogArr] = useState<string[]>([])
+
   const onChange = (k: string, val: any) => setForm({...form, [k]: val});
 
   const onStart = async () => {
-    // const res = await serveEvent<IJobsRes>(`/api/down-music?${qureyStr}`);
-    const res = await fetch('/api/down-music', {
+    serveEvent('/api/down-music', {
+      logCb(text) {
+        setLogArr(preVal => [...preVal, text])
+      }
+    }).then(res => {
+      logIcon('结果', res)
+    })
+
+    fetch('/api/down-music', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
-    logIcon('响应', res)
+  };
+
+  const onClear = () => {
+    setLogArr([])
   };
 
   const onClose = () => {
-    serveEvent<IJobsRes>(`/api/down-music/close`);
+    // serveEvent<IJobsRes>(`/api/down-music/close`);
   };
 
   useEffect(() => {
@@ -55,6 +66,11 @@ export default function DownMusic() {
         />
         <Button onClick={onStart}>开始</Button>
         <Button onClick={onClose}>关闭</Button>
+        <Button onClick={onClear}>清空日志</Button>
+      </div>
+      <div>
+        <p>日志：</p>
+        {logArr.map((str, idx) => (<pre key={idx}>{str}</pre>))}
       </div>
     </div>
   );

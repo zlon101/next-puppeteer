@@ -1,24 +1,42 @@
 // 客户端
-export function serveEvent<T>(url: string): Promise<T> {
+import {logIcon} from "@/lib/log";
+
+export enum EventEnum {
+  ping = 'ping',
+  log = 'log',
+  done = 'done',
+  message = 'message',
+}
+
+interface IOptions {
+  logCb?: (v: any) => void
+}
+
+export function serveEvent<T>(url: string, options: IOptions = {}): Promise<T> {
   const evtSource: EventSource = new EventSource(url);
 
-  evtSource.addEventListener('ping', event => {
-    console.log('EventSource ping!', event.data);
+  evtSource.addEventListener(EventEnum.message, function(event) {
+    console.debug('Received message:', event);
   });
 
-  evtSource.onmessage = msg => {
-    console.log('EventSource onmessage!', msg);
-  };
+  evtSource.addEventListener(EventEnum.ping, event => {
+  });
+
+  // 记录日志
+  evtSource.addEventListener(EventEnum.log, event => {
+    if (options.logCb) {
+      options.logCb(event.data)
+    }
+  });
 
   return new Promise((resolve, reject) => {
     // 完成
-    evtSource.addEventListener('done', event => {
+    evtSource.addEventListener(EventEnum.done, event => {
       evtSource.close();
-      resolve(JSON.parse(event.data));
+      resolve(JSON.parse(event.data) as T);
     });
 
     evtSource.onerror = err => {
-      console.log('EventSource Error!', err);
       evtSource.close();
       reject(err);
     };
@@ -28,12 +46,32 @@ export function serveEvent<T>(url: string): Promise<T> {
 
 // 服务端
 //    格式化发送给客户端的数据
-export function formatEvent(obj: Partial<Record<'data' | 'event', string>>): Uint8Array {
+interface IEvent {
+  event: EventEnum
+  retry?: number
+  data?: string | Object
+}
+export function formatEvent(obj: IEvent): Uint8Array {
   const encoder = new TextEncoder();
-  const merge = Object.assign({} as any, {retry: 5000}, obj);
-  let v = Object.keys(merge)
-    .map(k => `${k}: ${merge[k]}`)
+  let merge = Object.assign({} as any, {retry: 5000}, obj);
+  if (!Object.hasOwn(merge, 'data')) {
+    merge.data = ''
+  }
+  let str = Object.keys(merge)
+    .map(k => {
+      let v = merge[k]
+      v = typeof v === 'string' ? v : toJsonStr(v)
+      return `${k}: ${v}`
+    })
     .join('\n');
-  v = `${v}\n\n`;
-  return encoder.encode(v);
+  str = `${str}\n\n`;
+  return encoder.encode(str);
+}
+
+function toJsonStr(v: any): string {
+  try {
+    return JSON.stringify(v)
+  } catch (_) {
+    return `${v}`
+  }
 }

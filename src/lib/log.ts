@@ -32,19 +32,36 @@ const Color2 = {
 } as const;
 type IType2 = keyof (typeof Color2);
 
-export const logIcon = (label: string, data?: any, type: IType2 = 'debug' ) => {
+let writeLogFc: (v: any) => void = () => {}
+export function registryWrite(fn: typeof writeLogFc) {
+  writeLogFc = fn
+}
+
+export function logIcon(label: string, data?: any, type: IType2 = 'debug' ) {
+  let logLabel = ''
+  let logData;
   if (data === undefined) {
-    console.log(`\n${Color2[type]} ${label}`);
+    logLabel = `${Color2[type]} ${label}`
+    console.log(`\n${logLabel}`);
+    writeLogFc({ label: logLabel })
     return;
   }
   try {
     const msg = ['undefined', 'object'].includes(typeof data) ? JSON.stringify(data, null, 2) : data;
     if (typeof msg === 'string') {
-      console.log(`\n${Color2[type]} ${label}:\n%s`, msg);
+      logData = msg
+      logLabel = `${Color2[type]} ${label}`
+      console.log(`\n${logLabel}:\n%s`, msg);
     } else {
-      console.log(`\n${Color2[type]} ${label}:\n`, data);
+      logData = data
+      logLabel = `${Color2[type]} ${label}`
+      console.log(`\n${logLabel}:\n`, data);
     }
   } catch (_) {
-    console.log(`\n${Color2[type]} ${label}:\n`, data);
+    logData = data
+    logLabel = `${Color2[type]} ${label}`
+    console.log(`\n${logLabel}:\n`, data);
+  } finally {
+    writeLogFc({ label: logLabel, data: logData })
   }
-};
+}

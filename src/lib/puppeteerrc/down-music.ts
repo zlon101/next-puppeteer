@@ -37,6 +37,7 @@ export interface IQurey {
   downloadPath: string
 }
 
+
 export async function launch<T extends IQurey, R>(query: T) {
   exec(ShellCmd);
   if (query.pending) {
@@ -77,11 +78,11 @@ async function openBrowser<R>(query: any) {
   try {
     const musicNames = query.musicStr.split(/\n+/).map((s: string) => s.trim())
     // 磁盘文件名作为 key
-    const resultMap = await batchHandle(browser, musicNames)
+    const {state: resultMap, flag} = await batchHandle(browser, musicNames)
     // 文件重命名
-    await rename(resultMap)
+    await rename(resultMap, flag)
     await closeBrowser(browser);
-    logIcon('完成 !!!', undefined, 'success')
+    logIcon('任务完成，关闭浏览器')
     browser = null as any
   } catch (e) {
     logIcon('openBrowser Error', undefined, 'error');
@@ -89,6 +90,7 @@ async function openBrowser<R>(query: any) {
     return e as any;
   }
 }
+
 
 // 打开多个页面进行搜索
 interface IMapValue {
@@ -101,7 +103,7 @@ interface IMapValue {
   // 所有文件的前缀
   flag: string
 }
-async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<string, IMapValue>> {
+async function batchHandle(browser: Browser, musicNames: string[]): Promise<{flag: string; state: Map<string, IMapValue>}> {
   const stateMap = new Map<string, IMapValue>()
   const N = musicNames.length;
   let flag = ''
@@ -113,12 +115,13 @@ async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<
       if (stateMap.size === N) {
         const clearTimer = setInterval2(async () => {
           const count = await traversalDiskFiles(flag)
+          logIcon(`已经下载 ${count} 个文件`)
           // 下载完成
           if (count >= N) {
             clearTimer()
-            resolve(stateMap)
+            resolve({ flag, state: stateMap })
           }
-        }, 5000)
+        }, 8000)
       }
     }
     for (const name of musicNames) {
@@ -145,12 +148,13 @@ async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, 
       const urlQuery = getParams(decodeURIComponent(downUrl))
       const fileName = `${urlQuery.r} - ${urlQuery.t}`;
       okFn(fileName, {
-        flag: urlQuery.t,
+        flag: urlQuery.t.trim(),
         name: musicName,
         id: musicId,
         downUrl,
         fileName,
       })
+      logIcon(`开始下载 ${musicName}`)
       setTimeout(async () => {
         await page.close()
       }, 1500);
@@ -234,8 +238,8 @@ function traversalDiskFiles (flag?: string): Promise<number> {
       const complete = (files || []).filter((name: string) => {
         return !name.includes('crdownload') && name.includes(flag || '')
       })
+      logIcon(`complete`, complete)
       const count = complete.length
-      logIcon('下载完成的磁盘文件名', complete)
       resolve(count)
     });
   })
@@ -243,7 +247,7 @@ function traversalDiskFiles (flag?: string): Promise<number> {
 
 
 // 重命名文件
-function rename (map: Map<string, IMapValue>): Promise<void> {
+function rename (map: Map<string, IMapValue>, flag: string): Promise<void> {
   logIcon('开始重命名 rename')
   let count = 0
   const N = map.size
@@ -277,7 +281,7 @@ function rename (map: Map<string, IMapValue>): Promise<void> {
         reject('无法扫描目录')
         return logIcon('无法扫描目录', err, 'error');
       }
-      renameFile(files, resolve)
+      renameFile(files.filter(name => name.includes(flag)), resolve)
     });
   })
 }
