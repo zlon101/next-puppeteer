@@ -9,7 +9,7 @@ const { TextArea } = Input;
 
 export default function DownMusic() {
   const [form, setForm] = useState({
-    musicStr: '稻香\n夜空中最亮的星',
+    musicStr: '稻香',
     pending: false,
     downloadPath: '/Users/admins/Downloads/down-music/aa',
   });

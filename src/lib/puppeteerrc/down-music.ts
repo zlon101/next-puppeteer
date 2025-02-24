@@ -63,24 +63,24 @@ async function openBrowser<R>(query: any) {
   const chromeJson = await resData.json();
 
   if (!browser) {
-    // const browser = await puppeteer.launch(LaunchParam);
-    browser = await puppeteer.connect({
+    const browserSelf = await puppeteer.connect({
       browserWSEndpoint: chromeJson.webSocketDebuggerUrl,
       defaultViewport: LaunchParam.defaultViewport,
       protocolTimeout: 999999999,
     });
+    // const browser = await puppeteer.launch(LaunchParam);
 
     // 无痕模式
     // In Chrome all non-default contexts are incognito
-    // const browserCtx: BrowserContext = await browser.createBrowserContext();
+    browser = await browserSelf.createBrowserContext() as any as Browser;
   }
 
   try {
     const musicNames = query.musicStr.split(/\n+/).map((s: string) => s.trim())
     // 磁盘文件名作为 key
-    const {state: resultMap, flag} = await batchHandle(browser, musicNames)
+    const resultMap = await batchHandle(browser, musicNames)
     // 文件重命名
-    await rename(resultMap, flag)
+    await rename(resultMap)
     await closeBrowser(browser);
     logIcon('任务完成，关闭浏览器')
     browser = null as any
@@ -100,26 +100,24 @@ interface IMapValue {
   // 下载后的文件名
   fileName: string
   downUrl: string
-  // 所有文件的前缀
+  // 文件的前缀，不同歌曲的前缀可能不同
   flag: string
 }
-async function batchHandle(browser: Browser, musicNames: string[]): Promise<{flag: string; state: Map<string, IMapValue>}> {
+async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<string, IMapValue>> {
   const stateMap = new Map<string, IMapValue>()
   const N = musicNames.length;
-  let flag = ''
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const okFn = (fileName: string, result: IMapValue) => {
-      flag = result.flag
       stateMap.set(fileName, result)
       // 已经获取全部歌曲的下载url
       if (stateMap.size === N) {
         const clearTimer = setInterval2(async () => {
-          const count = await traversalDiskFiles(flag)
+          const count = await traversalDiskFiles()
           logIcon(`已经下载 ${count} 个文件`)
           // 下载完成
           if (count >= N) {
             clearTimer()
-            resolve({ flag, state: stateMap })
+            resolve(stateMap)
           }
         }, 8000)
       }
@@ -136,6 +134,7 @@ const SearchPageUrl = 'https://wavedancer.co.za/';
 async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, v: IMapValue) => void) {
   const page: Page = await browser.newPage();
   await page.goto(SearchPageUrl);
+  logIcon(`打开搜索页面 - ${musicName}`)
   // 搜索结果
   const ApiSearch = 'https://loftadditions.co.za/' // 搜索接口
   const ApiDown = 'https://ytdl.canehill.info/v/'
@@ -165,14 +164,20 @@ async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, 
   // 搜索框
   await page.locator('#search-form input').fill(musicName)
   await page.locator('#search-form button').click();
+  logIcon(`点击搜索按钮 ${musicName}`)
 }
 
 
 // 解析搜索结果
 async function parseSearchResult(browser: Browser, page: Page): Promise<{musicId: string, downUrl: string}> {
+  await page.waitForSelector('#results .download-item')
   const resultListDom = await page.waitForSelector('#results')
   const {count, musicId} = await resultListDom?.evaluate((el): any => {
     const firstItem = el.querySelector('.download-item') as Element
+    if (!firstItem) {
+      logIcon(`.download-item 未找到`)
+      return
+    }
     const musicId = firstItem.getAttribute('data-id');
     const [count, btnDom] = [
       firstItem.querySelector('.text-sm.text-gray-500')?.textContent?.trim()?.split(' ')[0],
@@ -217,17 +222,18 @@ async function getDownUrl(page: Page, musicId: string): Promise<string> {
       }
     })
 
-    const downTableDom = await page.waitForSelector('.border-separate')
-    await downTableDom?.evaluate(el => {
-      const downBtnDom = el.querySelector('tbody tr button') as HTMLButtonElement
-      downBtnDom?.click()
-    })
+    await page.locator('table.border-separate button[data-quality="320"]').click();
+    // const downTableDom = await page.waitForSelector('.border-separate')
+    // await downTableDom?.evaluate(el => {
+    //   const downBtnDom = el.querySelector('tbody tr button') as HTMLButtonElement
+    //   downBtnDom?.click()
+    // })
   })
 }
 
 
 // 定时遍历下载目录中的文件，判断某个文件是否已经开始下载
-function traversalDiskFiles (flag?: string): Promise<number> {
+function traversalDiskFiles (): Promise<number> {
   return new Promise((resolve, reject) => {
     fs.readdir(downloadPath, (err, files: string[]) => {
       if (err) {
@@ -236,9 +242,8 @@ function traversalDiskFiles (flag?: string): Promise<number> {
       }
       // 文件名中包含 crdownload 表示正在下载
       const complete = (files || []).filter((name: string) => {
-        return !name.includes('crdownload') && name.includes(flag || '')
+        return !name.includes('crdownload') && !name.includes('DS_Store')
       })
-      logIcon(`complete`, complete)
       const count = complete.length
       resolve(count)
     });
@@ -247,7 +252,7 @@ function traversalDiskFiles (flag?: string): Promise<number> {
 
 
 // 重命名文件
-function rename (map: Map<string, IMapValue>, flag: string): Promise<void> {
+function rename (map: Map<string, IMapValue>): Promise<void> {
   logIcon('开始重命名 rename')
   let count = 0
   const N = map.size
@@ -281,7 +286,12 @@ function rename (map: Map<string, IMapValue>, flag: string): Promise<void> {
         reject('无法扫描目录')
         return logIcon('无法扫描目录', err, 'error');
       }
-      renameFile(files.filter(name => name.includes(flag)), resolve)
+      renameFile(files.filter(name => !name.includes('DS_Store')), resolve)
     });
   })
 }
+
+/**
+ * 人工校验？
+ * 重复点击下载按钮？
+ * ***************/
