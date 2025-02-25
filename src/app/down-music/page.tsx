@@ -9,7 +9,7 @@ const { TextArea } = Input;
 
 export default function DownMusic() {
   const [form, setForm] = useState({
-    musicStr: '稻香',
+    musicStr: 'fade',
     pending: false,
     downloadPath: '/Users/admins/Downloads/down-music/aa',
   });
@@ -59,7 +59,7 @@ export default function DownMusic() {
             onChange={e => onChange('downloadPath', e.target.value)}
           />
         </div>
-        <TextArea
+        <TextArea style={{height: 500}}
           placeholder="歌单"
           value={form.musicStr}
           onChange={e => onChange('musicStr', e.target.value)}

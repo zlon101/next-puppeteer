@@ -1,7 +1,7 @@
 import path, {join} from 'path';
 import { exec } from 'node:child_process';
 import fs from 'node:fs';
-import puppeteer, {type Browser, Page, HTTPResponse, BrowserContext} from 'puppeteer';
+import puppeteer, {type Browser, Page, HTTPResponse, ConnectOptions, BrowserContext} from 'puppeteer';
 import {logIcon, getParams, setInterval2} from '@/lib/tool';
 import {closeBrowser} from './share';
 
@@ -59,20 +59,30 @@ let browser: Browser
 let downloadPath = ''
 async function openBrowser<R>(query: any) {
   downloadPath = query.downloadPath
-  const resData = await fetch('http://127.0.0.1:9231/json/version');
+  const remoteDebuggingPort = 9231
+  const resData = await fetch(`http://127.0.0.1:${remoteDebuggingPort}/json/version`);
   const chromeJson = await resData.json();
 
   if (!browser) {
-    const browserSelf = await puppeteer.connect({
+    const connectConf: ConnectOptions = {
       browserWSEndpoint: chromeJson.webSocketDebuggerUrl,
       defaultViewport: LaunchParam.defaultViewport,
       protocolTimeout: 999999999,
-    });
+      downloadBehavior: {
+        policy: 'allow',
+        downloadPath: downloadPath,
+      },
+    }
+    browser = await puppeteer.connect(connectConf);
     // const browser = await puppeteer.launch(LaunchParam);
 
-    // 无痕模式
-    // In Chrome all non-default contexts are incognito
+
+    /**
+     * 无痕模式
+     * In Chrome all non-default contexts are incognito
+    const browserSelf = await puppeteer.connect(connectConf);
     browser = await browserSelf.createBrowserContext() as any as Browser;
+     */
   }
 
   try {
@@ -199,13 +209,14 @@ interface IDownUrlRes {
   status: 'completed' | 'other'
 }
 async function getDownUrl(page: Page, musicId: string): Promise<string> {
-  await page.goto(`https://ytdl.canehill.info/v/${musicId}`)
-  // 设置下载路径
+  /**
+   * 设置下载路径
   const client = await page.createCDPSession();
   await client.send('Page.setDownloadBehavior', {
     behavior: 'allow',
     downloadPath,
   })
+   * ******/
 
   // 获取下载url，域名可能不同， https://api5.canehill.info/convert/${musicId}/mp3/320
   const returnDownPath = `/convert/${musicId}/mp3`
@@ -216,13 +227,23 @@ async function getDownUrl(page: Page, musicId: string): Promise<string> {
         const resJson: IDownUrlRes = await res.json()
         if (resJson.progress > 99 || resJson.status === 'completed') {
           resolve(resJson.downloadUrl)
-          client.removeAllListeners()
+          // client.removeAllListeners()
         }
         return
       }
+      // 获取 html 插入 js ，覆盖 window document 上的事件监听器
     })
 
-    await page.locator('table.border-separate button[data-quality="320"]').click();
+    await page.goto(`https://ytdl.canehill.info/v/${musicId}`)
+
+    const mp3SU = await page.evaluateHandle(() => {
+      (window as any).aUrl = '';
+      return (window as any).mp3SU
+    })
+    logIcon('mp3SU', mp3SU)
+    // 点击下载按钮
+    // await page.locator('table.border-separate button[data-quality="320"]').click();
+
     // const downTableDom = await page.waitForSelector('.border-separate')
     // await downTableDom?.evaluate(el => {
     //   const downBtnDom = el.querySelector('tbody tr button') as HTMLButtonElement
