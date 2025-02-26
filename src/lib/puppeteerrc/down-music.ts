@@ -1,7 +1,7 @@
 import path, {join} from 'path';
 import { exec } from 'node:child_process';
 import fs from 'node:fs';
-import puppeteer, {type Browser, Page, HTTPResponse, ConnectOptions, BrowserContext} from 'puppeteer';
+import puppeteer, {type Browser, Page, HTTPResponse, HTTPRequest, ConnectOptions, BrowserContext} from 'puppeteer';
 import {logIcon, getParams, setInterval2} from '@/lib/tool';
 import {closeBrowser} from './share';
 
@@ -76,7 +76,6 @@ async function openBrowser<R>(query: any) {
     browser = await puppeteer.connect(connectConf);
     // const browser = await puppeteer.launch(LaunchParam);
 
-
     /**
      * 无痕模式
      * In Chrome all non-default contexts are incognito
@@ -116,6 +115,14 @@ interface IMapValue {
 async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<string, IMapValue>> {
   const stateMap = new Map<string, IMapValue>()
   const N = musicNames.length;
+  const page: Page = await (async() => {
+    let pageList = await browser.pages()
+    if (pageList && pageList.length) {
+      return pageList[0]
+    }
+    return await browser.newPage();
+  })()
+
   return new Promise(async (resolve, reject) => {
     const okFn = (fileName: string, result: IMapValue) => {
       stateMap.set(fileName, result)
@@ -133,7 +140,7 @@ async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<
       }
     }
     for (const name of musicNames) {
-      crawlPage(browser, name, okFn)
+      await crawlPage(browser, page, name, okFn)
     }
   })
 }
@@ -141,8 +148,7 @@ async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<
 
 // 打开页面，解析DOM
 const SearchPageUrl = 'https://wavedancer.co.za/';
-async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, v: IMapValue) => void) {
-  const page: Page = await browser.newPage();
+async function crawlPage(browser: Browser, page: Page, musicName: string, okFn: (s: string, v: IMapValue) => void) {
   await page.goto(SearchPageUrl);
   logIcon(`打开搜索页面 - ${musicName}`)
   // 搜索结果
@@ -152,7 +158,7 @@ async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, 
     const [url, status, ok, method] = [res.url(), res.status(), res.ok(), res.request().method()]
     // 接口返回搜索结果
     if (url === ApiSearch && method === 'POST' && ok) {
-      const {downUrl, musicId} = await parseSearchResult(browser, page);
+      const {downUrl, musicId} = await parseSearchResult(page);
       // https://dl5.canehill.info/dl/sHD_z90ZKV0/mp3/320?r=za&t=稻香&h=986498050db61dd2e2d0eb334a921885
       const urlQuery = getParams(decodeURIComponent(downUrl))
       const fileName = `${urlQuery.r} - ${urlQuery.t}`;
@@ -179,7 +185,7 @@ async function crawlPage(browser: Browser, musicName: string, okFn: (s: string, 
 
 
 // 解析搜索结果
-async function parseSearchResult(browser: Browser, page: Page): Promise<{musicId: string, downUrl: string}> {
+async function parseSearchResult(page: Page): Promise<{musicId: string, downUrl: string}> {
   await page.waitForSelector('#results .download-item')
   const resultListDom = await page.waitForSelector('#results')
   const {count, musicId} = await resultListDom?.evaluate((el): any => {
@@ -220,6 +226,24 @@ async function getDownUrl(page: Page, musicId: string): Promise<string> {
 
   // 获取下载url，域名可能不同， https://api5.canehill.info/convert/${musicId}/mp3/320
   const returnDownPath = `/convert/${musicId}/mp3`
+  const pageUrl = `https://ytdl.canehill.info/v/${musicId}`
+
+  page.setRequestInterception(true)
+  page.on('request', (req: HTTPRequest) => {
+    const [url, method, resourceType, headers] = [req.url(), req.method(), req.resourceType(), req.headers()]
+    if (url.includes(pageUrl)) {
+      logIcon(`拦截请求 method: ${method} resourceType: ${resourceType}`, headers)
+      // req.respond({
+      //   status: 200,
+      //   contentType: 'text/plain',
+      //   body: 'Not Found!',
+      // })
+    } else {
+
+    }
+    req.continue()
+  });
+
   return new Promise(async (resolve, reject) => {
     page.on('response', async (res: HTTPResponse) => {
       const [url, status, ok, method] = [res.url(), res.status(), res.ok(), res.request().method()]
@@ -229,12 +253,26 @@ async function getDownUrl(page: Page, musicId: string): Promise<string> {
           resolve(resJson.downloadUrl)
           // client.removeAllListeners()
         }
-        return
       }
+
       // 获取 html 插入 js ，覆盖 window document 上的事件监听器
+      if (url.includes(pageUrl)) {
+        const htmlText = await res.text()
+        const newHtml = injectJS(htmlText)
+        const req = res.request()
+        req.respond({
+          status,
+          headers: {
+            ...res.headers(),
+            'X-Overwrite': 'true',
+          },
+          body: newHtml,
+          contentType: req.resourceType(),
+        });
+      }
     })
 
-    await page.goto(`https://ytdl.canehill.info/v/${musicId}`)
+    await page.goto(pageUrl)
 
     const mp3SU = await page.evaluateHandle(() => {
       (window as any).aUrl = '';
@@ -316,3 +354,32 @@ function rename (map: Map<string, IMapValue>): Promise<void> {
  * 人工校验？
  * 重复点击下载按钮？
  * ***************/
+
+// 插入js代码
+function injectJS(html: string): string {
+  const script = `
+<script type="text/javascript">
+  console.debug('\n🔥🔥 执行注入的js')
+  window.addEventListener = function windowListener() {
+    console.debug('执行 window.addEventListener')
+    debugger
+  }
+  document.addEventListener = function documentListener() {
+    console.debug('执行 document.addEventListener')
+    debugger
+  }
+  window.open = function customOpen() {
+    console.debug('执行 customOpen')
+    debugger
+  }
+</script>
+`;
+  html = html.trim()
+  if (/^<!DOCTYPE/i.test(html)) {
+    const head = '<head>'
+    const startIdx = html.indexOf(head)
+    const len = head.length
+    return html.slice(0, startIdx + len) + script + html.slice(startIdx + len + 1)
+  }
+  return script + html
+}
