@@ -69,7 +69,7 @@ async function openBrowser<R>(query: any) {
       defaultViewport: LaunchParam.defaultViewport,
       protocolTimeout: 999999999,
       downloadBehavior: {
-        policy: 'allow',
+        policy: 'allowAndName',
         downloadPath: downloadPath,
       },
     }
@@ -140,7 +140,7 @@ async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<
       }
     }
     for (const name of musicNames) {
-      await crawlPage(browser, page, name, okFn)
+      crawlPage(browser, page, name, okFn)
     }
   })
 }
@@ -150,7 +150,6 @@ async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<
 const SearchPageUrl = 'https://wavedancer.co.za/';
 async function crawlPage(browser: Browser, page: Page, musicName: string, okFn: (s: string, v: IMapValue) => void) {
   await page.goto(SearchPageUrl);
-  logIcon(`打开搜索页面 - ${musicName}`)
   // 搜索结果
   const ApiSearch = 'https://loftadditions.co.za/' // 搜索接口
   const ApiDown = 'https://ytdl.canehill.info/v/'
@@ -180,7 +179,6 @@ async function crawlPage(browser: Browser, page: Page, musicName: string, okFn: 
   // 搜索框
   await page.locator('#search-form input').fill(musicName)
   await page.locator('#search-form button').click();
-  logIcon(`点击搜索按钮 ${musicName}`)
 }
 
 
@@ -227,66 +225,77 @@ async function getDownUrl(page: Page, musicId: string): Promise<string> {
   // 获取下载url，域名可能不同， https://api5.canehill.info/convert/${musicId}/mp3/320
   const returnDownPath = `/convert/${musicId}/mp3`
   const pageUrl = `https://ytdl.canehill.info/v/${musicId}`
+  let interceptCount = 0;
+  const interceptTotal = 1;
+  const responseMap: Record<string, string> = {};
 
   page.setRequestInterception(true)
+
   page.on('request', (req: HTTPRequest) => {
     const [url, method, resourceType, headers] = [req.url(), req.method(), req.resourceType(), req.headers()]
-    if (url.includes(pageUrl)) {
-      logIcon(`拦截请求 method: ${method} resourceType: ${resourceType}`, headers)
-      // req.respond({
-      //   status: 200,
-      //   contentType: 'text/plain',
-      //   body: 'Not Found!',
-      // })
-    } else {
+    const contentType = headers['content-type'] || ''
 
+    if (url.includes(pageUrl) && resourceType === 'document') {
+      const key = [url, method].join('-')
+      if (responseMap[key]) {
+        logIcon('修改响应', undefined, 'success')
+        req.respond({
+          status: 200,
+          headers,
+          contentType,
+          body: responseMap[key],
+        })
+      } else {
+        req.continue()
+      }
+      return
+    }
+
+    if (req.isInterceptResolutionHandled() || req.interceptResolutionState().action === 'already-handled') {
+      logIcon('请求已经被处理过')
     }
     req.continue()
   });
 
+
   return new Promise(async (resolve, reject) => {
     page.on('response', async (res: HTTPResponse) => {
-      const [url, status, ok, method] = [res.url(), res.status(), res.ok(), res.request().method()]
+      const req2 = res.request()
+      const [url, status, ok, method] = [res.url(), res.status(), res.ok(), req2.method()]
+      const headers = res.headers()
+      const contentType = headers['content-type'] || ''
+
       if (method === 'POST' && ok && url.includes(returnDownPath)) {
         const resJson: IDownUrlRes = await res.json()
         if (resJson.progress > 99 || resJson.status === 'completed') {
           resolve(resJson.downloadUrl)
           // client.removeAllListeners()
         }
+        return
       }
 
       // 获取 html 插入 js ，覆盖 window document 上的事件监听器
-      if (url.includes(pageUrl)) {
+      if (url.includes(pageUrl) && contentType.includes('text/html')) {
+        const key = [url, method].join('-')
+        if (responseMap[key]) {
+          return
+        }
         const htmlText = await res.text()
-        const newHtml = injectJS(htmlText)
-        const req = res.request()
-        req.respond({
-          status,
-          headers: {
-            ...res.headers(),
-            'X-Overwrite': 'true',
-          },
-          body: newHtml,
-          contentType: req.resourceType(),
-        });
+        responseMap[key] = injectJS(htmlText)
+        ++interceptCount
+        logIcon(`暂存响应 ${interceptCount}`)
+        if (interceptCount === interceptTotal) {
+          await page.reload()
+          setTimeout(() => {
+            logIcon('点击下载按钮')
+            page.locator('#app .btn').click();
+          }, 2000)
+        }
+        return
       }
     })
 
     await page.goto(pageUrl)
-
-    const mp3SU = await page.evaluateHandle(() => {
-      (window as any).aUrl = '';
-      return (window as any).mp3SU
-    })
-    logIcon('mp3SU', mp3SU)
-    // 点击下载按钮
-    // await page.locator('table.border-separate button[data-quality="320"]').click();
-
-    // const downTableDom = await page.waitForSelector('.border-separate')
-    // await downTableDom?.evaluate(el => {
-    //   const downBtnDom = el.querySelector('tbody tr button') as HTMLButtonElement
-    //   downBtnDom?.click()
-    // })
   })
 }
 
@@ -350,24 +359,20 @@ function rename (map: Map<string, IMapValue>): Promise<void> {
   })
 }
 
-/**
- * 人工校验？
- * 重复点击下载按钮？
- * ***************/
 
 // 插入js代码
 function injectJS(html: string): string {
   const script = `
 <script type="text/javascript">
-  console.debug('\n🔥🔥 执行注入的js')
+  console.debug('🔥🔥 执行注入的js')
   window.addEventListener = function windowListener() {
     console.debug('执行 window.addEventListener')
     debugger
   }
-  document.addEventListener = function documentListener() {
-    console.debug('执行 document.addEventListener')
-    debugger
-  }
+  // document.addEventListener = function documentListener() {
+  //   console.debug('执行 document.addEventListener')
+  //   debugger
+  // }
   window.open = function customOpen() {
     console.debug('执行 customOpen')
     debugger
@@ -383,3 +388,8 @@ function injectJS(html: string): string {
   }
   return script + html
 }
+
+
+/**
+ * 获取到下载 url 后直接调用服务端接口下载文件
+ * ***************/
