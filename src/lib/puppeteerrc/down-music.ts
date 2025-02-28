@@ -76,7 +76,8 @@ async function openBrowser<R>(query: any) {
   }
 
   try {
-    const musicNames: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
+    let musicNames: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
+    musicNames = [...new Set(musicNames)]
     const filesExit = (await getFileNames(downloadPath)).map(item => item.replace(/\.\w+$/, ''));
     const musicNamesFilted = musicNames.filter(item => !filesExit.includes(item));
 
@@ -258,7 +259,13 @@ function rename(map: Map<string, IMapValue>): Promise<void> {
     files.forEach((oldName: string) => {
       // oldName 带文件后缀
       const ext = path.extname(oldName);
-      const newFileName = musicInfoArray.find(item => oldName.includes(item.fileName))?.name;
+      const newFileName = musicInfoArray.find(item =>{
+        // 页面上解析到的文件名
+        const fileNameInPage = item.fileName
+        const len = fileNameInPage.length
+        const segment = fileNameInPage.slice(Math.round(len * 0.25), Math.round(len * 0.75))
+        return oldName.includes(segment)
+      })?.name;
       if (!newFileName) {
         count++;
         count >= N && resolve();
