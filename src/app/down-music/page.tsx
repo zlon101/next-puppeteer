@@ -11,7 +11,7 @@ export default function DownMusic() {
   const [form, setForm] = useState({
     musicStr: 'fade',
     pending: false,
-    downloadPath: '/Users/admins/Downloads/down-music/aa',
+    downloadPath: '/Users/admin/Downloads/down-music/aa',
   });
   const [logArr, setLogArr] = useState<string[]>([])
 

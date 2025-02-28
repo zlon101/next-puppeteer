@@ -1,8 +1,9 @@
 import path, {join} from 'path';
-import { exec } from 'node:child_process';
+import {exec} from 'node:child_process';
 import fs from 'node:fs';
-import puppeteer, {type Browser, Page, HTTPResponse, HTTPRequest, ConnectOptions, BrowserContext} from 'puppeteer';
-import {logIcon, getParams, setInterval2} from '@/lib/tool';
+import puppeteer, {type Browser, Page, ConnectOptions} from 'puppeteer';
+import {logIcon, setInterval2} from '@/lib/tool';
+import {getFileNames} from '@/lib/tool-serve';
 import {closeBrowser} from './share';
 
 const ShellCmd = join(process.cwd(), 'script', 'chrome.sh');
@@ -31,17 +32,15 @@ const LaunchParam = {
   ],
 };
 
-
 export interface IQurey {
-  pending?: boolean
-  downloadPath: string
+  pending?: boolean;
+  downloadPath: string;
 }
-
 
 export async function launch<T extends IQurey, R>(query: T) {
   exec(ShellCmd);
   if (query.pending) {
-    return
+    return;
   }
   return new Promise((resolve, reject) => {
     setTimeout(async () => {
@@ -54,12 +53,11 @@ export async function launch<T extends IQurey, R>(query: T) {
   });
 }
 
-
-let browser: Browser
-let downloadPath = ''
+let browser: Browser;
+let downloadPath = '';
 async function openBrowser<R>(query: any) {
-  downloadPath = query.downloadPath
-  const remoteDebuggingPort = 9231
+  downloadPath = query.downloadPath;
+  const remoteDebuggingPort = 9231;
   const resData = await fetch(`http://127.0.0.1:${remoteDebuggingPort}/json/version`);
   const chromeJson = await resData.json();
 
@@ -69,30 +67,26 @@ async function openBrowser<R>(query: any) {
       defaultViewport: LaunchParam.defaultViewport,
       protocolTimeout: 999999999,
       downloadBehavior: {
-        policy: 'allowAndName',
+        policy: 'allow', // allowAndName
         downloadPath: downloadPath,
       },
-    }
+    };
     browser = await puppeteer.connect(connectConf);
     // const browser = await puppeteer.launch(LaunchParam);
-
-    /**
-     * 无痕模式
-     * In Chrome all non-default contexts are incognito
-    const browserSelf = await puppeteer.connect(connectConf);
-    browser = await browserSelf.createBrowserContext() as any as Browser;
-     */
   }
 
   try {
-    const musicNames = query.musicStr.split(/\n+/).map((s: string) => s.trim())
-    // 磁盘文件名作为 key
-    const resultMap = await batchHandle(browser, musicNames)
+    const musicNames: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
+    const filesExit = (await getFileNames(downloadPath)).map(item => item.replace(/\.\w+$/, ''));
+    const musicNamesFilted = musicNames.filter(item => !filesExit.includes(item));
+
+    // key: 磁盘文件名
+    const resultMap = await batchHandle(browser, musicNamesFilted, musicNames.length);
     // 文件重命名
-    await rename(resultMap)
+    await rename(resultMap);
     await closeBrowser(browser);
-    logIcon('任务完成，关闭浏览器')
-    browser = null as any
+    logIcon('任务完成，关闭浏览器');
+    browser = null as any;
   } catch (e) {
     logIcon('openBrowser Error', undefined, 'error');
     console.log(e);
@@ -100,265 +94,194 @@ async function openBrowser<R>(query: any) {
   }
 }
 
-
 // 打开多个页面进行搜索
 interface IMapValue {
-  id: string
+  id: string;
   // 预期的文件名
-  name: string
+  name: string;
   // 下载后的文件名
-  fileName: string
-  downUrl: string
-  // 文件的前缀，不同歌曲的前缀可能不同
-  flag: string
+  fileName: string;
+  downPageUrl: string;
 }
-async function batchHandle(browser: Browser, musicNames: string[]): Promise<Map<string, IMapValue>> {
-  const stateMap = new Map<string, IMapValue>()
-  const N = musicNames.length;
-  const page: Page = await (async() => {
-    let pageList = await browser.pages()
+type IokFn = (s: string, v: IMapValue) => void;
+const SearchPageUrl = 'https://wavedancer.co.za/';
+async function batchHandle(browser: Browser, musicNames: string[], total: number): Promise<Map<string, IMapValue>> {
+  const stateMap = new Map<string, IMapValue>();
+  const page: Page = await (async () => {
+    let pageList = await browser.pages();
     if (pageList && pageList.length) {
-      return pageList[0]
+      return pageList[0];
     }
     return await browser.newPage();
-  })()
+  })();
+  await page.goto(SearchPageUrl);
+
+  const okFn = (fileName: string, result: IMapValue) => {
+    stateMap.set(result.downPageUrl, result);
+  };
 
   return new Promise(async (resolve, reject) => {
-    const okFn = (fileName: string, result: IMapValue) => {
-      stateMap.set(fileName, result)
-      // 已经获取全部歌曲的下载url
-      if (stateMap.size === N) {
-        const clearTimer = setInterval2(async () => {
-          const count = await traversalDiskFiles()
-          logIcon(`已经下载 ${count} 个文件`)
-          // 下载完成
-          if (count >= N) {
-            clearTimer()
-            resolve(stateMap)
-          }
-        }, 8000)
+    const clearTimer = setInterval2(async () => {
+      const {processing, success} = await traversalDiskFiles();
+      logIcon(`${processing.length} 正在下载，${success.length}下载完成`);
+
+      // 关闭已经开始下载的页面
+      const diskFileNames = [...processing, ...success];
+      const allPage = await browser.pages();
+      allPage.forEach((page2: Page) => {
+        const fileName = stateMap.get(page2.url())?.fileName || '';
+        if (fileName && diskFileNames.some(item => item.includes(fileName))) {
+          logIcon(`关闭下载页面`);
+          page2.close();
+        }
+      });
+
+      if (success.length >= total) {
+        logIcon('所有文件下载完成', undefined, 'success');
+        clearTimer();
+        resolve(stateMap);
       }
-    }
+    }, 5000);
+
     for (const name of musicNames) {
-      crawlPage(browser, page, name, okFn)
+      await crawlPage(page, browser, name, okFn);
+      await page.bringToFront()
     }
-  })
+  });
 }
 
+// 打开搜索页面，输入歌曲名
+async function crawlPage(page: Page, browser: Browser, musicName: string, okFn: IokFn) {
+  // 搜索框输入
+  await page.locator('#search-form input').fill(musicName);
+  await page.locator('#search-form button').click();
 
-// 打开页面，解析DOM
-const SearchPageUrl = 'https://wavedancer.co.za/';
-async function crawlPage(browser: Browser, page: Page, musicName: string, okFn: (s: string, v: IMapValue) => void) {
-  await page.goto(SearchPageUrl);
   // 搜索结果
-  const ApiSearch = 'https://loftadditions.co.za/' // 搜索接口
-  const ApiDown = 'https://ytdl.canehill.info/v/'
-  page.on('response', async (res: HTTPResponse) => {
-    const [url, status, ok, method] = [res.url(), res.status(), res.ok(), res.request().method()]
-    // 接口返回搜索结果
-    if (url === ApiSearch && method === 'POST' && ok) {
-      const {downUrl, musicId} = await parseSearchResult(page);
-      // https://dl5.canehill.info/dl/sHD_z90ZKV0/mp3/320?r=za&t=稻香&h=986498050db61dd2e2d0eb334a921885
-      const urlQuery = getParams(decodeURIComponent(downUrl))
-      const fileName = `${urlQuery.r} - ${urlQuery.t}`;
+  let time = 0
+  return new Promise(resolve => {
+    const clearTimer = setInterval2(async () => {
+      ++time
+      const hasResult = await page.evaluate(() => {
+        const searchResultDom = document.querySelector('#results');
+        return searchResultDom && searchResultDom.textContent && !!searchResultDom.textContent.trim();
+      });
+      if (!hasResult) {
+        if (time > 5) {
+          await page.reload()
+          await page.locator('#search-form input').fill(musicName);
+          await page.locator('#search-form button').click();
+        }
+        return
+      }
+      time = 0
+      clearTimer();
+
+      const {fileName, musicId, downPageUrl} = await parseSearchResult(browser, page);
       okFn(fileName, {
-        flag: urlQuery.t.trim(),
         name: musicName,
         id: musicId,
-        downUrl,
         fileName,
-      })
-      logIcon(`开始下载 ${musicName}`)
-      setTimeout(async () => {
-        await page.close()
-      }, 1500);
-      return;
-    }
+        downPageUrl,
+      });
+      resolve(true);
+    }, 1000);
   });
-
-  // 搜索框
-  await page.locator('#search-form input').fill(musicName)
-  await page.locator('#search-form button').click();
 }
-
 
 // 解析搜索结果
-async function parseSearchResult(page: Page): Promise<{musicId: string, downUrl: string}> {
-  await page.waitForSelector('#results .download-item')
-  const resultListDom = await page.waitForSelector('#results')
-  const {count, musicId} = await resultListDom?.evaluate((el): any => {
-    const firstItem = el.querySelector('.download-item') as Element
+interface IMusicInfo {
+  musicId: string;
+  downPageUrl: string;
+  fileName: string;
+}
+async function parseSearchResult(browser: Browser, page: Page): Promise<IMusicInfo> {
+  await page.waitForSelector('#results .download-item');
+  const resultListDom = await page.waitForSelector('#results');
+  const {count, musicId, fileName} = await resultListDom?.evaluate((el): any => {
+    const firstItem = el.querySelector('.download-item') as Element;
     if (!firstItem) {
-      logIcon(`.download-item 未找到`)
-      return
+      logIcon(`.download-item 未找到`);
+      return;
     }
     const musicId = firstItem.getAttribute('data-id');
+    const fileName = firstItem.querySelector('h2')?.textContent?.trim();
     const [count, btnDom] = [
       firstItem.querySelector('.text-sm.text-gray-500')?.textContent?.trim()?.split(' ')[0],
-      firstItem.querySelector('.mt-auto button') as HTMLButtonElement
-    ]
-    btnDom?.click()
-    return { count, musicId };
-  })
-  // await page.locator('#search-form button').click();
-  const downUrl = await getDownUrl(page, musicId)
-  return {musicId, downUrl}
-}
-
-
-// 在新页面打开下载table，点击下载按钮，获取下载url并且开始下载
-interface IDownUrlRes {
-  downloadUrl: string;
-  progress: number
-  status: 'completed' | 'other'
-}
-async function getDownUrl(page: Page, musicId: string): Promise<string> {
-  /**
-   * 设置下载路径
-  const client = await page.createCDPSession();
-  await client.send('Page.setDownloadBehavior', {
-    behavior: 'allow',
-    downloadPath,
-  })
-   * ******/
-
-  // 获取下载url，域名可能不同， https://api5.canehill.info/convert/${musicId}/mp3/320
-  const returnDownPath = `/convert/${musicId}/mp3`
-  const pageUrl = `https://ytdl.canehill.info/v/${musicId}`
-  let interceptCount = 0;
-  const interceptTotal = 1;
-  const responseMap: Record<string, string> = {};
-
-  page.setRequestInterception(true)
-
-  page.on('request', (req: HTTPRequest) => {
-    const [url, method, resourceType, headers] = [req.url(), req.method(), req.resourceType(), req.headers()]
-    const contentType = headers['content-type'] || ''
-
-    if (url.includes(pageUrl) && resourceType === 'document') {
-      const key = [url, method].join('-')
-      if (responseMap[key]) {
-        logIcon('修改响应', undefined, 'success')
-        req.respond({
-          status: 200,
-          headers,
-          contentType,
-          body: responseMap[key],
-        })
-      } else {
-        req.continue()
-      }
-      return
-    }
-
-    if (req.isInterceptResolutionHandled() || req.interceptResolutionState().action === 'already-handled') {
-      logIcon('请求已经被处理过')
-    }
-    req.continue()
+      firstItem.querySelector('.mt-auto button') as HTMLButtonElement,
+    ];
+    btnDom?.click();
+    return {count, musicId, fileName};
   });
 
-
-  return new Promise(async (resolve, reject) => {
-    page.on('response', async (res: HTTPResponse) => {
-      const req2 = res.request()
-      const [url, status, ok, method] = [res.url(), res.status(), res.ok(), req2.method()]
-      const headers = res.headers()
-      const contentType = headers['content-type'] || ''
-
-      if (method === 'POST' && ok && url.includes(returnDownPath)) {
-        const resJson: IDownUrlRes = await res.json()
-        if (resJson.progress > 99 || resJson.status === 'completed') {
-          resolve(resJson.downloadUrl)
-          // client.removeAllListeners()
-        }
-        return
-      }
-
-      // 获取 html 插入 js ，覆盖 window document 上的事件监听器
-      if (url.includes(pageUrl) && contentType.includes('text/html')) {
-        const key = [url, method].join('-')
-        if (responseMap[key]) {
-          return
-        }
-        const htmlText = await res.text()
-        responseMap[key] = injectJS(htmlText)
-        ++interceptCount
-        logIcon(`暂存响应 ${interceptCount}`)
-        if (interceptCount === interceptTotal) {
-          await page.reload()
-          setTimeout(() => {
-            logIcon('点击下载按钮')
-            page.locator('#app .btn').click();
-          }, 2000)
-        }
-        return
-      }
-    })
-
-    await page.goto(pageUrl)
-  })
+  try {
+    const iframeDom = await page.waitForSelector('iframe.w-full');
+    const iframeUrl = (await iframeDom?.evaluate(el => el.getAttribute('src'))) as string;
+    // 在新页面打开下载table，点击下载按钮，获取下载url并且开始下载
+    const downPage = await browser.newPage();
+    await downPage.goto(iframeUrl);
+    await downPage.locator('#app .btn').click();
+    // await downPage.reload();
+    // await downPage.locator('#app .btn').click();
+    return {musicId, downPageUrl: iframeUrl, fileName};
+  } catch (e) {
+    return await parseSearchResult(browser, page);
+  }
 }
 
 
 // 定时遍历下载目录中的文件，判断某个文件是否已经开始下载
-function traversalDiskFiles (): Promise<number> {
-  return new Promise((resolve, reject) => {
-    fs.readdir(downloadPath, (err, files: string[]) => {
-      if (err) {
-        reject('无法扫描目录')
-        return logIcon('无法扫描目录', err, 'error');
+function traversalDiskFiles(): Promise<{processing: string[]; success: string[]}> {
+  return new Promise(async (resolve, reject) => {
+    const files = await getFileNames(downloadPath);
+    const success: string[] = [];
+    const processing: string[] = [];
+    // 文件名中包含 crdownload 表示正在下载
+    (files || []).forEach((name: string) => {
+      if (name.includes('crdownload')) {
+        processing.push(name);
+      } else {
+        success.push(name);
       }
-      // 文件名中包含 crdownload 表示正在下载
-      const complete = (files || []).filter((name: string) => {
-        return !name.includes('crdownload') && !name.includes('DS_Store')
-      })
-      const count = complete.length
-      resolve(count)
     });
-  })
+    resolve({processing, success});
+  });
 }
 
-
 // 重命名文件
-function rename (map: Map<string, IMapValue>): Promise<void> {
-  logIcon('开始重命名 rename')
-  let count = 0
-  const N = map.size
+function rename(map: Map<string, IMapValue>): Promise<void> {
+  logIcon('开始重命名 rename');
+  let count = 0;
+  const N = map.size;
+  const musicInfoArray = Array.from(map.values());
 
   const renameFile = (files: string[], resolve: () => void) => {
     files.forEach((oldName: string) => {
-      const oldFilePath = path.join(downloadPath, oldName);
       // oldName 带文件后缀
-      const ext = path.extname(oldName)
-      const newFileName = map.get(oldName.replace(ext, ''))?.name;
+      const ext = path.extname(oldName);
+      const newFileName = musicInfoArray.find(item => oldName.includes(item.fileName))?.name;
       if (!newFileName) {
-        count++
-        count >= N && resolve()
+        count++;
+        count >= N && resolve();
         logIcon(`未找到 ${oldName} 对应的 map value `, undefined, 'error');
-        return
+        return;
       }
       const newFilePath = path.join(downloadPath, `${newFileName}${ext}`);
-      fs.rename(oldFilePath, newFilePath, (err) => {
-        count++
-        count >= N && resolve()
+      const oldFilePath = path.join(downloadPath, oldName);
+      fs.rename(oldFilePath, newFilePath, err => {
+        count++;
+        count >= N && resolve();
         if (err) {
           return logIcon(`重命名文件 ${oldName} 失败: `, err, 'error');
         }
       });
-    })
-  }
-
-  return new Promise((resolve, reject) => {
-    fs.readdir(downloadPath, (err, files: string[]) => {
-      if (err) {
-        reject('无法扫描目录')
-        return logIcon('无法扫描目录', err, 'error');
-      }
-      renameFile(files.filter(name => !name.includes('DS_Store')), resolve)
     });
-  })
-}
+  };
 
+  return new Promise(async (resolve, reject) => {
+    const fileNames = await getFileNames(downloadPath);
+    renameFile(fileNames, resolve);
+  });
+}
 
 // 插入js代码
 function injectJS(html: string): string {
@@ -379,17 +302,20 @@ function injectJS(html: string): string {
   }
 </script>
 `;
-  html = html.trim()
+  html = html.trim();
   if (/^<!DOCTYPE/i.test(html)) {
-    const head = '<head>'
-    const startIdx = html.indexOf(head)
-    const len = head.length
-    return html.slice(0, startIdx + len) + script + html.slice(startIdx + len + 1)
+    const head = '<head>';
+    const startIdx = html.indexOf(head);
+    const len = head.length;
+    return html.slice(0, startIdx + len) + script + html.slice(startIdx + len + 1);
   }
-  return script + html
+  return script + html;
 }
-
 
 /**
  * 获取到下载 url 后直接调用服务端接口下载文件
  * ***************/
+
+
+// Zyboy忠宇 - 媽媽的話『從小的時候就經常聽我媽媽講 童年的夢境可笑的，就像是烏雲隱藏著。』【動態Lyrics|高音質】♫
+// ytdl.canehill.info - Zyboy忠宇 - 媽媽的話『從小的時候就經常聽我媽媽講 童年的夢境可笑的，就像是烏雲隱藏著。』【動態Lyrics 高音質】.m4a

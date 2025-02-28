@@ -7,7 +7,58 @@
 1. 通过命令行运行 Chrome
 2. 通过 puppeteer.connect 连接浏览器，实现对浏览器的控制
 
+3. 设置下载路径
+
+```js
+const client = await page.createCDPSession();
+await client.send('Page.setDownloadBehavior', {
+  behavior: 'allow',
+  downloadPath,
+})
+```
+
+4. 拦截请求
+
+```js
+page.setRequestInterception(true);
+page.on('request', (req: HTTPRequest) => {
+  const [url, method, resourceType, headers] = [req.url(), req.method(), req.resourceType(), req.headers()];
+  const contentType = headers['content-type'] || '';
+
+  if (url.includes(pageUrl) && resourceType === 'document') {
+    const key = [url, method].join('-');
+    if (responseMap[key]) {
+      req.respond({
+        status: 200,
+        headers,
+        contentType,
+        body: responseMap[key],
+      });
+    } else {
+      req.continue();
+    }
+    return;
+  }
+
+  if (req.isInterceptResolutionHandled() || req.interceptResolutionState().action === 'already-handled') {
+    logIcon('请求已经被处理过');
+  }
+  req.continue();
+});
+```
+
+5. 无痕模式
+
+In Chrome all non-default contexts are incognito
+
+```js
+const browserSelf = await puppeteer.connect(connectConf);
+browser = await browserSelf.createBrowserContext() as any as Browser;
+```
+
 > 下载歌曲，执行自动化任务前先打开浏览器配置文件下载路径
+
+Todo 从YouTube获取歌曲
 
 
 ## Getting Started
