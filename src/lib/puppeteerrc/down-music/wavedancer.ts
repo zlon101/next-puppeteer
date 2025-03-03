@@ -198,7 +198,7 @@ interface IMusicInfo {
 async function parseSearchResult(browser: Browser, page: Page): Promise<IMusicInfo> {
   await page.waitForSelector('#results .download-item');
   const resultListDom = await page.waitForSelector('#results');
-  const {count, musicId, fileName} = await resultListDom?.evaluate((el): any => {
+  const {count, musicId} = await resultListDom?.evaluate((el): any => {
     const firstItem = el.querySelector('.download-item') as Element;
     if (!firstItem) {
       logIcon(`.download-item 未找到`);
@@ -220,10 +220,13 @@ async function parseSearchResult(browser: Browser, page: Page): Promise<IMusicIn
     // 在新页面打开下载table，点击下载按钮，获取下载url并且开始下载
     const downPage = await browser.newPage();
     await downPage.goto(iframeUrl);
-    await downPage.locator('#app .btn').click();
-    // await downPage.reload();
-    // await downPage.locator('#app .btn').click();
-    return {musicId, downPageUrl: iframeUrl, fileName};
+
+    const titleSelector = await downPage.locator('h2.title').waitHandle();
+    const fileName = await titleSelector?.evaluate(el => el.textContent);
+    // 下载页面A: await downPage.locator('#app .btn').click();
+    await downPage.locator('table tbody tr button').click();
+    logIcon(`点击下载按钮 - ${fileName}`)
+    return {musicId, downPageUrl: iframeUrl, fileName: (fileName || '').trim()};
   } catch (e) {
     return await parseSearchResult(browser, page);
   }
