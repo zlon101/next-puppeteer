@@ -56,7 +56,7 @@ export async function launch<T extends IQurey, R>(query: T) {
 let browser: Browser;
 let downloadPath = '';
 async function openBrowser<R>(query: any) {
-  downloadPath = query.downloadPath;
+  downloadPath = query.downloadPath.trim();
   const remoteDebuggingPort = 9231;
   const resData = await fetch(`http://127.0.0.1:${remoteDebuggingPort}/json/version`);
   const chromeJson = await resData.json();
