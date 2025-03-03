@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import puppeteer, {type Browser, Page, ConnectOptions} from 'puppeteer';
 import {logIcon, setInterval2} from '@/lib/tool';
 import {getFileNames} from '@/lib/tool-serve';
-import {closeBrowser} from './share';
+import {closeBrowser} from '../share';
 
 const ShellCmd = join(process.cwd(), 'script', 'chrome.sh');
 const LaunchParam = {
@@ -318,11 +318,3 @@ function injectJS(html: string): string {
   }
   return script + html;
 }
-
-/**
- * 获取到下载 url 后直接调用服务端接口下载文件
- * ***************/
-
-
-// Zyboy忠宇 - 媽媽的話『從小的時候就經常聽我媽媽講 童年的夢境可笑的，就像是烏雲隱藏著。』【動態Lyrics|高音質】♫
-// ytdl.canehill.info - Zyboy忠宇 - 媽媽的話『從小的時候就經常聽我媽媽講 童年的夢境可笑的，就像是烏雲隱藏著。』【動態Lyrics 高音質】.m4a

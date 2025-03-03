@@ -1,4 +1,4 @@
-import {launch, IQurey} from '@/lib/puppeteerrc/down-music';
+import {launch, IQurey} from '@/lib/puppeteerrc/down-music/wavedancer';
 import {getUrlQuery, formatEvent, setInterval2, EventEnum, registryWrite, logIcon} from '@/lib/tool';
 
 
