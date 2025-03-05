@@ -3,7 +3,7 @@ import {logIcon} from './log'
 
 export function getFileNames(dir: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
-    fs.readdir(dir, (err, files: string[]) => {
+    fs.readdir(dir.trim(), (err, files: string[]) => {
       if (err) {
         reject('无法扫描目录');
         return logIcon('无法扫描目录', err, 'error');

@@ -1,14 +1,18 @@
-import {launch, IQurey} from '@/lib/puppeteerrc/down-music/wavedancer';
+import {launch, IQurey, close} from '@/lib/puppeteerrc/down-music/wavedancer';
 import {getUrlQuery, formatEvent, setInterval2, EventEnum, registryWrite, logIcon} from '@/lib/tool';
-
 
 let eventFinally: (res:  any) => void
 
 interface IReqBody extends IQurey {
   musicStr: string
+  close?: boolean
 }
 export async function POST(req: Request) {
   const query: IReqBody = await req.json()
+  if (query.close) {
+    await close()
+    return Response.json({ok: true});
+  }
   launch<IReqBody, any>(query).then(() => {
     eventFinally({ msg: '完成!' })
   })

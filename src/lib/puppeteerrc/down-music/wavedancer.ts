@@ -55,6 +55,13 @@ export async function launch<T extends IQurey, R>(query: T) {
 
 let browser: Browser;
 let downloadPath = '';
+
+export async function close() {
+  if (browser) {
+    await closeBrowser(browser);
+  }
+  browser = null as any;
+}
 async function openBrowser<R>(query: any) {
   downloadPath = query.downloadPath.trim();
   const remoteDebuggingPort = 9231;
@@ -85,9 +92,8 @@ async function openBrowser<R>(query: any) {
     const resultMap = await batchHandle(browser, musicNamesFilted, musicNames.length);
     // 文件重命名
     await rename(resultMap);
-    await closeBrowser(browser);
+    await close()
     logIcon('任务完成，关闭浏览器');
-    browser = null as any;
   } catch (e) {
     logIcon('openBrowser Error', undefined, 'error');
     console.log(e);

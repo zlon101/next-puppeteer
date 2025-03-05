@@ -38,7 +38,11 @@ export default function DownMusic() {
   };
 
   const onClose = () => {
-    // serveEvent<IJobsRes>(`/api/down-music/close`);
+    fetch('/api/down-music', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({...form, close: true}),
+    });
   };
 
   useEffect(() => {
