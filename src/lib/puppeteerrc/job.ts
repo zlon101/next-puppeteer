@@ -11,7 +11,7 @@ import fs from 'node:fs';
 import puppeteer from 'puppeteer';
 import {logIcon} from '@/lib/tool';
 import {ReqParam, PageType, IJob} from '@/components/job/const';
-import {closeBrowser} from './share';
+import {closeBrowser} from './brower-tool';
 import {enterBoss} from './boss';
 import {enterZhiLian} from './zhilian';
 import {queryLocation} from "@/lib/puppeteerrc/gaode";

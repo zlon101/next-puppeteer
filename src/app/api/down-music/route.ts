@@ -1,4 +1,5 @@
-import {launch, IQurey, close} from '@/lib/puppeteerrc/down-music/wavedancer';
+import {main as wavedancerMain} from '@/lib/puppeteerrc/down-music/wavedancer';
+import {IQurey, exitBrowser} from '@/lib/puppeteerrc/brower-tool'
 import {getUrlQuery, formatEvent, setInterval2, EventEnum, registryWrite, logIcon} from '@/lib/tool';
 
 let eventFinally: (res:  any) => void
@@ -10,12 +11,17 @@ interface IReqBody extends IQurey {
 export async function POST(req: Request) {
   const query: IReqBody = await req.json()
   if (query.close) {
-    await close()
+    await exitBrowser()
     return Response.json({ok: true});
   }
-  launch<IReqBody, any>(query).then(() => {
-    eventFinally({ msg: '完成!' })
-  })
+  // youtube 分享链接
+  if (query.musicStr.includes('http')) {
+
+  } else {
+    wavedancerMain(query).then(() => {
+      eventFinally({ msg: '完成!' })
+    })
+  }
 
   return Response.json({ok: true});
 }

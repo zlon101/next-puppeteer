@@ -10,28 +10,25 @@ export async function main(query: any) {
     // musicNames = [...new Set(musicNames)]
     // const filesExit = (await getFileNames(getDownloadPath())).map(item => item.replace(/\.\w+$/, ''));
     // const musicNamesFilted = musicNames.filter(item => !filesExit.includes(item));
-    // // 批量
-    // const resultMap = await batchHandle(browser, musicNamesFilted, musicNames.length);
-    // // 文件重命名
-    // const fileNameMap = Array.from(resultMap.values()).reduce(
-    //   (acc, cur) => {
-    //     acc[cur.fileName] = cur.name
-    //     return acc
-    //   },
-    //   {} as Record<string, string>
-    // )
-    const fileNameMap = {
-      faded: 'faded',
-      '稻香': '稻香',
-    }
+
+    const shareUrl: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
+    // 批量
+    const resultMap = await batchHandle(browser, shareUrl);
+    // 文件重命名
+    const fileNameMap = Array.from(resultMap.values()).reduce(
+      (acc, cur) => {
+        acc[cur.fileName] = cur.name
+        return acc
+      },
+      {} as Record<string, string>
+    )
     await rename(
       getDownloadPath(),
       fileNameMap,
       (nameFromDisk: string, nameFromPage: string) => {
         const len = nameFromPage.length
         const segment = nameFromPage.slice(Math.round(len * 0.25), Math.round(len * 0.75))
-        // logIcon('重命名', {segment, nameFromDisk})
-        return nameFromDisk.includes(nameFromPage)
+        return nameFromDisk.includes(segment)
       },
     );
     await exitBrowser()
@@ -50,8 +47,10 @@ interface IMapValue {
   downPageUrl: string;
 }
 type IokFn = (s: string, v: IMapValue) => void;
-const SearchPageUrl = 'https://wavedancer.co.za/';
-async function batchHandle(browser: Browser, musicNames: string[], total: number): Promise<Map<string, IMapValue>> {
+const SearchPageUrl = 'https://yt1d.com/en305/';
+
+async function batchHandle(browser: Browser, shareUrl: string[]): Promise<Map<string, IMapValue>> {
+  const total = shareUrl.length
   const stateMap = new Map<string, IMapValue>();
   const page: Page = await (async () => {
     let pageList = await browser.pages();
@@ -89,7 +88,7 @@ async function batchHandle(browser: Browser, musicNames: string[], total: number
       }
     }, 5000);
 
-    for (const name of musicNames) {
+    for (const name of shareUrl) {
       await crawlPage(page, browser, name, okFn);
       await page.bringToFront()
     }
@@ -97,9 +96,9 @@ async function batchHandle(browser: Browser, musicNames: string[], total: number
 }
 
 // 打开搜索页面，输入歌曲名
-async function crawlPage(page: Page, browser: Browser, musicName: string, okFn: IokFn) {
+async function crawlPage(page: Page, browser: Browser, shareUrl: string, okFn: IokFn) {
   // 搜索框输入
-  await page.locator('#search-form input').fill(musicName);
+  await page.locator('form #txt-url').fill(shareUrl);
   await page.locator('#search-form button').click();
 
   // 搜索结果
@@ -114,7 +113,7 @@ async function crawlPage(page: Page, browser: Browser, musicName: string, okFn: 
       if (!hasResult) {
         if (time > 5) {
           await page.reload()
-          await page.locator('#search-form input').fill(musicName);
+          await page.locator('#search-form input').fill(shareUrl);
           await page.locator('#search-form button').click();
         }
         return
@@ -124,7 +123,7 @@ async function crawlPage(page: Page, browser: Browser, musicName: string, okFn: 
 
       const {fileName, musicId, downPageUrl} = await parseSearchResult(browser, page);
       okFn(fileName, {
-        name: musicName,
+        name: shareUrl,
         id: musicId,
         fileName,
         downPageUrl,
