@@ -6,24 +6,20 @@ import {launch, exitBrowser, getDownloadPath} from '../brower-tool';
 
 export async function main(query: any) {
   const task = async (browser: Browser) => {
-    // let musicNames: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
-    // musicNames = [...new Set(musicNames)]
-    // const filesExit = (await getFileNames(getDownloadPath())).map(item => item.replace(/\.\w+$/, ''));
-    // const musicNamesFilted = musicNames.filter(item => !filesExit.includes(item));
-    // // 批量
-    // const resultMap = await batchHandle(browser, musicNamesFilted, musicNames.length);
-    // // 文件重命名
-    // const fileNameMap = Array.from(resultMap.values()).reduce(
-    //   (acc, cur) => {
-    //     acc[cur.fileName] = cur.name
-    //     return acc
-    //   },
-    //   {} as Record<string, string>
-    // )
-    const fileNameMap = {
-      faded: 'faded',
-      '稻香': '稻香',
-    }
+    let musicNames: string[] = query.musicStr.split(/\n+/).map((s: string) => s.trim());
+    musicNames = [...new Set(musicNames)]
+    const filesExit = (await getFileNames(getDownloadPath())).map(item => item.replace(/\.\w+$/, ''));
+    const musicNamesFilted = musicNames.filter(item => !filesExit.includes(item));
+    // 批量
+    const resultMap = await batchHandle(browser, musicNamesFilted, musicNames.length);
+    // 文件重命名
+    const fileNameMap = Array.from(resultMap.values()).reduce(
+      (acc, cur) => {
+        acc[cur.fileName] = cur.name
+        return acc
+      },
+      {} as Record<string, string>
+    )
     await rename(
       getDownloadPath(),
       fileNameMap,

@@ -9,9 +9,9 @@ const { TextArea } = Input;
 
 export default function DownMusic() {
   const [form, setForm] = useState({
-    musicStr: 'fade',
+    musicStr: '',
     pending: false,
-    downloadPath: '/Users/admins/Downloads/down-music/aa',
+    downloadPath: '',
   });
   const [logArr, setLogArr] = useState<string[]>([])
 

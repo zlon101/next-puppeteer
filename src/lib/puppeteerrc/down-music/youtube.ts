@@ -99,7 +99,7 @@ async function batchHandle(browser: Browser, shareUrl: string[]): Promise<Map<st
 async function crawlPage(page: Page, browser: Browser, shareUrl: string, okFn: IokFn) {
   // 搜索框输入
   await page.locator('form #txt-url').fill(shareUrl);
-  await page.locator('#search-form button').click();
+  await page.locator('form #btn-submit').click();
 
   // 搜索结果
   let time = 0
