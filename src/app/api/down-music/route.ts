@@ -1,4 +1,5 @@
 import {main as wavedancerMain} from '@/lib/puppeteerrc/down-music/wavedancer';
+import {main as youtubeMain} from '@/lib/puppeteerrc/down-music/youtube';
 import {IQurey, exitBrowser} from '@/lib/puppeteerrc/brower-tool'
 import {getUrlQuery, formatEvent, setInterval2, EventEnum, registryWrite, logIcon} from '@/lib/tool';
 
@@ -16,7 +17,9 @@ export async function POST(req: Request) {
   }
   // youtube 分享链接
   if (query.musicStr.includes('http')) {
-
+    youtubeMain(query).then(() => {
+      eventFinally({ msg: '完成!' })
+    })
   } else {
     wavedancerMain(query).then(() => {
       eventFinally({ msg: '完成!' })
