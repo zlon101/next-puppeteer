@@ -12,7 +12,7 @@ port=9231
 downFileDir=/Users/admins/Downloads/down-music/aa
 
 # --disable-web-security --disable-dev-shm-usage
-chromeExe="/Applications/Google\ Chrome\ Dev.app/Contents/MacOS/Google\ Chrome\ Dev --remote-debugging-port=$port --user-data-dir=\"$chromeUserDir\""
+chromeExe="/Applications/Google\ Chrome\ Dev.app/Contents/MacOS/Google\ Chrome\ Dev --incognito --remote-debugging-port=$port --user-data-dir=\"$chromeUserDir\""
 
 
 # 执行

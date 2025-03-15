@@ -72,7 +72,8 @@ async function batchHandle(browser: Browser, shareUrls: string[]): Promise<Map<s
 async function crawlPage(page: Page, browser: Browser, shareUrl: string): Promise<string> {
   // 搜索框输入
   await page.locator('form #txt-url').fill(shareUrl);
-  await page.locator('form #btn-submit').click();
+  const searchBtn = await page.locator('form #btn-submit').waitHandle();
+  searchBtn.evaluate((el) => (el as HTMLButtonElement).click())
 
   // 搜索结果
   let time = 0
@@ -85,9 +86,10 @@ async function crawlPage(page: Page, browser: Browser, shareUrl: string): Promis
       });
       if (!hasResult) {
         if (time > 5) {
+          time = 0
           await page.reload()
           await page.locator('form #txt-url').fill(shareUrl);
-          await page.locator('form #btn-submit').click();
+          searchBtn.evaluate((el) => (el as HTMLButtonElement).click())
         }
         return
       }
